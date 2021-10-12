@@ -14,7 +14,7 @@ def hello_world():
 if __name__ == "__main__":
     # Testing the APIs this way for now
     load_dotenv()
-    
+
     print(service.get_rapla())
     STUTTGART_LAT = 48.783333
     STUTTGART_LON = 9.183333
