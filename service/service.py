@@ -157,3 +157,24 @@ def get_news_stories():
     """
     d = feedparser.parse(URLS.NYT_EUROPE_RSS)
     return d
+
+
+def get_bestselling_books(fiction=True):
+    """
+    Get the The New York Times Best Sellers lists for either fiction or non-fiction books.
+    :param fiction: Fiction or non-fiction books (optional, default=True)
+    :return: API response as json
+    """
+    api_key = os.environ.get("NYT_KEY")
+    if not api_key:
+        raise exception.InvalidConfiguration("No NYT API key configured")
+    if fiction:
+        list_name = "hardcover-fiction"
+    else:
+        list_name = "hardcover-nonfiction"
+    r = requests.get(
+        URLS.NYT_BOOKS + f"{list_name}.json?api-key={api_key}")
+    if r.ok:
+        return r.json()
+    else:
+        raise requests.HTTPError(f"Request not OK: {r.text}")
