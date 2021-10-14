@@ -14,3 +14,5 @@ GYM_UTIL_BASE = "https://www.mcfit.com/de/auslastung/antwort/request.json"
 COVID_BASE = "https://api.corona-zahlen.org/districts/"
 
 YT_SEARCH_BASE = "https://youtube.googleapis.com/youtube/v3/search"
+
+NYT_EUROPE_RSS = "https://rss.nytimes.com/services/xml/rss/nyt/Europe.xml"

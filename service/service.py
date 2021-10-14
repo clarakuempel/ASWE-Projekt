@@ -1,5 +1,6 @@
 import os
 
+import feedparser
 import requests
 
 import exception
@@ -147,3 +148,12 @@ def get_youtube_search(search_term):
         return r.json()
     else:
         raise requests.HTTPError(f"Request not OK: {r.text}")
+
+
+def get_news_stories():
+    """
+    Get the NYT Europe RSS feed.
+    :return: JSON like object containing RSS feed
+    """
+    d = feedparser.parse(URLS.NYT_EUROPE_RSS)
+    return d

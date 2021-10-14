@@ -1,6 +1,8 @@
 from dotenv import load_dotenv
 from flask import Flask
 
+import service.service
+
 app = Flask(__name__)
 
 
@@ -30,3 +32,4 @@ if __name__ == "__main__":
     # print(service.get_covid_stats(STUTTGART_AGS))
 
     # print(service.get_youtube_search("Yoga Workout"))
+    print(service.service.get_news_stories()["entries"][0]["title"])
