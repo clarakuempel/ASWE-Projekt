@@ -79,7 +79,7 @@ def get_sunrise_sunset(lat, lon, date="today"):
     :param lat: Latitude
     :param lon: Longitude
     :param date: Date in YYYY-MM-DD format (optional)
-    :return:
+    :return: API response as json
     """
     r = requests.get(
         URLS.SUNRISE_BASE + f"?lat={lat}&lon={lon}&date={date}&formatted=0")
@@ -94,10 +94,24 @@ def get_wikipedia_extract(search_title):
     Get the extract of a Wikipedia page. Automatically redirects to synonyms.
 
     :param search_title: Title of the Wikipedia page
-    :return:
+    :return: API response as json
     """
     r = requests.get(
         URLS.WIKIPEDIA_BASE + f"&titles={search_title}")
+    if r.ok:
+        return r.json()
+    else:
+        raise requests.HTTPError(f"Request not OK: {r.text}")
+
+
+def get_gym_utilization(gym_id):
+    """
+    Get the 24h utilization for a specific gym
+    :param gym_id: Gym id
+    :return: API response as json
+    """
+    r = requests.get(
+        URLS.GYM_UTIL_BASE + f"?tx_brastudioprofilesmcfitcom_brastudioprofiles%5BstudioId%5D={gym_id}")
     if r.ok:
         return r.json()
     else:

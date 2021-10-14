@@ -22,3 +22,5 @@ if __name__ == "__main__":
     print(service.get_air_pollution(STUTTGART_LAT, STUTTGART_LON))
     print(service.get_sunrise_sunset(STUTTGART_LAT, STUTTGART_LON))
     print(service.get_wikipedia_extract("Stuttgart"))
+    MCFIT_STUTTGART_MITTE = 1731421430
+    print(service.get_gym_utilization(MCFIT_STUTTGART_MITTE))

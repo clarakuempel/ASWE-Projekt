@@ -8,3 +8,5 @@ SUNRISE_BASE = "https://api.sunrise-sunset.org/json"
 
 WIKIPEDIA_BASE = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext" \
                  "&redirects=1 "
+
+GYM_UTIL_BASE = "https://www.mcfit.com/de/auslastung/antwort/request.json"
