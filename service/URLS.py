@@ -10,3 +10,5 @@ WIKIPEDIA_BASE = "https://en.wikipedia.org/w/api.php?format=json&action=query&pr
                  "&redirects=1 "
 
 GYM_UTIL_BASE = "https://www.mcfit.com/de/auslastung/antwort/request.json"
+
+COVID_BASE = "https://api.corona-zahlen.org/districts/"

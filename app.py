@@ -24,3 +24,5 @@ if __name__ == "__main__":
     print(service.get_wikipedia_extract("Stuttgart"))
     MCFIT_STUTTGART_MITTE = 1731421430
     print(service.get_gym_utilization(MCFIT_STUTTGART_MITTE))
+    STUTTGART_AGS = "08111"
+    print(service.get_covid_stats(STUTTGART_AGS))

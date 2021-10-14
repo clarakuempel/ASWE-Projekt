@@ -116,3 +116,17 @@ def get_gym_utilization(gym_id):
         return r.json()
     else:
         raise requests.HTTPError(f"Request not OK: {r.text}")
+
+
+def get_covid_stats(ags):
+    """
+    Get covid stats using the Amtliche Gemeindeschlüssel (AGS)
+    :param ags: Amtliche Gemeindeschlüssel
+    :return: API response as json
+    """
+    r = requests.get(
+        URLS.COVID_BASE + f"{ags}")
+    if r.ok:
+        return r.json()
+    else:
+        raise requests.HTTPError(f"Request not OK: {r.text}")
