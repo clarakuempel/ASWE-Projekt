@@ -1,1 +1,2 @@
 Flask==2.0.2
+ibmcloudant>=0.0.38
