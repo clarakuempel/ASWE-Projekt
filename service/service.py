@@ -130,3 +130,20 @@ def get_covid_stats(ags):
         return r.json()
     else:
         raise requests.HTTPError(f"Request not OK: {r.text}")
+
+
+def get_youtube_search(search_term):
+    """
+    Search for youtube videos. Returns 10 search results.
+    :param search_term: Search term
+    :return: API response as json
+    """
+    api_key = os.environ.get("GOOGLE_YT_KEY")
+    if not api_key:
+        raise exception.InvalidConfiguration("No Google Youtube api key configured")
+    r = requests.get(
+        URLS.YT_SEARCH_BASE + f"?part=snippet&maxResults=10&q={search_term}&key={api_key}")
+    if r.ok:
+        return r.json()
+    else:
+        raise requests.HTTPError(f"Request not OK: {r.text}")
