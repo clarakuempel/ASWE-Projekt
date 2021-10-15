@@ -3,6 +3,7 @@ RAPLA_PARAMETER = "?format=json&Description=false&noInfo=true"
 
 OWM_WEATHER_BASE = "https://api.openweathermap.org/data/2.5/onecall"
 OWM_AQ_BASE = "https://api.openweathermap.org/data/2.5/air_pollution"
+OWM_ICON_BASE = "https://openweathermap.org/img/wn/"
 
 SUNRISE_BASE = "https://api.sunrise-sunset.org/json"
 
