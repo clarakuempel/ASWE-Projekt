@@ -1,10 +1,21 @@
+import uuid
+
 from dotenv import load_dotenv
 from flask import Flask
+from flask import session, jsonify
 from flask.helpers import send_from_directory
 
 import service.service
 
 app = Flask(__name__, static_folder='./frontend')
+app.secret_key = "DEV_fe5dce3c7b5a0a3339342"
+
+
+@app.before_request
+def assign_user_id():
+    if "id" not in session:
+        session.permanent = True
+        session["id"] = uuid.uuid4().hex
 
 
 @app.route("/")
@@ -13,6 +24,58 @@ def default():
     returns default html page
     """
     return send_from_directory(app.static_folder, 'index.html')
+
+
+@app.route("/api/dialog")
+def get_dialog_response():
+    return "dialog response"
+
+
+@app.route("/api/habits", methods=['GET'])
+def get_user_habits():
+    print(f"Get habits for user {session.get('id', None)}")
+    # Get habits for user, idk what format
+    user_habits = [
+        {
+            "name": "Running",
+            "achieved": 1,
+            "goal": 3
+        },
+        {
+            "name": "test",
+            "achieved": 1,
+            "goal": 1
+        }
+    ]
+    return jsonify(user_habits)
+
+
+@app.route("/api/habits", methods=['POST'])
+def set_user_habits():
+    print(f"Set habits for user {session.get('id', None)}")
+    return f"Set habits for user {session.get('id', None)}"
+
+
+@app.route("/api/preferences", methods=['GET'])
+def get_user_preferences():
+    print(f"Get preferences for user {session.get('id', None)}")
+    # Get preferences for user or default values if new user
+    user_preferences = {
+        "location": {
+            "city": "Stuttgart",
+            "lat": 48.783333,
+            "lon": 9.183333,
+        },
+        "gyms": [1731421430],
+        "wakeup": "08:00"
+    }
+    return jsonify(user_preferences)
+
+
+@app.route("/api/preferences", methods=['POST'])
+def set_user_preferences():
+    print(f"Set preferences for user {session.get('id', None)}")
+    return f"Set preferences for user {session.get('id', None)}"
 
 
 if __name__ == "__main__":
