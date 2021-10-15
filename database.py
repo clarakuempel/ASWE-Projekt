@@ -2,6 +2,10 @@ import abc
 import secrets
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from ibmcloudant.cloudant_v1 import CloudantV1
+from typing import Final
+
+_DB_NAME: Final = 'products'
+_EXCEPTION_CONNECT: Final = Exception("Call connect() first")
 
 
 class DBInterface(metaclass=abc.ABCMeta):
@@ -40,6 +44,7 @@ class Database(DBInterface):
             raise Exception("This class is a singleton!")
         else:
             self.__class__.__instance = self
+            self.__instance.connect()  # ToDo Remove
 
     def connect(self) -> None:
         """
@@ -55,16 +60,37 @@ class Database(DBInterface):
         service.set_disable_ssl_verification(True)
         self.__service = service
 
-    def init(self):
-        pass
-
     def get_service(self) -> CloudantV1:
         return self.__service
 
     def create_dbs(self) -> None:
         if self.__service is None:
-            raise Exception("Call connect() first")
-        response = self.__service\
-            .put_database(db='products', partitioned=True).get_result()
-        if not response["ok"]:
+            raise _EXCEPTION_CONNECT
+        response = self.__service \
+            .put_database(db=_DB_NAME).get_result()
+        if not response['ok']:
             raise Exception("Error while creation of databases")
+
+    def store(self) -> None:
+        if self.__service is None:
+            raise _EXCEPTION_CONNECT
+        key = "person1" + "-preferences"
+        doc = {
+            '_id': ":" + key,
+            'name': 'test',
+            'age': 18
+        }
+
+        response = self.__service.post_document(db=_DB_NAME, document=doc)\
+            .get_result()
+        if not response['ok']:
+            raise Exception("Error while posting document")
+
+    def get_all_docs(self):
+        # Catch 404
+        return self.__service.post_all_docs(
+            db=_DB_NAME,
+            include_docs=True,
+            startkey='',
+            limit=10
+        ).get_result()
