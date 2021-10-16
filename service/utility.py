@@ -1,11 +1,23 @@
 from datetime import datetime, timezone
 
 import numpy as np
-# TODO for debugging date: from dateutil.tz import tzutc
+# TODO for debugging date:
+# from dateutil.tz import tzutc
 from dateutil import parser
 from flask import session
 
 from service import service, URLS
+
+
+def get_new_stories():
+    # TODO get user preference for news
+    USER_PREF_TOPIC = 1
+    news_data = service.get_news_stories(USER_PREF_TOPIC)
+    stories = news_data["entries"]
+    sentence = f"Current news topics are '{stories[0]['title']}' and '{stories[1]['title']}'"
+    return {
+        "tts": sentence
+    }
 
 
 def get_covid_situation():
@@ -13,7 +25,11 @@ def get_covid_situation():
     # TODO Get AGS based on user location
     # TODO AS OF 15.10.21 COVID API IS RETURNING 502 https://api.corona-zahlen.org/docs/
     covid_data = service.get_covid_stats(STUTTGART_AGS)
-    return covid_data
+    week_incidence = covid_data["data"][str(STUTTGART_AGS)]["weekIncidence"]
+    sentence = f"The weekly incidence is {week_incidence:.1f}."
+    return {
+        "tts": sentence
+    }
 
 
 def get_first_event():
@@ -23,6 +39,7 @@ def get_first_event():
     for event in rapla_data["events"]:
         start = parser.isoparse(event["start"])
         date_now = datetime.now(timezone.utc)
+        # date_now = datetime(2021, 10, 14, 7, tzinfo=tzutc())
         # TODO: date for debugging: datetime(2021, 10, 14, 5, tzinfo=tzutc())
         if start.date() == date_now.date():
             delta = start - date_now
@@ -45,11 +62,7 @@ def get_first_event():
                 break
 
     return {
-        "tts": sentence,
-        "display": {
-            "message": sentence,
-            "data": None
-        }
+        "tts": sentence
     }
 
 
@@ -77,12 +90,7 @@ def get_current_weather():
                f"Temperature today will be between {min_temp} and {max_temp} degrees. {recommendation}"
     return {
         "tts": sentence,
-        "display": {
-            "message": sentence,
-            "data": {
-                "icon": f"{URLS.OWM_ICON_BASE}{icon}@2x.png"
-            }
-        }
+        "icon": f"{URLS.OWM_ICON_BASE}{icon}@2x.png"
     }
 
 
@@ -97,7 +105,7 @@ def _get_daily_temperature_points(hourly_data):
 def _is_raining(hourly_data):
     umbrella = False
     for item in hourly_data:
-        if item["weather"] in ["Rain", "Thunderstorm", "Drizzle"]:
+        if item["weather"][0]["main"] in ["Rain", "Thunderstorm", "Drizzle"]:
             umbrella = True
             break
     return umbrella

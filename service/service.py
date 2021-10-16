@@ -150,12 +150,24 @@ def get_youtube_search(search_term):
         raise requests.HTTPError(f"Request not OK: {r.text}")
 
 
-def get_news_stories():
+def get_news_stories(topic_key=1):
     """
-    Get the NYT Europe RSS feed.
-    :return: JSON like object containing RSS feed
+    Get the Deutsche Welle RSS feed.
+
+    Topics: 1 - All, 2 - Business, 3 - Science, 4 - Sports
+
+    :param topic_key: News Feed topic
+    :return:  JSON like object containing RSS fee
     """
-    d = feedparser.parse(URLS.NYT_EUROPE_RSS)
+    topic_mapping = {
+        1: "-en-all",
+        2: "-en-bus",
+        3: "_en_science",
+        4: "-en-sports"
+    }
+    if topic_key not in topic_mapping.keys():
+        topic_key = 1
+    d = feedparser.parse(f"{URLS.DW_RSS_BASE}{topic_mapping[topic_key]}")
     return d
 
 
