@@ -2,3 +2,4 @@ Flask==2.0.2
 requests==2.26.0
 python-dotenv==0.19.1
 feedparser==6.0.8
+ibmcloudant==0.0.38
