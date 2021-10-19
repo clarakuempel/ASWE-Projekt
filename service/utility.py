@@ -14,7 +14,7 @@ def get_new_stories():
     USER_PREF_TOPIC = 1
     news_data = service.get_news_stories(USER_PREF_TOPIC)
     stories = news_data["entries"]
-    sentence = f"Current news topics are '{stories[0]['title']}' and '{stories[1]['title']}'"
+    sentence = f"Current headlines for you preferred topics are '{stories[0]['title']}' and '{stories[1]['title']}'"
     return {
         "tts": sentence
     }
@@ -26,7 +26,7 @@ def get_covid_situation():
     # TODO AS OF 15.10.21 COVID API IS RETURNING 502 https://api.corona-zahlen.org/docs/
     covid_data = service.get_covid_stats(STUTTGART_AGS)
     week_incidence = covid_data["data"][str(STUTTGART_AGS)]["weekIncidence"]
-    sentence = f"The weekly incidence is {week_incidence:.1f}."
+    sentence = f"Remember washing your hands, the weekly incidence is at {week_incidence:.1f}."
     return {
         "tts": sentence
     }
@@ -34,7 +34,7 @@ def get_covid_situation():
 
 def get_first_event():
     rapla_data = service.get_rapla()
-    sentence = "No lecture today."
+    sentence = "You have no upcoming lectures today."
     is_first_lecture = True
     for event in rapla_data["events"]:
         start = parser.isoparse(event["start"])
@@ -49,7 +49,7 @@ def get_first_event():
             else:
                 hours, remainder = divmod(delta.total_seconds(), 3600)
                 minutes, _ = divmod(remainder, 60)
-                sentence = f"The {'first' if is_first_lecture else 'next'} lecture starts in "
+                sentence = f"Your {'first' if is_first_lecture else 'next'} lecture starts in "
                 has_hours = False
                 if hours > 0:
                     sentence += f"{int(hours)} hours "
@@ -80,11 +80,14 @@ def get_current_weather():
     raining = _is_raining(weather_data["hourly"])
 
     if mean_temp <= 10:
-        recommendation = "You will need a jacket and an umbrella." if raining else "You will need a jacket."
+        recommendation = "Remember to bring a jacket and an umbrella, it will rain later on." if raining else \
+            "You will need a jacket."
     elif 10 < mean_temp <= 18:
-        recommendation = "You will need a light jacket and an umbrella." if raining else "You will need a light jacket."
+        recommendation = "Remember to bring a jacket and an umbrella, it will rain later on." if raining else \
+            "You will need a light jacket."
     else:
-        recommendation = "You dont need a jacket but it will rain." if raining else "You dont need a jacket."
+        recommendation = "You dont need a jacket but it will rain later on." if raining else \
+            "You dont need a jacket."
 
     sentence = f"It is currently {current_temp} degrees and {description}. " \
                f"Temperature today will be between {min_temp} and {max_temp} degrees. {recommendation}"
