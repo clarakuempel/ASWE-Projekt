@@ -5,14 +5,13 @@ import numpy as np
 # from dateutil.tz import tzutc
 from dateutil import parser
 from flask import session
+from database import Database
 
 from service import service, URLS
 
 
 def get_new_stories():
-    # TODO get user preference for news
-    USER_PREF_TOPIC = 1
-    news_data = service.get_news_stories(USER_PREF_TOPIC)
+    news_data = service.get_news_stories(Database.get_instance().load_prefs(session["id"])["news"])
     stories = news_data["entries"]
     sentence = f"Current headlines for you preferred topics are '{stories[0]['title']}' and '{stories[1]['title']}'"
     return {
@@ -21,11 +20,9 @@ def get_new_stories():
 
 
 def get_covid_situation():
-    STUTTGART_AGS = "08111"
-    # TODO Get AGS based on user location
-    # TODO AS OF 15.10.21 COVID API IS RETURNING 502 https://api.corona-zahlen.org/docs/
-    covid_data = service.get_covid_stats(STUTTGART_AGS)
-    week_incidence = covid_data["data"][str(STUTTGART_AGS)]["weekIncidence"]
+    ags = Database.get_instance().load_prefs(session["id"])["location"]["ags"]
+    covid_data = service.get_covid_stats(ags)
+    week_incidence = covid_data["data"][str(ags)]["weekIncidence"]
     sentence = f"Remember washing your hands, the weekly incidence is at {week_incidence:.1f}."
     return {
         "tts": sentence
@@ -67,10 +64,9 @@ def get_first_event():
 
 
 def get_current_weather():
-    STUTTGART_LAT = 48.783333
-    STUTTGART_LON = 9.183333
-    # TODO Get location from user preference
-    print(f"GET LOCATION FOR USER {session['id']}")
+    data = Database.get_instance().load_prefs(session["id"])
+    STUTTGART_LAT = data["location"]["lat"]
+    STUTTGART_LON = data["location"]["lon"]
     weather_data = service.get_weather_forecast(STUTTGART_LAT, STUTTGART_LON)
     description = weather_data["current"]["weather"][0]["description"]
     icon = weather_data["current"]["weather"][0]["icon"]

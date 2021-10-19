@@ -5,6 +5,7 @@ from flask import Flask
 from flask import session, jsonify
 from flask.helpers import send_from_directory
 
+from database import Database
 from usecase import welcome
 
 app = Flask(__name__, static_folder='./frontend')
@@ -28,7 +29,10 @@ def default():
 
 @app.route("/api/dialog")
 def get_dialog_response():
-    return "dialog response"
+    text = welcome.get_welcome_text()
+    db = Database.get_instance()
+    prefs = db.load_prefs(session["id"])
+    return jsonify(output=text, preferences=prefs)
 
 
 @app.route("/api/habits", methods=['GET'])
@@ -60,22 +64,26 @@ def set_user_habits():
 def get_user_preferences():
     print(f"Get preferences for user {session.get('id', None)}")
     # Get preferences for user or default values if new user
-    user_preferences = {
-        "location": {
-            "city": "Stuttgart",
-            "lat": 48.783333,
-            "lon": 9.183333,
-        },
-        "gyms": [1731421430],
-        "wakeup": "08:00"
-    }
+
+    database = Database.get_instance()
+    user_preferences = database.load_prefs(session["id"])
     return jsonify(user_preferences)
 
 
 @app.route("/api/preferences", methods=['POST'])
 def set_user_preferences():
-    print(f"Set preferences for user {session.get('id', None)}")
-    return f"Set preferences for user {session.get('id', None)}"
+    database = Database.get_instance()
+    user_preferences = {
+        "location": {
+            "city": "Stuttgart",
+            "ags": "08111",
+            "lat": 13.736717,
+            "lon": 100.523186,
+        },
+        "news": 1,
+    }
+    database.store_prefs(session["id"], user_preferences)
+    return jsonify(user_id=session.get('id', None), prefs=user_preferences)
 
 
 @app.route("/test")
@@ -85,6 +93,8 @@ def test():
 
 if __name__ == "__main__":
     load_dotenv()
+
+    Database.get_instance().initialize()
 
     app.run(debug=True, host='0.0.0.0', port=9090, threaded=True)
 
