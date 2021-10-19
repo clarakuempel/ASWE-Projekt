@@ -5,7 +5,7 @@ from flask import Flask
 from flask import session, jsonify
 from flask.helpers import send_from_directory
 
-import service.service
+from usecase import welcome
 
 app = Flask(__name__, static_folder='./frontend')
 app.secret_key = "DEV_fe5dce3c7b5a0a3339342"
@@ -78,10 +78,15 @@ def set_user_preferences():
     return f"Set preferences for user {session.get('id', None)}"
 
 
+@app.route("/test")
+def test():
+    return welcome.get_welcome_text()
+
+
 if __name__ == "__main__":
-    # app.run(debug=True, host='0.0.0.0', port=9090, threaded=True)
-    # Testing the APIs this way for now
     load_dotenv()
+
+    app.run(debug=True, host='0.0.0.0', port=9090, threaded=True)
 
     # print(service.get_rapla())
 
@@ -100,5 +105,5 @@ if __name__ == "__main__":
     # print(service.get_covid_stats(STUTTGART_AGS))
 
     # print(service.get_youtube_search("Yoga Workout"))
-    print(service.service.get_news_stories()["entries"][0]["title"])
+    # print(service.service.get_news_stories()["entries"][0]["title"])
     # print(service.service.get_bestselling_books())
