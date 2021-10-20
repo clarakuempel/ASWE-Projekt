@@ -211,7 +211,7 @@ class Database(DBInterface, abc.ABC):
         del prefs['_rev']
         return prefs
 
-    def store_habits(self, user_id: str, habits: object) -> None:
+    def store_habits(self, user_id: str, habits: dict) -> None:
         """
         Save the habits associated with a user by user_id
         :param user_id: unique user id
@@ -220,7 +220,7 @@ class Database(DBInterface, abc.ABC):
         """
         return self._store(user_id, habits, _DB_NAME_HABITS)
 
-    def load_habits(self, user_id: str) -> object:
+    def load_habits(self, user_id: str) -> dict:
         """
         Invokes query to database and processes response.
 
