@@ -11,7 +11,9 @@ from service import service, URLS
 
 
 def get_new_stories():
-    news_data = service.get_news_stories(Database.get_instance().load_prefs(session["id"])["news"])
+    prefs = Database.get_instance().load_prefs(session["id"])
+    news_pref = prefs["news"] if prefs is not None else 1  # TODO SET DEFAULT PREFS IN ONE PLACE / CONFIG FILE
+    news_data = service.get_news_stories(news_pref)
     stories = news_data["entries"]
     sentence = f"Current headlines for you preferred topics are '{stories[0]['title']}' and '{stories[1]['title']}'"
     return {
@@ -20,7 +22,9 @@ def get_new_stories():
 
 
 def get_covid_situation():
-    ags = Database.get_instance().load_prefs(session["id"])["location"]["ags"]
+    prefs = Database.get_instance().load_prefs(session["id"])
+    # TODO SET DEFAULT PREFS IN ONE PLACE / CONFIG FILE
+    ags = prefs["location"]["ags"] if prefs is not None else "08111"
     covid_data = service.get_covid_stats(ags)
     week_incidence = covid_data["data"][str(ags)]["weekIncidence"]
     sentence = f"Remember washing your hands, the weekly incidence is at {week_incidence:.1f}."
@@ -65,9 +69,14 @@ def get_first_event():
 
 def get_current_weather():
     data = Database.get_instance().load_prefs(session["id"])
-    STUTTGART_LAT = data["location"]["lat"]
-    STUTTGART_LON = data["location"]["lon"]
-    weather_data = service.get_weather_forecast(STUTTGART_LAT, STUTTGART_LON)
+    if data is not None:
+        lat = data["location"]["lat"]
+        lon = data["location"]["lon"]
+    else:
+        # TODO SET DEFAULT PREFS IN ONE PLACE / CONFIG FILE
+        lat = 48.783333
+        lon = 9.183333
+    weather_data = service.get_weather_forecast(lat, lon)
     description = weather_data["current"]["weather"][0]["description"]
     icon = weather_data["current"]["weather"][0]["icon"]
     current_temp = int(weather_data["current"]["temp"])
