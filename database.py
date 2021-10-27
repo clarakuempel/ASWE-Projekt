@@ -1,5 +1,6 @@
 import abc
-import secrets
+import os
+
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from ibm_cloud_sdk_core.api_exception import ApiException
 from ibmcloudant.cloudant_v1 import CloudantV1
@@ -17,7 +18,7 @@ class Database(DBInterface, abc.ABC):
     Singleton for Database
     Uses Cloudant
     Prerequisites:
-        secrets.py in same directory in the form of:
+        .env config in the form of:
             APIKey = "example API Key"
             URL = "example URL"
     Usage:
@@ -29,7 +30,7 @@ class Database(DBInterface, abc.ABC):
     __service = None  # Cloudant service
 
     @classmethod
-    def get_instance(cls) -> object:
+    def get_instance(cls) -> 'Database':
         """
         Method to access singleton-instance. Creates instance if not exists.
         :return: Singleton of database-connector
@@ -139,14 +140,14 @@ class Database(DBInterface, abc.ABC):
     def connect(self) -> None:
         """
         Connects to IBM Cloudant via IAMAuthenticator
-        Based on API-Key and URL defined in ./secrets.py
+        Based on API-Key and URL defined in .env file
 
         :return: None
         """
-        authenticator = IAMAuthenticator(secrets.APIKey)
+        authenticator = IAMAuthenticator(os.environ.get("DB_API_KEY"))
         authenticator.set_disable_ssl_verification(True)
         service = CloudantV1(authenticator=authenticator)
-        service.set_service_url(secrets.URL)
+        service.set_service_url(os.environ.get("DB_URL"))
         service.set_disable_ssl_verification(True)
         self.__service = service
 
@@ -210,7 +211,7 @@ class Database(DBInterface, abc.ABC):
         del prefs['_rev']
         return prefs
 
-    def store_habits(self, user_id: str, habits: object) -> None:
+    def store_habits(self, user_id: str, habits: dict) -> None:
         """
         Save the habits associated with a user by user_id
         :param user_id: unique user id
@@ -219,7 +220,7 @@ class Database(DBInterface, abc.ABC):
         """
         return self._store(user_id, habits, _DB_NAME_HABITS)
 
-    def load_habits(self, user_id: str) -> object:
+    def load_habits(self, user_id: str) -> dict:
         """
         Invokes query to database and processes response.
 

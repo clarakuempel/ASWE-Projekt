@@ -3,6 +3,7 @@ RAPLA_PARAMETER = "?format=json&Description=false&noInfo=true"
 
 OWM_WEATHER_BASE = "https://api.openweathermap.org/data/2.5/onecall"
 OWM_AQ_BASE = "https://api.openweathermap.org/data/2.5/air_pollution"
+OWM_ICON_BASE = "https://openweathermap.org/img/wn/"
 
 SUNRISE_BASE = "https://api.sunrise-sunset.org/json"
 
@@ -11,10 +12,10 @@ WIKIPEDIA_BASE = "https://en.wikipedia.org/w/api.php?format=json&action=query&pr
 
 GYM_UTIL_BASE = "https://www.mcfit.com/de/auslastung/antwort/request.json"
 
-COVID_BASE = "https://api.corona-zahlen.org/districts/"
+COVID_BASE = "http://193.196.54.41/districts/"
 
 YT_SEARCH_BASE = "https://youtube.googleapis.com/youtube/v3/search"
 
-NYT_EUROPE_RSS = "https://rss.nytimes.com/services/xml/rss/nyt/Europe.xml"
+DW_RSS_BASE = "https://rss.dw.com/rdf/rss"
 
 NYT_BOOKS = "https://api.nytimes.com/svc/books/v3/lists/current/"
