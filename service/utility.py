@@ -10,12 +10,24 @@ from database import Database
 from service import service, URLS
 
 
-def get_new_stories():
+def get_news_headlines(offset=0):
     prefs = Database.get_instance().load_prefs(session["id"])
     news_pref = prefs["news"] if prefs is not None else 1  # TODO SET DEFAULT PREFS IN ONE PLACE / CONFIG FILE
     news_data = service.get_news_stories(news_pref)
     stories = news_data["entries"]
-    sentence = f"Current headlines for you preferred topics are '{stories[0]['title']}' and '{stories[1]['title']}'"
+    sentence = f"Current headlines for you preferred topics are '{stories[0 + offset]['title']}' and " \
+               f"'{stories[1 + offset]['title']}'"
+    return {
+        "tts": sentence
+    }
+
+
+def get_news_abstract(index=0):
+    prefs = Database.get_instance().load_prefs(session["id"])
+    news_pref = prefs["news"] if prefs is not None else 1  # TODO SET DEFAULT PREFS IN ONE PLACE / CONFIG FILE
+    news_data = service.get_news_stories(news_pref)
+    stories = news_data["entries"]
+    sentence = f"More information about the article '{stories[index]['title']}: {stories[index]['description']}."
     return {
         "tts": sentence
     }
