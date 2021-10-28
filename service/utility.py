@@ -5,8 +5,8 @@ import numpy as np
 # from dateutil.tz import tzutc
 from dateutil import parser
 from flask import session
-from database import Database
 
+from database import Database
 from service import service, URLS
 
 
@@ -33,7 +33,7 @@ def get_covid_situation():
     }
 
 
-def get_first_event():
+def get_next_event():
     rapla_data = service.get_rapla()
     sentence = "You have no upcoming lectures today."
     is_first_lecture = True
