@@ -18,7 +18,7 @@ def get_rapla():
     r = requests.get(
         URLS.RAPLA_BASE +
         rapla_key +
-        URLS.RAPLA_PARAMETER)
+        URLS.RAPLA_PARAMETER, verify=False)
     if r.ok:
         return r.json()
     else:
@@ -42,7 +42,8 @@ def get_weather_forecast(lat, lon, exclude="minutely,daily,alerts", units="metri
     if not api_key:
         raise exception.InvalidConfiguration("No OpenWeatherMap api key configured")
     r = requests.get(
-        URLS.OWM_WEATHER_BASE + f"?lat={lat}&lon={lon}&exclude={exclude}&appid={api_key}&units={units}&lang={lang}")
+        URLS.OWM_WEATHER_BASE + f"?lat={lat}&lon={lon}&exclude={exclude}&appid={api_key}&units={units}&lang={lang}",
+        verify=False)
     if r.ok:
         return r.json()
     else:
@@ -64,7 +65,7 @@ def get_air_pollution(lat, lon):
     if not api_key:
         raise exception.InvalidConfiguration("No OpenWeatherMap api key configured")
     r = requests.get(
-        URLS.OWM_AQ_BASE + f"?lat={lat}&lon={lon}&appid={api_key}")
+        URLS.OWM_AQ_BASE + f"?lat={lat}&lon={lon}&appid={api_key}", verify=False)
     if r.ok:
         return r.json()
     else:
@@ -83,7 +84,7 @@ def get_sunrise_sunset(lat, lon, date="today"):
     :return: API response as json
     """
     r = requests.get(
-        URLS.SUNRISE_BASE + f"?lat={lat}&lon={lon}&date={date}&formatted=0")
+        URLS.SUNRISE_BASE + f"?lat={lat}&lon={lon}&date={date}&formatted=0", verify=False)
     if r.ok:
         return r.json()
     else:
@@ -98,7 +99,7 @@ def get_wikipedia_extract(search_title):
     :return: API response as json
     """
     r = requests.get(
-        URLS.WIKIPEDIA_BASE + f"&titles={search_title}")
+        URLS.WIKIPEDIA_BASE + f"&titles={search_title}", verify=False)
     if r.ok:
         return r.json()
     else:
@@ -112,7 +113,7 @@ def get_gym_utilization(gym_id):
     :return: API response as json
     """
     r = requests.get(
-        URLS.GYM_UTIL_BASE + f"?tx_brastudioprofilesmcfitcom_brastudioprofiles%5BstudioId%5D={gym_id}")
+        URLS.GYM_UTIL_BASE + f"?tx_brastudioprofilesmcfitcom_brastudioprofiles%5BstudioId%5D={gym_id}", verify=False)
     if r.ok:
         return r.json()
     else:
@@ -126,7 +127,7 @@ def get_covid_stats(ags):
     :return: API response as json
     """
     r = requests.get(
-        URLS.COVID_BASE + f"{ags}")
+        URLS.COVID_BASE + f"{ags}", verify=False)
     if r.ok:
         return r.json()
     else:
@@ -143,7 +144,7 @@ def get_youtube_search(search_term):
     if not api_key:
         raise exception.InvalidConfiguration("No Google Youtube api key configured")
     r = requests.get(
-        URLS.YT_SEARCH_BASE + f"?part=snippet&maxResults=10&q={search_term}&key={api_key}")
+        URLS.YT_SEARCH_BASE + f"?part=snippet&maxResults=10&q={search_term}&key={api_key}", verify=False)
     if r.ok:
         return r.json()
     else:
@@ -185,7 +186,7 @@ def get_bestselling_books(fiction=True):
     else:
         list_name = "hardcover-nonfiction"
     r = requests.get(
-        URLS.NYT_BOOKS + f"{list_name}.json?api-key={api_key}")
+        URLS.NYT_BOOKS + f"{list_name}.json?api-key={api_key}", verify=False)
     if r.ok:
         return r.json()
     else:
