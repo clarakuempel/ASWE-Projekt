@@ -45,35 +45,62 @@ def get_covid_situation():
     }
 
 
-def get_next_event():
+def get_event_overview():
     rapla_data = service.get_rapla()
-    sentence = "You have no upcoming lectures today."
+    results = []
+    next_lecture = None
     is_first_lecture = True
+    is_next_lecture = True
     for event in rapla_data["events"]:
         start = parser.isoparse(event["start"])
         date_now = datetime.now(timezone.utc)
         # date_now = datetime(2021, 10, 14, 7, tzinfo=tzutc())
         # TODO: date for debugging: datetime(2021, 10, 14, 5, tzinfo=tzutc())
         if start.date() == date_now.date():
-            delta = start - date_now
-            if delta.total_seconds() < 0:
+            start_delta = start - date_now
+            if start_delta.total_seconds() < 0:
                 is_first_lecture = False
-                continue
+                # already started
+                end = parser.isoparse(event["end"])
+                end_delta = end - date_now
+                if end_delta.total_seconds() < 0:
+                    # already ended
+                    sentence = f"Lecture {_parse_lecture_title(event['title'])} is already over."
+                else:
+                    sentence = f"Lecture {_parse_lecture_title(event['title'])} is currently ongoing and " \
+                               f"is taking place {_parse_lecture_type(event['type'])}."
             else:
-                hours, remainder = divmod(delta.total_seconds(), 3600)
+                hours, remainder = divmod(start_delta.total_seconds(), 3600)
                 minutes, _ = divmod(remainder, 60)
-                sentence = f"Your {'first' if is_first_lecture else 'next'} lecture starts in "
+                sentence = f"The {'first' if is_first_lecture else 'next'} lecture starts in "
                 has_hours = False
                 if hours > 0:
                     sentence += f"{int(hours)} hours "
                     has_hours = True
                 if minutes > 0:
                     sentence += f"{'and ' if has_hours else ''}{int(minutes)} minutes"
-                lecture_type = 'online' if event["type"] == "Online-Format (ohne Raumbelegung)" else "on site"
-                lecture_title = event['title'].replace(" - Online  [ Teiln]", "").replace(" [19 Teiln]", "")
-                sentence += f". It is {lecture_title} and is taking place {lecture_type}."
-                break
+                sentence += f". It is {_parse_lecture_title(event['title'])} and " \
+                            f"is taking place {_parse_lecture_type(event['type'])}."
+                if is_next_lecture:
+                    next_lecture = sentence
+                    is_next_lecture = False
+            results.append(sentence)
+    if not results:
+        results = ["You have no lectures today."]
+    return results, next_lecture
 
+
+def _parse_lecture_title(title):
+    return title.replace(" - Online  [ Teiln]", "").replace(" [19 Teiln]", "")
+
+
+def _parse_lecture_type(event_type):
+    return 'online' if event_type == "Online-Format (ohne Raumbelegung)" else "on site"
+
+
+def get_next_event():
+    day_events, next_lecture = get_event_overview()
+    sentence = day_events[0] if next_lecture is None else next_lecture
     return {
         "tts": sentence
     }
