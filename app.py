@@ -6,6 +6,7 @@ from flask import Flask, request, session, jsonify
 from flask.helpers import send_from_directory
 
 from database import Database
+from service import service, utility
 from usecase import welcome
 
 app = Flask(__name__, static_folder='./frontend')
@@ -105,6 +106,13 @@ def test():
     db = Database.get_instance()
     prefs = db.load_prefs(session["id"])
     return jsonify(output=text, preferences=prefs, session_id=session["id"])
+
+
+@app.route("/testdata")
+def testing():
+    news_data = service.get_news_stories(1)
+    text = utility.get_news_headlines(news_data)
+    return jsonify(output=text, data=news_data)
 
 
 if __name__ == "__main__":
