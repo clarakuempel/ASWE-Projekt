@@ -1,9 +1,11 @@
 import json
+import os
 import uuid
 
 from dotenv import load_dotenv
 from flask import Flask, request, session, jsonify
 from flask.helpers import send_from_directory
+from ibm_cloud_sdk_core import IAMTokenManager
 
 from database import Database
 from usecase import welcome
@@ -105,6 +107,30 @@ def test():
     db = Database.get_instance()
     prefs = db.load_prefs(session["id"])
     return jsonify(output=text, preferences=prefs, session_id=session["id"])
+
+
+@app.route("/api/tts-token", methods=["GET"])
+def get_tts_token():
+    """
+    Get Token for TTS
+    """
+    iam_token_manager = IAMTokenManager(apikey=os.environ.get("TTS_APIKEY"))
+    iam_token_manager.set_disable_ssl_verification(True)
+    token = iam_token_manager.get_token()
+    res = {"token": token, "url": os.environ.get("TTS_URL")}
+    return jsonify(res)
+
+
+@app.route("/api/stt-token", methods=["GET"])
+def get_stt_token():
+    """
+    Get Token for STT
+    """
+    iam_token_manager = IAMTokenManager(apikey=os.environ.get("STT_APIKEY"))
+    iam_token_manager.set_disable_ssl_verification(True)
+    token = iam_token_manager.get_token()
+    res = {"token": token, "url": os.environ.get("STT_URL")}
+    return jsonify(res)
 
 
 if __name__ == "__main__":
