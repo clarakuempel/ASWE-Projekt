@@ -4,16 +4,11 @@ import numpy as np
 # TODO for debugging date:
 # from dateutil.tz import tzutc
 from dateutil import parser
-from flask import session
 
-from database import Database
-from service import service, URLS
+from service import URLS
 
 
-def get_news_headlines(offset=0):
-    prefs = Database.get_instance().load_prefs(session["id"])
-    news_pref = prefs["news"] if prefs is not None else 1  # TODO SET DEFAULT PREFS IN ONE PLACE / CONFIG FILE
-    news_data = service.get_news_stories(news_pref)
+def get_news_headlines(news_data, offset=0):
     stories = news_data["entries"]
     sentence = f"Current headlines for you preferred topics are '{stories[0 + offset]['title']}' and " \
                f"'{stories[1 + offset]['title']}'"
@@ -22,10 +17,7 @@ def get_news_headlines(offset=0):
     }
 
 
-def get_news_abstract(index=0):
-    prefs = Database.get_instance().load_prefs(session["id"])
-    news_pref = prefs["news"] if prefs is not None else 1  # TODO SET DEFAULT PREFS IN ONE PLACE / CONFIG FILE
-    news_data = service.get_news_stories(news_pref)
+def get_news_abstract(news_data, index=0):
     stories = news_data["entries"]
     sentence = f"More information about the article '{stories[index]['title']}: {stories[index]['description']}."
     return {
@@ -33,11 +25,7 @@ def get_news_abstract(index=0):
     }
 
 
-def get_covid_situation():
-    prefs = Database.get_instance().load_prefs(session["id"])
-    # TODO SET DEFAULT PREFS IN ONE PLACE / CONFIG FILE
-    ags = prefs["location"]["ags"] if prefs is not None else "08111"
-    covid_data = service.get_covid_stats(ags)
+def get_covid_situation(covid_data, ags):
     week_incidence = covid_data["data"][str(ags)]["weekIncidence"]
     sentence = f"Remember washing your hands, the weekly incidence is at {week_incidence:.1f}."
     return {
@@ -45,8 +33,7 @@ def get_covid_situation():
     }
 
 
-def get_event_overview():
-    rapla_data = service.get_rapla()
+def get_event_overview(rapla_data):
     results = []
     next_lecture = None
     is_first_lecture = True
@@ -98,24 +85,15 @@ def _parse_lecture_type(event_type):
     return 'online' if event_type == "Online-Format (ohne Raumbelegung)" else "on site"
 
 
-def get_next_event():
-    day_events, next_lecture = get_event_overview()
+def get_next_event(rapla_data):
+    day_events, next_lecture = get_event_overview(rapla_data)
     sentence = day_events[0] if next_lecture is None else next_lecture
     return {
         "tts": sentence
     }
 
 
-def get_current_weather():
-    data = Database.get_instance().load_prefs(session["id"])
-    if data is not None:
-        lat = data["location"]["lat"]
-        lon = data["location"]["lon"]
-    else:
-        # TODO SET DEFAULT PREFS IN ONE PLACE / CONFIG FILE
-        lat = 48.783333
-        lon = 9.183333
-    weather_data = service.get_weather_forecast(lat, lon)
+def get_current_weather(weather_data):
     description = weather_data["current"]["weather"][0]["description"]
     icon = weather_data["current"]["weather"][0]["icon"]
     current_temp = int(weather_data["current"]["temp"])
