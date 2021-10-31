@@ -1,0 +1,2 @@
+[run]
+omit = ./service/service.py

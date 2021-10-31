@@ -5,3 +5,4 @@ feedparser==6.0.8
 ibmcloudant==0.0.38
 numpy==1.21.2
 python-dateutil==2.8.2
+coverage==6.1.1
