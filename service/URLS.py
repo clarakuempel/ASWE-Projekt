@@ -1,3 +1,5 @@
+QUOTE_BASE = "https://type.fit/api/quotes"
+
 RAPLA_BASE = "https://rapla.wuest.dev/https%3A%2F%2Frapla.dhbw-stuttgart.de%2Frapla%3Fkey%3D"
 RAPLA_PARAMETER = "?format=json&Description=false&noInfo=true"
 
