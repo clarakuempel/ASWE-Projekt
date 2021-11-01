@@ -191,3 +191,24 @@ def get_bestselling_books(fiction=True):
         return r.json()
     else:
         raise requests.HTTPError(f"Request not OK: {r.text}")
+
+
+def get_travel_summary(org_lat, org_lon, dest_lat, dest_lon):
+    """
+    Get the travel summary for a car route
+    :param org_lat: Origin latitude
+    :param org_lon: Origin longitude
+    :param dest_lat: Destination latitude
+    :param dest_lon: Destination longitude
+    :return: API response as json
+    """
+    api_key = os.environ.get("HERE_API_KEY")
+    if not api_key:
+        raise exception.InvalidConfiguration("No HERE API key configured")
+    r = requests.get(
+        URLS.HERE_ROUTING_BASE + f"?transportMode=car&origin={org_lat},{org_lon}&destination={dest_lat},{dest_lon}"
+                                 f"&return=travelSummary&apiKey={api_key}", verify=False)
+    if r.ok:
+        return r.json()
+    else:
+        raise requests.HTTPError(f"Request not OK: {r.text}")

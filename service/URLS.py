@@ -19,3 +19,5 @@ YT_SEARCH_BASE = "https://youtube.googleapis.com/youtube/v3/search"
 DW_RSS_BASE = "https://rss.dw.com/rdf/rss"
 
 NYT_BOOKS = "https://api.nytimes.com/svc/books/v3/lists/current/"
+
+HERE_ROUTING_BASE = "https://router.hereapi.com/v8/routes"
