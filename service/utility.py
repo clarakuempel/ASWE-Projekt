@@ -97,9 +97,9 @@ def get_current_weather(weather_data):
     description = weather_data["current"]["weather"][0]["description"]
     icon = weather_data["current"]["weather"][0]["icon"]
     current_temp = int(weather_data["current"]["temp"])
-    min_temp, max_temp, mean_temp = _get_daily_temperature_points(weather_data["hourly"])
+    min_temp, max_temp, mean_temp = get_daily_temperature_points(weather_data["hourly"])
 
-    raining = _is_raining(weather_data["hourly"])
+    raining = is_raining(weather_data["hourly"])
 
     if mean_temp <= 10:
         recommendation = "Remember to bring a jacket and an umbrella, it will rain later on." if raining else \
@@ -119,7 +119,7 @@ def get_current_weather(weather_data):
     }
 
 
-def _get_daily_temperature_points(hourly_data):
+def get_daily_temperature_points(hourly_data):
     temperatures = np.array([])
     for item in hourly_data:
         t = item["temp"]
@@ -127,7 +127,7 @@ def _get_daily_temperature_points(hourly_data):
     return int(np.min(temperatures)), int(np.max(temperatures)), int(np.mean(temperatures))
 
 
-def _is_raining(hourly_data):
+def is_raining(hourly_data):
     umbrella = False
     for item in hourly_data:
         if item["weather"][0]["main"] in ["Rain", "Thunderstorm", "Drizzle"]:
