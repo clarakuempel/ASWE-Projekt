@@ -1,10 +1,40 @@
 import os
+import random
 
 import feedparser
 import requests
+import warnings
 
 import exception
 from . import URLS
+
+
+def get_quote(seed: int = None, return_seed: bool = False):
+    """
+    Get inspirational quote.
+
+    :param return_seed: (Optional) If true, used seed is returned as well
+    :param seed: (Optional) Seed for random generator to return pre-determined quote (Seed is index of array)
+    :return: Quote as dict with keys 'text', 'author', and - if return_seed == True 'seed'
+    """
+    r = requests.get(
+        URLS.QUOTE_BASE, verify=False)
+    if r.ok:
+        quotes = r.json()
+        if seed is not None:
+            if seed >= len(quotes):
+                warnings.warn(
+                    f"Warning: Seed was above or equal length of quotes: {len(quotes)}. "
+                    f"Using random quote instead.")
+                seed = None
+        seed = random.randint(0, len(quotes)) if seed is None else seed
+        quote = quotes[seed]
+        if return_seed:
+            quote["seed"] = seed
+        return quote
+
+    else:
+        raise requests.HTTPError(f"Request not OK: {r.text}")
 
 
 def get_rapla():
