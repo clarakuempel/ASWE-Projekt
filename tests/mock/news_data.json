@@ -1,0 +1,358 @@
+{
+  "bozo": false,
+  "encoding": "UTF-8",
+  "entries": [
+    {
+      "dwsyn_contentid": "59678869",
+      "id": "https://www.dw.com/en/japan-stabbing-attack-at-least-17-injured-on-tokyo-train/a-59678869?maca=en-rss-en-all-1573-rdf",
+      "language": "en",
+      "link": "https://www.dw.com/en/japan-stabbing-attack-at-least-17-injured-on-tokyo-train/a-59678869?maca=en-rss-en-all-1573-rdf",
+      "links": [
+        {
+          "href": "https://www.dw.com/en/japan-stabbing-attack-at-least-17-injured-on-tokyo-train/a-59678869?maca=en-rss-en-all-1573-rdf",
+          "rel": "alternate",
+          "type": "text/html"
+        }
+      ],
+      "summary": "The suspect, who was reportedly dressed as the \"Joker\" character, was arrested for attempted murder after the stabbing rampage. He also started a fire on the train, with smoke filling the carriage.",
+      "summary_detail": {
+        "base": "https://rss.dw.com/rdf/rss-en-all",
+        "language": null,
+        "type": "text/html",
+        "value": "The suspect, who was reportedly dressed as the \"Joker\" character, was arrested for attempted murder after the stabbing rampage. He also started a fire on the train, with smoke filling the carriage."
+      },
+      "tags": [
+        {
+          "label": null,
+          "scheme": null,
+          "term": "News"
+        }
+      ],
+      "title": "Japan stabbing attack: At least 17 injured on Tokyo train",
+      "title_detail": {
+        "base": "https://rss.dw.com/rdf/rss-en-all",
+        "language": null,
+        "type": "text/plain",
+        "value": "Japan stabbing attack: At least 17 injured on Tokyo train"
+      },
+      "updated": "2021-10-31T16:31:00Z",
+      "updated_parsed": [
+        2021,
+        10,
+        31,
+        16,
+        31,
+        0,
+        6,
+        304,
+        0
+      ]
+    },
+    {
+      "dwsyn_contentid": "59679534",
+      "id": "https://www.dw.com/en/czech-cable-car-crashes-to-ground-kills-one/a-59679534?maca=en-rss-en-all-1573-rdf",
+      "language": "en",
+      "link": "https://www.dw.com/en/czech-cable-car-crashes-to-ground-kills-one/a-59679534?maca=en-rss-en-all-1573-rdf",
+      "links": [
+        {
+          "href": "https://www.dw.com/en/czech-cable-car-crashes-to-ground-kills-one/a-59679534?maca=en-rss-en-all-1573-rdf",
+          "rel": "alternate",
+          "type": "text/html"
+        }
+      ],
+      "summary": "One person died after a Czech cable car cabin detached from its cable. Rescuers were able to rescue 15 people from a second cabin.",
+      "summary_detail": {
+        "base": "https://rss.dw.com/rdf/rss-en-all",
+        "language": null,
+        "type": "text/html",
+        "value": "One person died after a Czech cable car cabin detached from its cable. Rescuers were able to rescue 15 people from a second cabin."
+      },
+      "tags": [
+        {
+          "label": null,
+          "scheme": null,
+          "term": "News"
+        }
+      ],
+      "title": "Czech cable car crashes to ground, kills one",
+      "title_detail": {
+        "base": "https://rss.dw.com/rdf/rss-en-all",
+        "language": null,
+        "type": "text/plain",
+        "value": "Czech cable car crashes to ground, kills one"
+      },
+      "updated": "2021-10-31T16:16:00Z",
+      "updated_parsed": [
+        2021,
+        10,
+        31,
+        16,
+        16,
+        0,
+        6,
+        304,
+        0
+      ]
+    },
+    {
+      "dwsyn_contentid": "59675406",
+      "id": "https://www.dw.com/en/biontech-founders-covid-is-going-to-become-more-manageable/a-59675406?maca=en-rss-en-all-1573-rdf",
+      "language": "en",
+      "link": "https://www.dw.com/en/biontech-founders-covid-is-going-to-become-more-manageable/a-59675406?maca=en-rss-en-all-1573-rdf",
+      "links": [
+        {
+          "href": "https://www.dw.com/en/biontech-founders-covid-is-going-to-become-more-manageable/a-59675406?maca=en-rss-en-all-1573-rdf",
+          "rel": "alternate",
+          "type": "text/html"
+        }
+      ],
+      "summary": "\u00d6zlem T\u00fcreci and Ugur Sahin, founders of German company BioNTech, have been honored several times for developing the first COVID-19 vaccine. They spoke with DW about the future of the virus and vaccines.",
+      "summary_detail": {
+        "base": "https://rss.dw.com/rdf/rss-en-all",
+        "language": null,
+        "type": "text/html",
+        "value": "\u00d6zlem T\u00fcreci and Ugur Sahin, founders of German company BioNTech, have been honored several times for developing the first COVID-19 vaccine. They spoke with DW about the future of the virus and vaccines."
+      },
+      "tags": [
+        {
+          "label": null,
+          "scheme": null,
+          "term": "Coronavirus"
+        }
+      ],
+      "title": "BioNTech founders: COVID is going to become more manageable",
+      "title_detail": {
+        "base": "https://rss.dw.com/rdf/rss-en-all",
+        "language": null,
+        "type": "text/plain",
+        "value": "BioNTech founders: COVID is going to become more manageable"
+      },
+      "updated": "2021-10-31T15:51:00Z",
+      "updated_parsed": [
+        2021,
+        10,
+        31,
+        15,
+        51,
+        0,
+        6,
+        304,
+        0
+      ]
+    },
+    {
+      "dwsyn_contentid": "59678740",
+      "id": "https://www.dw.com/en/g-20-leaders-make-no-promises-over-climate-change/a-59678740?maca=en-rss-en-all-1573-rdf",
+      "language": "en",
+      "link": "https://www.dw.com/en/g-20-leaders-make-no-promises-over-climate-change/a-59678740?maca=en-rss-en-all-1573-rdf",
+      "links": [
+        {
+          "href": "https://www.dw.com/en/g-20-leaders-make-no-promises-over-climate-change/a-59678740?maca=en-rss-en-all-1573-rdf",
+          "rel": "alternate",
+          "type": "text/html"
+        }
+      ],
+      "summary": "World leaders have failed to set a firm date for achieving carbon neutrality or for phasing out coal. Activists had hoped for a stronger signal from the G-20 ahead of the UN's climate change conference, COP26.",
+      "summary_detail": {
+        "base": "https://rss.dw.com/rdf/rss-en-all",
+        "language": null,
+        "type": "text/html",
+        "value": "World leaders have failed to set a firm date for achieving carbon neutrality or for phasing out coal. Activists had hoped for a stronger signal from the G-20 ahead of the UN's climate change conference, COP26."
+      },
+      "tags": [
+        {
+          "label": null,
+          "scheme": null,
+          "term": "News"
+        }
+      ],
+      "title": "G-20 leaders make no promises over climate change",
+      "title_detail": {
+        "base": "https://rss.dw.com/rdf/rss-en-all",
+        "language": null,
+        "type": "text/plain",
+        "value": "G-20 leaders make no promises over climate change"
+      },
+      "updated": "2021-10-31T14:58:00Z",
+      "updated_parsed": [
+        2021,
+        10,
+        31,
+        14,
+        58,
+        0,
+        6,
+        304,
+        0
+      ]
+    },
+    {
+      "dwsyn_contentid": "59678281",
+      "id": "https://www.dw.com/en/uk-disputes-french-statement-over-fishing-row-deescalation/a-59678281?maca=en-rss-en-all-1573-rdf",
+      "language": "en",
+      "link": "https://www.dw.com/en/uk-disputes-french-statement-over-fishing-row-deescalation/a-59678281?maca=en-rss-en-all-1573-rdf",
+      "links": [
+        {
+          "href": "https://www.dw.com/en/uk-disputes-french-statement-over-fishing-row-deescalation/a-59678281?maca=en-rss-en-all-1573-rdf",
+          "rel": "alternate",
+          "type": "text/html"
+        }
+      ],
+      "summary": "The British government has contradicted French claims that both sides had agreed to defuse a row over post-Brexit fishing rights, insisting it was up to Paris to back down.",
+      "summary_detail": {
+        "base": "https://rss.dw.com/rdf/rss-en-all",
+        "language": null,
+        "type": "text/html",
+        "value": "The British government has contradicted French claims that both sides had agreed to defuse a row over post-Brexit fishing rights, insisting it was up to Paris to back down."
+      },
+      "tags": [
+        {
+          "label": null,
+          "scheme": null,
+          "term": "News"
+        }
+      ],
+      "title": "UK disputes French statement over fishing row 'deescalation'",
+      "title_detail": {
+        "base": "https://rss.dw.com/rdf/rss-en-all",
+        "language": null,
+        "type": "text/plain",
+        "value": "UK disputes French statement over fishing row 'deescalation'"
+      },
+      "updated": "2021-10-31T14:51:00Z",
+      "updated_parsed": [
+        2021,
+        10,
+        31,
+        14,
+        51,
+        0,
+        6,
+        304,
+        0
+      ]
+    },
+    {
+      "dwsyn_contentid": "59678277",
+      "id": "https://www.dw.com/en/sudan-protests-continue-as-un-confirms-pm-hamdok-is-well/a-59678277?maca=en-rss-en-all-1573-rdf",
+      "language": "en",
+      "link": "https://www.dw.com/en/sudan-protests-continue-as-un-confirms-pm-hamdok-is-well/a-59678277?maca=en-rss-en-all-1573-rdf",
+      "links": [
+        {
+          "href": "https://www.dw.com/en/sudan-protests-continue-as-un-confirms-pm-hamdok-is-well/a-59678277?maca=en-rss-en-all-1573-rdf",
+          "rel": "alternate",
+          "type": "text/html"
+        }
+      ],
+      "summary": "Anti-coup demonstrators have taken to the streets once more, one day after at least three people died during civil unrest. The United Nations is seeking a way out of the crisis.",
+      "summary_detail": {
+        "base": "https://rss.dw.com/rdf/rss-en-all",
+        "language": null,
+        "type": "text/html",
+        "value": "Anti-coup demonstrators have taken to the streets once more, one day after at least three people died during civil unrest. The United Nations is seeking a way out of the crisis."
+      },
+      "tags": [
+        {
+          "label": null,
+          "scheme": null,
+          "term": "News"
+        }
+      ],
+      "title": "Sudan: Protests continue as UN confirms PM Hamdok is 'well'",
+      "title_detail": {
+        "base": "https://rss.dw.com/rdf/rss-en-all",
+        "language": null,
+        "type": "text/plain",
+        "value": "Sudan: Protests continue as UN confirms PM Hamdok is 'well'"
+      },
+      "updated": "2021-10-31T14:19:00Z",
+      "updated_parsed": [
+        2021,
+        10,
+        31,
+        14,
+        19,
+        0,
+        6,
+        304,
+        0
+      ]
+    }
+  ],
+  "feed": {
+    "entries": "",
+    "image": {
+      "links": [
+        {
+          "rel": "alternate",
+          "type": "text/html"
+        }
+      ]
+    },
+    "link": "http://www.dw.com/english/?maca=en-rss-en-all-1573-rdf",
+    "links": [
+      {
+        "href": "http://www.dw.com/english/?maca=en-rss-en-all-1573-rdf",
+        "rel": "alternate",
+        "type": "text/html"
+      }
+    ],
+    "rdf_li": {
+      "rdf:resource": "https://www.dw.com/en/making-traditional-chinese-medicine-from-lab-grown-meat/a-59352604?maca=en-rss-en-all-1573-rdf"
+    },
+    "rdf_seq": "",
+    "subtitle": "Deutsche Welle",
+    "subtitle_detail": {
+      "base": "https://rss.dw.com/rdf/rss-en-all",
+      "language": null,
+      "type": "text/html",
+      "value": "Deutsche Welle"
+    },
+    "sy_updatebase": "2002-05-01T00:00:00Z",
+    "sy_updatefequency": "4",
+    "sy_updateperiod": "hourly",
+    "title": "Deutsche Welle",
+    "title_detail": {
+      "base": "https://rss.dw.com/rdf/rss-en-all",
+      "language": null,
+      "type": "text/plain",
+      "value": "Deutsche Welle"
+    },
+    "updated": "2021-10-31T16:51:58Z",
+    "updated_parsed": [
+      2021,
+      10,
+      31,
+      16,
+      51,
+      58,
+      6,
+      304,
+      0
+    ]
+  },
+  "headers": {
+    "accept-ranges": "bytes",
+    "access-control-allow-origin": "*",
+    "cache-control": "private, max-age=51",
+    "connection": "close",
+    "content-encoding": "gzip",
+    "content-length": "15183",
+    "content-type": "text/xml; charset=UTF-8",
+    "date": "Sun, 31 Oct 2021 16:52:56 GMT",
+    "set-cookie": "SERVERID=s2; path=/",
+    "vary": "Accept-Encoding",
+    "x-backend": "web"
+  },
+  "href": "https://rss.dw.com/rdf/rss-en-all",
+  "namespaces": {
+    "": "http://purl.org/rss/1.0/",
+    "content": "http://purl.org/rss/1.0/modules/content/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "dwsyn": "http://rss.dw.com/syndication/dwsyn/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "sy": "http://purl.org/rss/modules/syndication/"
+  },
+  "status": 200,
+  "version": "rss10"
+}
