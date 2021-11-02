@@ -7,4 +7,4 @@ numpy==1.21.2
 python-dateutil==2.8.2
 coverage==6.1.1
 requests-mock==1.9.3
-pytest=6.2.5
+pytest==6.2.5
