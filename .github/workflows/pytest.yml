@@ -18,4 +18,4 @@ jobs:
           pip install pytest coverage
       - name: Run tests
         run: |
-          coverage run -m pytest .\tests\
+          coverage run -m pytest tests\
