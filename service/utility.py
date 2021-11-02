@@ -19,7 +19,7 @@ def get_news_headlines(news_data, offset=0):
 
 def get_news_abstract(news_data, index=0):
     stories = news_data["entries"]
-    sentence = f"More information about the article '{stories[index]['title']}: {stories[index]['description']}."
+    sentence = f"More information about the article '{stories[index]['title']}: {stories[index]['summary']}"
     return {
         "tts": sentence
     }
