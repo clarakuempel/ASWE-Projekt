@@ -52,10 +52,10 @@ def get_event_overview(rapla_data):
                 end_delta = end - date_now
                 if end_delta.total_seconds() < 0:
                     # already ended
-                    sentence = f"Lecture {_parse_lecture_title(event['title'])} is already over."
+                    sentence = f"Lecture {parse_lecture_title(event['title'])} is already over."
                 else:
-                    sentence = f"Lecture {_parse_lecture_title(event['title'])} is currently ongoing and " \
-                               f"is taking place {_parse_lecture_type(event['type'])}."
+                    sentence = f"Lecture {parse_lecture_title(event['title'])} is currently ongoing and " \
+                               f"is taking place {parse_lecture_type(event['type'])}."
             else:
                 hours, remainder = divmod(start_delta.total_seconds(), 3600)
                 minutes, _ = divmod(remainder, 60)
@@ -66,8 +66,8 @@ def get_event_overview(rapla_data):
                     has_hours = True
                 if minutes > 0:
                     sentence += f"{'and ' if has_hours else ''}{int(minutes)} minutes"
-                sentence += f". It is {_parse_lecture_title(event['title'])} and " \
-                            f"is taking place {_parse_lecture_type(event['type'])}."
+                sentence += f". It is {parse_lecture_title(event['title'])} and " \
+                            f"is taking place {parse_lecture_type(event['type'])}."
                 if is_next_lecture:
                     next_lecture = sentence
                     is_next_lecture = False
@@ -77,11 +77,11 @@ def get_event_overview(rapla_data):
     return results, next_lecture
 
 
-def _parse_lecture_title(title):
-    return title.replace(" - Online  [ Teiln]", "").replace(" [19 Teiln]", "")
+def parse_lecture_title(title):
+    return title.rstrip().replace(" [ Teiln]", "").replace(" - Online", "").replace(" [19 Teiln]", "")
 
 
-def _parse_lecture_type(event_type):
+def parse_lecture_type(event_type):
     return 'online' if event_type == "Online-Format (ohne Raumbelegung)" else "on site"
 
 

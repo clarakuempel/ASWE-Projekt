@@ -2,7 +2,23 @@ import json
 
 import requests
 
-from service.utility import get_news_headlines, get_news_abstract
+from service.utility import get_news_headlines, get_news_abstract, parse_lecture_title, parse_lecture_type
+
+
+def test_parse_lecture_title():
+    test_title_1 = "Advanced Software Engineering [ Teiln]"
+    test_title_2 = "Advanced Software Engineering [19 Teiln]"
+    test_title_3 = "Maschinelles Lernen - Online [ Teiln]"
+    assert parse_lecture_title(test_title_1) == "Advanced Software Engineering"
+    assert parse_lecture_title(test_title_2) == "Advanced Software Engineering"
+    assert parse_lecture_title(test_title_3) == "Maschinelles Lernen"
+
+
+def test_parse_lecture_type():
+    event_online = "Online-Format (ohne Raumbelegung)"
+    event_onsite = "RB41-0.18"
+    assert parse_lecture_type(event_online) == "online"
+    assert parse_lecture_type(event_onsite) == "on site"
 
 
 def test_get_news_headlines(requests_mock):
