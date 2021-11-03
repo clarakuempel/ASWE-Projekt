@@ -15232,7 +15232,7 @@ RecognizeStream.prototype.initialize = function() {
   ];
   var queryParams = processUserParameters(options, queryParamsAllowed);
   if (!queryParams.language_customization_id && !queryParams.model) {
-    queryParams.model = 'de-DE_NarrowbandModel' //'en-US_BroadbandModel';
+    queryParams.model = 'en-US_BroadbandModel';
   }
   var queryString = qs.stringify(queryParams);
 
