@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ivy - your PDA</title>
+  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- <script data-main="static/imports" stc="static/require.js"></script> -->
+</head>
+<body>
+<div>
+  <div style="width: 45%; float:left; height:1000px; margin:10px; text-align: center; margin-top: 100px;">
+    <div style="margin: 50px">
+      <button style="width: 100px; height: 50px" id="button-start">start</button>
+      <button style="width: 100px; height: 50px" id="button-stop">stop</button>
+      <button style="width: 100px; height: 50px" id="button-test">test</button>
+    </div>
+    <div>
+      <!-- <input style="width: 200px;" id="message"></input> -->
+      <textarea style="width: 250px;" id="message"></textarea>
+    </div>
+  </div>
+  <div style="width: 45%; float:left; height:1000px; margin:10px; margin-top: 100px;">
+    <!-- Second DIV -->
+    <form onsubmit="submitSearch(); return false">
+      <div class="form-group">
+        <label for="tag_beginn">Wann möchtest du in den Tag starten</label>
+        <input type="time" id="tag_beginn">
+      </div>
+      <hr>
+      <div class="form-group">
+        <label for="ass_len">Assistent</label><br><br>
+        <select id="ass_len" class="custom-select custom-select-sm" required>
+          <option value="m">Männlich</option>
+          <option value="f">Weiblich</option>
+        </select>
+      </div>
+      <hr>
+      <div class="form-group">
+        <label for="verkehrsm_pref">Verkehrsmittelpräferenz</label><br><br>
+        <select id="verkehrsm_pref" class="custom-select custom-select-sm" required>
+          <option value="0">Auto</option>
+          <option value="1">ÖPNV</option>
+          <option value="2">Fahrrad</option>
+          <option value="3">UFO</option>
+        </select>
+      </div>
+      <hr>
+      <div class="form-group">
+        <p>Verfügbare Verkehrsmittel</p>
+        <div>
+          <input type="checkbox" id="bike" name="bike"
+             checked>
+          <label for="1">Fahrrad</label>
+        </div>
+        <div>
+          <input type="checkbox" id="car" name="car"
+             checked>
+          <label for="2">Auto</label>
+        </div>
+        <div>
+          <input type="checkbox" id="horse" name="horse"
+             checked>
+          <label for="3">Pferd</label>
+        </div>
+      </div>
+      <hr>
+      <div class="form-group">
+        <label for="urlaub_pref">Urlaubspräferenz</label><br><br>
+        <select id="urlaub_pref" class="custom-select custom-select-sm" required>
+          <option value="strand">Strand</option>
+          <option value="berge">Berge</option>
+          <option value="mccs">Mccs</option>
+        </select>
+      </div>
+      <hr>
+      <div class="form-group mb-2">
+        <p>Standort</p>
+        <label for="location_lon">Lon</label>
+        <input id="location_lon" class="form-control form-control-sm" type="number" step="any" placeholder="42">
+  
+        <label for="location_lat">Lat</label>
+        <input id="location_lat" class="form-control form-control-sm" type="number" step="any" placeholder="1337">
+      </div>
+      <hr>
+      <button type="submit">Save Preferences</button>
+    </form>
+  </div>
+</div>
+</body>
+<!-- <script type="module" src="./static/imports.js"></script> -->
+<script type="text/javascript" src="./static/bundle.js"></script>
+<script type="text/javascript" src="./static/index.js"></script>
+<script>
+
+</script>
+</html>

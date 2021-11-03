@@ -10,7 +10,7 @@ from ibm_cloud_sdk_core import IAMTokenManager
 from database import Database
 from usecase import welcome
 
-app = Flask(__name__, static_folder='./frontend')
+app = Flask(__name__, static_folder='./static')
 app.secret_key = "DEV_fe5dce3c7b5a0a3339342"
 
 
