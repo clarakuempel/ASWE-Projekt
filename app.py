@@ -7,6 +7,7 @@ from flask.helpers import send_from_directory
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from ibm_watson import AssistantV2
 
+import service
 from database import Database
 from usecase import welcome
 
@@ -63,17 +64,28 @@ def get_dialog_response():
         context=user_context
     ).get_result()
 
-    session["context"] = watson_res["context"]
-    try:
-        return jsonify(tts=watson_res["output"]["generic"][0]["text"], watson=watson_res)
-    except Exception:
-        return jsonify(tts="no watson text defined", watson=watson_res)
+    first_intent = watson_res["output"]["intents"][0]["intent"]
+    print("123 " + first_intent)
+    if first_intent == "welcome_news":
+        watson_res["context"]["skills"]["main skill"]["user_defined"][
+            "news_test"] = service.utility.get_new_stories()["tts"]
 
-    # first_intent = watson_res["output"]["intents"][0]["intent"]
-    # if first_intent == "General_Greetings":
-    #    return jsonify(tts="I am Ivy. What's your name?", context=watson_res["context"], watson=watson_res)
-    # else:
-    #    return jsonify(tts="I don't understand", context=watson_res["context"], watson=watson_res)
+        watson_res = assistant.message_stateless(
+            assistant_id=os.environ.get("WATSON_ASSISTANT_ID"),
+            input={},
+            context=watson_res["context"]
+        ).get_result()
+
+    session["context"] = watson_res["context"]
+
+    return jsonify(tts=watson_res["output"]["generic"][0]["text"], watson=watson_res)
+
+
+# first_intent = watson_res["output"]["intents"][0]["intent"]
+# if first_intent == "General_Greetings":
+#    return jsonify(tts="I am Ivy. What's your name?", context=watson_res["context"], watson=watson_res)
+# else:
+#    return jsonify(tts="I don't understand", context=watson_res["context"], watson=watson_res)
 
 
 @app.route("/api/habits", methods=['GET'])

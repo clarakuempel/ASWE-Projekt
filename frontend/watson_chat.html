@@ -27,6 +27,7 @@
         function handle_res(data) {
             $("#chat").append("<p>watson: " + data["tts"] + "</p>");
             context = data["context"]
+            console.log(data["watson_res"])
         }
 
     </script>
