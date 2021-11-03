@@ -19,6 +19,24 @@ async function send(url) {
   return response.json()
 }
 
+// text to speech
+function speech(text){
+  fetch('/api/tts-token')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(res) {
+    const audio = TTS.synthesize({
+      accessToken: res.token,
+      url: res.url,
+      text: text,
+    });
+    audio.onerror = function(err) {
+      console.log('audio error: ', err);
+    };
+  });
+}
+
 // handle speech to text
 document.querySelector('#button-start').addEventListener('click', async() => {
 
@@ -45,42 +63,15 @@ document.querySelector('#button-start').addEventListener('click', async() => {
       document.querySelector('#button-stop').addEventListener('click', () => {
         stream.stop()
         console.log('stream stopped..', input)
+        send('/api/dialog', input).then((res) => {
+          speech(res)
+          speech('Test test')
+        })
       })
   })
 })
 
-// text to speech
-function speech(text){
-  send('/api/tts-token').then((res) => {
-    const audio = TTS.synthesize({
-      accessToken: res.token,
-      url: wsURI.TTS,
-      text: text
-    })
-    audio.onerror = function(err) {
-      console.log(err)
-    }
-  })
-}
-
-document.querySelector('#button-test').onclick = function() {
-  fetch('/api/tts-token')
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(res) {
-      const audio = TTS.synthesize({
-        accessToken: res.token,
-        url: res.url,
-        text: 'This is a test and a rather longer sentence than usually, let us see how long it will take you to turn in into speech. As this process may take a while I need to check.',
-      });
-      audio.onerror = function(err) {
-        console.log('audio error: ', err);
-      };
-    });
-};
-
-// document.getElementById('button-test').addEventListener('click', speech('This is a test'))
+document.getElementById('button-test').addEventListener('click', speech('This is a test'))
 
 // send user pref to backend
 function submitSearch(){
