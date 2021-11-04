@@ -2,24 +2,45 @@ import json
 
 import requests
 
-from service.utility import get_news_headlines, get_news_abstract, parse_lecture_title, parse_lecture_type, \
-    get_current_weather, get_daily_temperature_points, is_raining
+import service.URLS as URLS
+from service.utility import (
+    get_news_headlines,
+    get_news_abstract,
+    parse_lecture_title,
+    parse_lecture_type,
+    get_current_weather,
+    get_daily_temperature_points,
+    is_raining
+)
 
 
 def test_get_current_weather(requests_mock):
     with open("tests/mock/weather_data.json") as f:
         weather_data = json.load(f)
-    requests_mock.get("https://api.openweathermap.org/data/2.5/onecall", json=weather_data)
-    weather_api_response = requests.get("https://api.openweathermap.org/data/2.5/onecall").json()
-    tts_output = get_current_weather(weather_api_response)["tts"]
-    assert tts_output == test_current_weather
+    requests_mock.get(URLS.OWM_WEATHER_BASE, json=weather_data)
+    weather_api_response = requests.get(URLS.OWM_WEATHER_BASE).json()
+    parsed_weather, _ = get_current_weather(weather_api_response)
+    expected_weather = {
+        "min": 5,
+        "max": 9,
+        "current": 9,
+        "mean": 7,
+        "rain": True,
+        "description": "scattered clouds"
+    }
+    assert parsed_weather["min"] == expected_weather["min"]
+    assert parsed_weather["max"] == expected_weather["max"]
+    assert parsed_weather["current"] == expected_weather["current"]
+    assert parsed_weather["mean"] == expected_weather["mean"]
+    assert parsed_weather["rain"] is expected_weather["rain"]
+    assert parsed_weather["description"] == expected_weather["description"]
 
 
 def test_get_daily_temperature_points(requests_mock):
     with open("tests/mock/weather_data.json") as f:
         weather_data = json.load(f)
-    requests_mock.get("https://api.openweathermap.org/data/2.5/onecall", json=weather_data)
-    weather_api_response = requests.get("https://api.openweathermap.org/data/2.5/onecall").json()
+    requests_mock.get(URLS.OWM_WEATHER_BASE, json=weather_data)
+    weather_api_response = requests.get(URLS.OWM_WEATHER_BASE).json()
     min_temp, max_temp, mean_temp = get_daily_temperature_points(weather_api_response["hourly"])
     assert min_temp == 5
     assert max_temp == 9
@@ -29,8 +50,8 @@ def test_get_daily_temperature_points(requests_mock):
 def test_is_raining(requests_mock):
     with open("tests/mock/weather_data.json") as f:
         weather_data = json.load(f)
-    requests_mock.get("https://api.openweathermap.org/data/2.5/onecall", json=weather_data)
-    weather_api_response = requests.get("https://api.openweathermap.org/data/2.5/onecall").json()
+    requests_mock.get(URLS.OWM_WEATHER_BASE, json=weather_data)
+    weather_api_response = requests.get(URLS.OWM_WEATHER_BASE).json()
     assert is_raining(weather_api_response["hourly"]) is True
 
 
@@ -53,31 +74,28 @@ def test_parse_lecture_type():
 def test_get_news_headlines(requests_mock):
     with open("tests/mock/news_data.json") as f:
         news_data = json.load(f)
-    requests_mock.get("https://rss.dw.com/rdf/rss-en-all", json=news_data)
-    news_api_response = requests.get("https://rss.dw.com/rdf/rss-en-all").json()
-    tts_output = get_news_headlines(news_api_response)["tts"]
-    assert tts_output == test_news_headlines
+    requests_mock.get(URLS.DW_RSS_BASE, json=news_data)
+    news_api_response = requests.get(URLS.DW_RSS_BASE).json()
+    headlines = get_news_headlines(news_api_response, count=2)
+    assert headlines == test_news_headlines
 
 
 def test_get_news_abstract(requests_mock):
     with open("tests/mock/news_data.json") as f:
         news_data = json.load(f)
-    requests_mock.get("https://rss.dw.com/rdf/rss-en-all", json=news_data)
-    news_api_response = requests.get("https://rss.dw.com/rdf/rss-en-all").json()
-    tts_output = get_news_abstract(news_api_response)["tts"]
-    print(test_news_abstract)
-    assert tts_output == test_news_abstract
+    requests_mock.get(URLS.DW_RSS_BASE, json=news_data)
+    news_api_response = requests.get(URLS.DW_RSS_BASE).json()
+    title, abstract = get_news_abstract(news_api_response, index=0)
+    assert title == test_news_title
+    assert abstract == test_news_abstract
 
 
-test_current_weather = "It is currently 9 degrees and scattered clouds. " \
-                       "Temperature today will be between 5 and 9 degrees. " \
-                       "Remember to bring a jacket and an umbrella, it will rain later on."
+test_news_headlines = [
+    "Japan stabbing attack: At least 17 injured on Tokyo train",
+    "Czech cable car crashes to ground, kills one"
+]
+test_news_title = "Japan stabbing attack: At least 17 injured on Tokyo train"
 
-test_news_headlines = "Current headlines for you preferred topics are " \
-                      "'Japan stabbing attack: At least 17 injured on Tokyo train' and " \
-                      "'Czech cable car crashes to ground, kills one'"
-test_news_abstract = "More information about the article " \
-                     "'Japan stabbing attack: At least 17 injured on Tokyo train: " \
-                     "The suspect, who was reportedly dressed as the \"Joker\" character, " \
+test_news_abstract = "The suspect, who was reportedly dressed as the \"Joker\" character, " \
                      "was arrested for attempted murder after the stabbing rampage. " \
                      "He also started a fire on the train, with smoke filling the carriage."

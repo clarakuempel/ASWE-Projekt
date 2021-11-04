@@ -2,13 +2,13 @@ import json
 import os
 import uuid
 
+import urllib3
 from dotenv import load_dotenv
 from flask import Flask, request, session, jsonify
 from flask.helpers import send_from_directory
 from ibm_cloud_sdk_core import IAMTokenManager
 
 from database import Database
-from usecase import welcome
 
 app = Flask(__name__, static_folder='./frontend')
 app.secret_key = "DEV_fe5dce3c7b5a0a3339342"
@@ -103,10 +103,9 @@ def set_user_preferences():
 
 @app.route("/test")
 def test():
-    text = welcome.get_welcome_text()
     db = Database.get_instance()
     prefs = db.load_prefs(session["id"])
-    return jsonify(output=text, preferences=prefs, session_id=session["id"])
+    return jsonify(preferences=prefs, session_id=session["id"])
 
 
 @app.route("/api/tts-token", methods=["GET"])
@@ -136,6 +135,8 @@ def get_stt_token():
 if __name__ == "__main__":
     # Load .env file with secrets and credentials
     load_dotenv()
+
+    urllib3.disable_warnings()
 
     Database.get_instance().initialize()
 
