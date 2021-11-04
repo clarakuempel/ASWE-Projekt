@@ -29,7 +29,6 @@ def get_covid_situation(covid_data, ags):
 def get_event_overview(rapla_data):
     results = []
     next_lecture = None
-    is_first_lecture = True
     is_next_lecture = True
     for event in rapla_data["events"]:
         start = parser.isoparse(event["start"])
@@ -38,40 +37,18 @@ def get_event_overview(rapla_data):
         # TODO: date for debugging: datetime(2021, 10, 14, 5, tzinfo=tzutc())
         if start.date() == date_now.date():
             start_delta = start - date_now
-            if start_delta.total_seconds() < 0:
-                is_first_lecture = False
-                # already started
-                end = parser.isoparse(event["end"])
-                end_delta = end - date_now
-                if end_delta.total_seconds() < 0:
-                    # already ended
-                    sentence = f"Lecture {parse_lecture_title(event['title'])} is already over."
-                else:
-                    sentence = f"Lecture {parse_lecture_title(event['title'])} is currently ongoing and " \
-                               f"is taking place {parse_lecture_type(event['type'])}."
-            else:
-                hours, remainder = divmod(start_delta.total_seconds(), 3600)
-                minutes, _ = divmod(remainder, 60)
-                sentence = f"The {'first' if is_first_lecture else 'next'} lecture starts in "
-                has_hours = False
-                if hours > 0:
-                    sentence += f"{int(hours)} hours "
-                    has_hours = True
-                if minutes > 0:
-                    sentence += f"{'and ' if has_hours else ''}{int(minutes)} minutes"
-                sentence += f". It is {parse_lecture_title(event['title'])} and " \
-                            f"is taking place {parse_lecture_type(event['type'])}."
+            if start_delta.total_seconds() >= 0:
                 if is_next_lecture:
-                    next_lecture = sentence
+                    next_lecture = parse_lecture_title(event['title'])
                     is_next_lecture = False
-            results.append(sentence)
+            results.append(parse_lecture_title(event['title']))
     if not results:
-        results = ["You have no lectures today."]
+        results = []
     return results, next_lecture
 
 
 def parse_lecture_title(title):
-    return title.rstrip().replace(" [ Teiln]", "").replace(" - Online", "").replace(" [19 Teiln]", "")
+    return title.replace(" [ Teiln]", "").replace(" - Online", "").replace(" [19 Teiln]", "").rstrip()
 
 
 def parse_lecture_type(event_type):
@@ -79,37 +56,27 @@ def parse_lecture_type(event_type):
 
 
 def get_next_event(rapla_data):
-    day_events, next_lecture = get_event_overview(rapla_data)
-    sentence = day_events[0] if next_lecture is None else next_lecture
-    return {
-        "tts": sentence
-    }
+    _, next_lecture = get_event_overview(rapla_data)
+    return next_lecture
 
 
 def get_current_weather(weather_data):
     description = weather_data["current"]["weather"][0]["description"]
     icon = weather_data["current"]["weather"][0]["icon"]
     current_temp = int(weather_data["current"]["temp"])
-    min_temp, max_temp, mean_temp = get_daily_temperature_points(weather_data["hourly"])
 
+    min_temp, max_temp, mean_temp = get_daily_temperature_points(weather_data["hourly"])
     raining = is_raining(weather_data["hourly"])
 
-    if mean_temp <= 10:
-        recommendation = "Remember to bring a jacket and an umbrella, it will rain later on." if raining else \
-            "You will need a jacket."
-    elif 10 < mean_temp <= 18:
-        recommendation = "Remember to bring a jacket and an umbrella, it will rain later on." if raining else \
-            "You will need a light jacket."
-    else:
-        recommendation = "You dont need a jacket but it will rain later on." if raining else \
-            "You dont need a jacket."
-
-    sentence = f"It is currently {current_temp} degrees and {description}. " \
-               f"Temperature today will be between {min_temp} and {max_temp} degrees. {recommendation}"
-    return {
-        "tts": sentence,
-        "icon": f"{URLS.OWM_ICON_BASE}{icon}@2x.png"
+    weather = {
+        "min": min_temp,
+        "max": max_temp,
+        "current": current_temp,
+        "mean": mean_temp,
+        "rain": raining,
+        "description": description
     }
+    return weather, f"{URLS.OWM_ICON_BASE}{icon}@2x.png"
 
 
 def get_daily_temperature_points(hourly_data):
@@ -121,9 +88,9 @@ def get_daily_temperature_points(hourly_data):
 
 
 def is_raining(hourly_data):
-    umbrella = False
+    rain = False
     for item in hourly_data:
         if item["weather"][0]["main"] in ["Rain", "Thunderstorm", "Drizzle"]:
-            umbrella = True
+            rain = True
             break
-    return umbrella
+    return rain
