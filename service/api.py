@@ -1,9 +1,9 @@
 import os
 import random
+import warnings
 
 import feedparser
 import requests
-import warnings
 
 import exception
 from . import URLS
@@ -40,17 +40,15 @@ def get_quote(seed: int = None, return_seed: bool = False):
 def get_rapla():
     """
     Get Rapla schedule for the next 7 days
-    :return: API response as json
+    :return: response object
     """
-    rapla_key = os.environ.get("RAPLA_KEY")
-    if not rapla_key:
-        raise exception.InvalidConfiguration("No Rapla key configured")
+    rapla_key = os.environ.get("RAPLA_KEY", "")
     r = requests.get(
         URLS.RAPLA_BASE +
         rapla_key +
         URLS.RAPLA_PARAMETER, verify=False)
     if r.ok:
-        return r.json()
+        return r
     else:
         raise requests.HTTPError(f"Request not OK: {r.text}")
 
