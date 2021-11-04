@@ -5,7 +5,6 @@ import warnings
 import feedparser
 import requests
 
-import exception
 from . import URLS
 
 
@@ -64,18 +63,13 @@ def get_weather_forecast(lat, lon, exclude="minutely,daily,alerts", units="metri
     :param exclude: Exclude forecast categories (optional)
     :param units: Unit of measurement  (optional)
     :param lang: Language  (optional)
-    :return: API response as json
+    :return: response object
     """
     api_key = os.environ.get("OWM_API_KEY")
-    if not api_key:
-        raise exception.InvalidConfiguration("No OpenWeatherMap api key configured")
     r = requests.get(
         URLS.OWM_WEATHER_BASE + f"?lat={lat}&lon={lon}&exclude={exclude}&appid={api_key}&units={units}&lang={lang}",
         verify=False)
-    if r.ok:
-        return r.json()
-    else:
-        raise requests.HTTPError(f"Request not OK: {r.text}")
+    return r
 
 
 def get_air_pollution(lat, lon):
@@ -87,36 +81,12 @@ def get_air_pollution(lat, lon):
 
     :param lat: Latitude
     :param lon: Longitude
-    :return: API response as json
+    :return: response object
     """
     api_key = os.environ.get("OWM_API_KEY")
-    if not api_key:
-        raise exception.InvalidConfiguration("No OpenWeatherMap api key configured")
     r = requests.get(
         URLS.OWM_AQ_BASE + f"?lat={lat}&lon={lon}&appid={api_key}", verify=False)
-    if r.ok:
-        return r.json()
-    else:
-        raise requests.HTTPError(f"Request not OK: {r.text}")
-
-
-def get_sunrise_sunset(lat, lon, date="today"):
-    """
-    Get sunrise and sunset information for a specific location.
-
-    More information: https://sunrise-sunset.org/api
-
-    :param lat: Latitude
-    :param lon: Longitude
-    :param date: Date in YYYY-MM-DD format (optional)
-    :return: API response as json
-    """
-    r = requests.get(
-        URLS.SUNRISE_BASE + f"?lat={lat}&lon={lon}&date={date}&formatted=0", verify=False)
-    if r.ok:
-        return r.json()
-    else:
-        raise requests.HTTPError(f"Request not OK: {r.text}")
+    return r
 
 
 def get_wikipedia_extract(search_title):
@@ -124,14 +94,11 @@ def get_wikipedia_extract(search_title):
     Get the extract of a Wikipedia page. Automatically redirects to synonyms.
 
     :param search_title: Title of the Wikipedia page
-    :return: API response as json
+    :return: response object
     """
     r = requests.get(
         URLS.WIKIPEDIA_BASE + f"&titles={search_title}", verify=False)
-    if r.ok:
-        return r.json()
-    else:
-        raise requests.HTTPError(f"Request not OK: {r.text}")
+    return r
 
 
 def get_gym_utilization(gym_id):
@@ -143,7 +110,7 @@ def get_gym_utilization(gym_id):
     r = requests.get(
         URLS.GYM_UTIL_BASE + f"?tx_brastudioprofilesmcfitcom_brastudioprofiles%5BstudioId%5D={gym_id}", verify=False)
     if r.ok:
-        return r.json()
+        return r
     else:
         raise requests.HTTPError(f"Request not OK: {r.text}")
 
@@ -157,7 +124,7 @@ def get_covid_stats(ags):
     r = requests.get(
         URLS.COVID_BASE + f"{ags}", verify=False)
     if r.ok:
-        return r.json()
+        return r
     else:
         raise requests.HTTPError(f"Request not OK: {r.text}")
 
@@ -166,17 +133,12 @@ def get_youtube_search(search_term):
     """
     Search for youtube videos. Returns 10 search results.
     :param search_term: Search term
-    :return: API response as json
+    :return: response object
     """
     api_key = os.environ.get("GOOGLE_YT_KEY")
-    if not api_key:
-        raise exception.InvalidConfiguration("No Google Youtube api key configured")
     r = requests.get(
         URLS.YT_SEARCH_BASE + f"?part=snippet&maxResults=10&q={search_term}&key={api_key}", verify=False)
-    if r.ok:
-        return r.json()
-    else:
-        raise requests.HTTPError(f"Request not OK: {r.text}")
+    return r
 
 
 def get_news_stories(topic_key=1):
@@ -204,21 +166,16 @@ def get_bestselling_books(fiction=True):
     """
     Get the The New York Times Best Sellers lists for either fiction or non-fiction books.
     :param fiction: Fiction or non-fiction books (optional, default=True)
-    :return: API response as json
+    :return: response object
     """
     api_key = os.environ.get("NYT_KEY")
-    if not api_key:
-        raise exception.InvalidConfiguration("No NYT API key configured")
     if fiction:
         list_name = "hardcover-fiction"
     else:
         list_name = "hardcover-nonfiction"
     r = requests.get(
         URLS.NYT_BOOKS + f"{list_name}.json?api-key={api_key}", verify=False)
-    if r.ok:
-        return r.json()
-    else:
-        raise requests.HTTPError(f"Request not OK: {r.text}")
+    return r
 
 
 def get_travel_summary(org_lat, org_lon, dest_lat, dest_lon):
@@ -228,15 +185,10 @@ def get_travel_summary(org_lat, org_lon, dest_lat, dest_lon):
     :param org_lon: Origin longitude
     :param dest_lat: Destination latitude
     :param dest_lon: Destination longitude
-    :return: API response as json
+    :return: response object
     """
     api_key = os.environ.get("HERE_API_KEY")
-    if not api_key:
-        raise exception.InvalidConfiguration("No HERE API key configured")
     r = requests.get(
         URLS.HERE_ROUTING_BASE + f"?transportMode=car&origin={org_lat},{org_lon}&destination={dest_lat},{dest_lon}"
                                  f"&return=travelSummary&apiKey={api_key}", verify=False)
-    if r.ok:
-        return r.json()
-    else:
-        raise requests.HTTPError(f"Request not OK: {r.text}")
+    return r
