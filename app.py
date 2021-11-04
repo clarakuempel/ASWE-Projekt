@@ -1,4 +1,3 @@
-import json
 import os
 import uuid
 
@@ -7,6 +6,8 @@ from dotenv import load_dotenv
 from flask import Flask, request, session, jsonify
 from flask.helpers import send_from_directory
 from ibm_cloud_sdk_core import IAMTokenManager
+from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
+from ibm_watson import AssistantV2
 
 from database import Database
 
@@ -33,22 +34,35 @@ def default():
 def get_dialog_response():
     user_input = request.form.get("input", "Hi")
     print(f"Got user input: {user_input}")
-    # TODO Message Watson service and get response
-    res = json.loads("""{
-    "output": {
-        "intents": [
-            {
-                "intent": "General_Greetings",
-                "confidence": 0.9273388385772705
-            }
-        ]
-    }
-}""")
-    first_intent = res["output"]["intents"][0]["intent"]
+
+    user_context = session.get("context", None)
+
+    watson_res = assistant.message_stateless(
+        assistant_id=os.environ.get("WATSON_ASSISTANT_ID"),
+        input={
+            'message_type': 'text',
+            'text': user_input
+        },
+        context=user_context
+    ).get_result()
+
+    tts = "No intent identified"
+    try:
+        first_intent = watson_res["output"]["intents"][0]["intent"]
+    except KeyError:
+        first_intent = None
+
     if first_intent == "General_Greetings":
-        return jsonify(tts="I am Ivy. What's your name?")
-    else:
-        return jsonify(tts="I don't understand")
+        pass
+        # Send data to watson
+        # set tts =  watson response text
+    elif first_intent == "Weather":
+        pass
+        # Send data to watson
+        # set tts =  watson response text
+
+    session["context"] = watson_res.get("context", None)
+    return jsonify(tts=tts)
 
 
 @app.route("/api/habits", methods=['GET'])
@@ -139,5 +153,12 @@ if __name__ == "__main__":
     urllib3.disable_warnings()
 
     Database.get_instance().initialize()
+
+    authenticator = IAMAuthenticator(os.environ.get("WATSON_ASSISTANT_API"))
+    authenticator.set_disable_ssl_verification(True)
+    assistant = AssistantV2(version='2021-06-14', authenticator=authenticator)
+
+    assistant.set_service_url('https://api.eu-de.assistant.watson.cloud.ibm.com')
+    assistant.set_disable_ssl_verification(True)
 
     app.run(debug=True, host='0.0.0.0', port=9090, threaded=True)
