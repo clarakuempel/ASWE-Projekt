@@ -1,13 +1,17 @@
-import requests
-import urllib3
+from datetime import datetime, timezone
 
-import service.URLS as URLS
+import urllib3
+from dateutil import parser
+
+from service import api
 
 
 def test_get_news_api():
+    """
+    Test if news api is functional
+    """
     urllib3.disable_warnings()
-    news_api_response = requests.get(f"{URLS.DW_RSS_BASE}-en-all", verify=False)
-    # Test if API is available
-    assert news_api_response.ok is True
-    # Test if API returns XML feed
-    assert news_api_response.headers["Content-Type"] == "text/xml; charset=UTF-8"
+    news_feed = api.get_news_stories()
+    last_update = parser.isoparse(news_feed["channel"]["updated"]).date()
+    assert news_feed["channel"]["title"] == "Deutsche Welle"
+    assert last_update == datetime.now(timezone.utc).date()
