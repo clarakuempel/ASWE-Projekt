@@ -19,7 +19,7 @@ def get_news_headlines(news_data, offset=0):
 
 def get_news_abstract(news_data, index=0):
     stories = news_data["entries"]
-    sentence = f"More information about the article '{stories[index]['title']}: {stories[index]['description']}."
+    sentence = f"More information about the article '{stories[index]['title']}: {stories[index]['summary']}"
     return {
         "tts": sentence
     }
@@ -52,10 +52,10 @@ def get_event_overview(rapla_data):
                 end_delta = end - date_now
                 if end_delta.total_seconds() < 0:
                     # already ended
-                    sentence = f"Lecture {_parse_lecture_title(event['title'])} is already over."
+                    sentence = f"Lecture {parse_lecture_title(event['title'])} is already over."
                 else:
-                    sentence = f"Lecture {_parse_lecture_title(event['title'])} is currently ongoing and " \
-                               f"is taking place {_parse_lecture_type(event['type'])}."
+                    sentence = f"Lecture {parse_lecture_title(event['title'])} is currently ongoing and " \
+                               f"is taking place {parse_lecture_type(event['type'])}."
             else:
                 hours, remainder = divmod(start_delta.total_seconds(), 3600)
                 minutes, _ = divmod(remainder, 60)
@@ -66,8 +66,8 @@ def get_event_overview(rapla_data):
                     has_hours = True
                 if minutes > 0:
                     sentence += f"{'and ' if has_hours else ''}{int(minutes)} minutes"
-                sentence += f". It is {_parse_lecture_title(event['title'])} and " \
-                            f"is taking place {_parse_lecture_type(event['type'])}."
+                sentence += f". It is {parse_lecture_title(event['title'])} and " \
+                            f"is taking place {parse_lecture_type(event['type'])}."
                 if is_next_lecture:
                     next_lecture = sentence
                     is_next_lecture = False
@@ -77,11 +77,11 @@ def get_event_overview(rapla_data):
     return results, next_lecture
 
 
-def _parse_lecture_title(title):
-    return title.replace(" - Online  [ Teiln]", "").replace(" [19 Teiln]", "")
+def parse_lecture_title(title):
+    return title.rstrip().replace(" [ Teiln]", "").replace(" - Online", "").replace(" [19 Teiln]", "")
 
 
-def _parse_lecture_type(event_type):
+def parse_lecture_type(event_type):
     return 'online' if event_type == "Online-Format (ohne Raumbelegung)" else "on site"
 
 
@@ -97,9 +97,9 @@ def get_current_weather(weather_data):
     description = weather_data["current"]["weather"][0]["description"]
     icon = weather_data["current"]["weather"][0]["icon"]
     current_temp = int(weather_data["current"]["temp"])
-    min_temp, max_temp, mean_temp = _get_daily_temperature_points(weather_data["hourly"])
+    min_temp, max_temp, mean_temp = get_daily_temperature_points(weather_data["hourly"])
 
-    raining = _is_raining(weather_data["hourly"])
+    raining = is_raining(weather_data["hourly"])
 
     if mean_temp <= 10:
         recommendation = "Remember to bring a jacket and an umbrella, it will rain later on." if raining else \
@@ -119,7 +119,7 @@ def get_current_weather(weather_data):
     }
 
 
-def _get_daily_temperature_points(hourly_data):
+def get_daily_temperature_points(hourly_data):
     temperatures = np.array([])
     for item in hourly_data:
         t = item["temp"]
@@ -127,7 +127,7 @@ def _get_daily_temperature_points(hourly_data):
     return int(np.min(temperatures)), int(np.max(temperatures)), int(np.mean(temperatures))
 
 
-def _is_raining(hourly_data):
+def is_raining(hourly_data):
     umbrella = False
     for item in hourly_data:
         if item["weather"][0]["main"] in ["Rain", "Thunderstorm", "Drizzle"]:
