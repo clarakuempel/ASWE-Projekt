@@ -8,29 +8,22 @@ from dateutil import parser
 from service import URLS
 
 
-def get_news_headlines(news_data, offset=0):
+def get_news_headlines(news_data, count=1):
     stories = news_data["entries"]
-    sentence = f"Current headlines for you preferred topics are '{stories[0 + offset]['title']}' and " \
-               f"'{stories[1 + offset]['title']}'"
-    return {
-        "tts": sentence
-    }
+    headlines = [stories[i]["title"] for i in range(0, count)]
+    return headlines
 
 
 def get_news_abstract(news_data, index=0):
     stories = news_data["entries"]
-    sentence = f"More information about the article '{stories[index]['title']}: {stories[index]['summary']}"
-    return {
-        "tts": sentence
-    }
+    title = stories[index]["title"]
+    abstract = stories[index]["summary"]
+    return title, abstract
 
 
 def get_covid_situation(covid_data, ags):
     week_incidence = covid_data["data"][str(ags)]["weekIncidence"]
-    sentence = f"Remember washing your hands, the weekly incidence is at {week_incidence:.1f}."
-    return {
-        "tts": sentence
-    }
+    return f"{week_incidence:.1f}"
 
 
 def get_event_overview(rapla_data):
