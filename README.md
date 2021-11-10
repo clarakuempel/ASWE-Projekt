@@ -16,7 +16,7 @@ Python 3.8 (anything 3.5+ should work) `python -V`
 In console:
 
 ```
-coverage run -m pytest .\tests\
+coverage run --source . -m pytest .\tests\
 coverage html
 coverage report
 ```
