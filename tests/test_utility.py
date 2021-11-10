@@ -4,8 +4,8 @@ import requests
 
 import service.URLS as URLS
 from service.utility import (
-    get_news_headlines,
-    get_news_abstract,
+    parse_news_headlines,
+    parse_news_abstract,
     parse_lecture_title,
     parse_lecture_type,
     get_current_weather,
@@ -76,7 +76,7 @@ def test_get_news_headlines(requests_mock):
         news_data = json.load(f)
     requests_mock.get(URLS.DW_RSS_BASE, json=news_data)
     news_api_response = requests.get(URLS.DW_RSS_BASE).json()
-    headlines = get_news_headlines(news_api_response, count=2)
+    headlines = parse_news_headlines(news_api_response, count=2)
     assert headlines == test_news_headlines
 
 
@@ -85,7 +85,7 @@ def test_get_news_abstract(requests_mock):
         news_data = json.load(f)
     requests_mock.get(URLS.DW_RSS_BASE, json=news_data)
     news_api_response = requests.get(URLS.DW_RSS_BASE).json()
-    title, abstract = get_news_abstract(news_api_response, index=0)
+    title, abstract = parse_news_abstract(news_api_response, index=0)
     assert title == test_news_title
     assert abstract == test_news_abstract
 

@@ -8,20 +8,93 @@ from dateutil import parser
 from service import URLS
 
 
-def get_news_headlines(news_data, count=1):
+def parse_travel_summary(travel_data):
+    data = travel_data["routes"][0]["sections"][0]["travelSummary"]
+    hours, remainder = divmod(data["duration"], 3600)
+    minutes, _ = divmod(remainder, 60)
+    travel_summary = {
+        "length_km": int(data["length"] / 1000),
+        "duration": f"{hours} hours {minutes} minutes"
+    }
+    return travel_summary
+
+
+def parse_bestselling_books(book_data):
+    books = []
+    for b in book_data["results"]["books"]:
+        book = {
+            "title": b["title"],
+            "author": b["author"],
+            "description": b["description"],
+            "image": b["book_image"]
+        }
+        books.append(book)
+    return books
+
+
+def parse_youtube_search(youtube_data):
+    results = []
+    for v in youtube_data["items"]:
+        video = {
+            "url": f"{URLS.YT_VIDEO_BASE}{v['id']['videoId']}",
+            "thumbnail": v["snippet"]["thumbnails"]["high"]["url"],
+            "title": v['snippet']['title']
+        }
+        results.append(video)
+    return results
+
+
+def parse_gym_utilization(gym_data):
+    percentage = 0
+    for entry in gym_data["items"]:
+        if entry["isCurrent"]:
+            percentage = entry["percentage"]
+    return percentage
+
+
+def parse_wikipedia_extract(wiki_data):
+    pages = wiki_data["query"]["pages"]
+    page_id = None
+    for key in pages:
+        page_id = key
+        break
+    extract = pages[page_id]["extract"]
+    return extract
+
+
+def parse_quote(quote_data):
+    author = quote_data["author"]
+    quote = quote_data["text"]
+    return quote, author
+
+
+def parse_air_pollution(air_pol_data):
+    aqi_numeric = air_pol_data["list"][0]["main"]["aqi"]
+    aqi_map = {
+        1: "Good",
+        2: "Fair",
+        3: "Moderate",
+        4: "Poor",
+        5: "Very Poor"
+    }
+    aqi = aqi_map.get(aqi_numeric, "not available")
+    return aqi
+
+
+def parse_news_headlines(news_data, count=1):
     stories = news_data["entries"]
     headlines = [stories[i]["title"] for i in range(0, count)]
     return headlines
 
 
-def get_news_abstract(news_data, index=0):
+def parse_news_abstract(news_data, index=0):
     stories = news_data["entries"]
     title = stories[index]["title"]
     abstract = stories[index]["summary"]
     return title, abstract
 
 
-def get_covid_situation(covid_data, ags):
+def parse_covid_situation(covid_data, ags):
     week_incidence = covid_data["data"][str(ags)]["weekIncidence"]
     return f"{week_incidence:.1f}"
 
