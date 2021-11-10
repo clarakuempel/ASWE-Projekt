@@ -30,9 +30,9 @@ def default():
     return send_from_directory(app.static_folder, 'index.html')
 
 
-@app.route("/api/dialog")
+@app.route("/api/dialog", methods=["POST"])
 def get_dialog_response():
-    user_input = request.form.get("input", "Hi")
+    user_input = request.json.get("input", "Hi")
     print(f"Got user input: {user_input}")
 
     user_context = session.get("context", None)
@@ -46,11 +46,17 @@ def get_dialog_response():
         context=user_context
     ).get_result()
 
-    tts = "No intent identified"
     try:
         first_intent = watson_res["output"]["intents"][0]["intent"]
-    except KeyError:
+        tts = watson_res["output"]["generic"][0]["text"]
+    except (KeyError, IndexError):
         first_intent = None
+        tts = "No intent identified"
+
+    try:
+        user_defined = watson_res["context"]["skills"]["main skill"]["user_defined"]
+    except (KeyError, IndexError):
+        user_defined = None
 
     if first_intent == "General_Greetings":
         pass
@@ -62,7 +68,7 @@ def get_dialog_response():
         # set tts =  watson response text
 
     session["context"] = watson_res.get("context", None)
-    return jsonify(tts=tts)
+    return jsonify(tts=tts, watson=watson_res, intent=first_intent, user_defined=user_defined)
 
 
 @app.route("/api/habits", methods=['GET'])
@@ -120,6 +126,11 @@ def test():
     db = Database.get_instance()
     prefs = db.load_prefs(session["id"])
     return jsonify(preferences=prefs, session_id=session["id"])
+
+
+@app.route("/chat")
+def test_chat():
+    return send_from_directory(app.static_folder, 'chat.html')
 
 
 @app.route("/api/tts-token", methods=["GET"])

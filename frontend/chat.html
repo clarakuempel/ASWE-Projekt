@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>watson test</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        let context = null;
+
+        function send_chat() {
+            let user_data = {
+                "input": $("#input").val()
+            };
+            $("#chat").append("<p>user: " + user_data["input"] + "</p>");
+            $.ajax({
+                type: "POST",
+                url: "/api/dialog",
+                data: JSON.stringify(user_data),
+                success: handle_res,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8'
+            });
+        }
+
+
+        function handle_res(data) {
+            $("#chat").append("<p>watson: " + data["tts"] + "</p>");
+            $("#output").prepend("<p> watson intent: " + JSON.stringify(data["intent"]) + "</p><hr>");
+            $("#output").prepend("<p> watson user defined: " + JSON.stringify(data["user_defined"]) + "</p>");
+            $("#output").prepend("<p>" + JSON.stringify(data["watson"]) + "</p>");
+            console.log(data["watson"])
+        }
+
+    </script>
+</head>
+<body>
+<div id="chat">
+</div>
+<br>
+<input id="input" placeholder="user input">
+<button onclick="send_chat()">send</button>
+<br>
+<div id="output"></div>
+</body>
+</html>
