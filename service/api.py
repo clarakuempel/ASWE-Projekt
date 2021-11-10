@@ -105,7 +105,7 @@ def get_gym_utilization(gym_id):
     """
     Get the 24h utilization for a specific gym
     :param gym_id: Gym id
-    :return: API response as json
+    :return: response object
     """
     r = requests.get(
         URLS.GYM_UTIL_BASE + f"?tx_brastudioprofilesmcfitcom_brastudioprofiles%5BstudioId%5D={gym_id}", verify=False)
@@ -118,8 +118,8 @@ def get_gym_utilization(gym_id):
 def get_covid_stats(ags):
     """
     Get covid stats using the Amtliche Gemeindeschlüssel (AGS)
-    :param ags: Amtliche Gemeindeschlüssel
-    :return: API response as json
+    :param ags: Amtlicher Gemeindeschlüssel
+    :return: response object
     """
     r = requests.get(
         URLS.COVID_BASE + f"{ags}", verify=False)
