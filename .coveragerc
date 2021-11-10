@@ -1,0 +1,2 @@
+[run]
+omit = tests/*, database.py, app.py
