@@ -8,6 +8,42 @@ from dateutil import parser
 from service import URLS
 
 
+def parse_travel_summary(travel_data):
+    data = travel_data["routes"][0]["sections"][0]["travelSummary"]
+    hours, remainder = divmod(data["duration"], 3600)
+    minutes, _ = divmod(remainder, 60)
+    travel_summary = {
+        "length_km": int(data["length"] / 1000),
+        "duration": f"{hours} hours {minutes} minutes"
+    }
+    return travel_summary
+
+
+def parse_bestselling_books(book_data):
+    books = []
+    for b in book_data["results"]["books"]:
+        book = {
+            "title": b["title"],
+            "author": b["author"],
+            "description": b["description"],
+            "image": b["book_image"]
+        }
+        books.append(book)
+    return books
+
+
+def parse_youtube_search(youtube_data):
+    results = []
+    for v in youtube_data["items"]:
+        video = {
+            "url": f"{URLS.YT_VIDEO_BASE}{v['id']['videoId']}",
+            "thumbnail": v["snippet"]["thumbnails"]["high"]["url"],
+            "title": v['snippet']['title']
+        }
+        results.append(video)
+    return results
+
+
 def parse_gym_utilization(gym_data):
     percentage = 0
     for entry in gym_data["items"]:
