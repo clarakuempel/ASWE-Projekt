@@ -83,6 +83,24 @@ def timedelta_to_sentence(datetime1, datetime2):
     return string if string != "" else "now"
 
 
+def get_days_until_two_off(date=datetime.now()):
+    """
+    You are free "today / in one day / in 3 days" for a two day trip
+    :param date:
+    :return: "today / in one day / in 3 days"
+    """
+    delta = 5 - date.weekday() if date.weekday() != 6 else 6
+    string = ""
+    if delta == 0:
+        string += "today"
+    elif delta == 1:
+        string += "in one day"
+    else:
+        string += f"in {delta} days"
+
+    return string
+
+
 def lecture_titles_to_sentence(lecture_titles: list):
     if len(lecture_titles) >= 3:
         last_lecture = lecture_titles.pop()
