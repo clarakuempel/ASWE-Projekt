@@ -1,11 +1,16 @@
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
+from typing import Final
 
 import numpy as np
 # TODO for debugging date:
 # from dateutil.tz import tzutc
 from dateutil import parser
 
-from service import URLS
+# Two different scopes to deal with: Python console and flask
+try:
+    import URLS
+except ModuleNotFoundError:
+    from service import URLS
 
 
 def parse_travel_summary(travel_data):
@@ -97,6 +102,88 @@ def parse_news_abstract(news_data, index=0):
 def parse_covid_situation(covid_data, ags):
     week_incidence = covid_data["data"][str(ags)]["weekIncidence"]
     return f"{week_incidence:.1f}"
+
+
+def parse_date(string):
+    return datetime.strptime(string, "%Y-%m-%dT%H:%M:%S.%fZ")
+
+
+def get_events(rapla_data, date=datetime.now()):  # Debug: datetime(2021, 11, 11, 10)
+    """
+    Get current lecture (+ time until it ends as string),
+    events of the passed day,
+    and next lecture (+ time until then as string)
+    :param rapla_data: rapla data from rapla API
+    :param date: date object, defaults to now
+    :return: dict with keys 'rapla_lectures', 'rapla_next_lecture'.'title', 'rapla_next_lecture'.'start',
+    'rapla_current_lecture'.'title', 'rapla_current_lecture'.'end'
+    """
+    current_time_zone: Final = +1
+    date -= timedelta(hours=current_time_zone)  # date to utc
+    events_of_date = [event for event in rapla_data['events']
+                      if parser.isoparse(event['start']).date() == date.date()]
+    current_lecture = next((event for event in events_of_date
+                            if parse_date(event['start'])
+                            <= date <= parse_date(event['end'])),
+                           None)
+    next_lecture = next((event for event in events_of_date
+                         if parse_date(event['start']) >= date), None)
+
+    ret = {}
+    if events_of_date:
+        ret['rapla_lectures'] = lecture_titles_to_sentence(
+            [parse_lecture_title(event['title']) for event in events_of_date])
+    if next_lecture:
+        ret['rapla_next_lecture'] = {}
+        ret['rapla_next_lecture']['title'] = parse_lecture_title(next_lecture['title'])
+        ret['rapla_next_lecture']['start'] = timedelta_to_sentence(parse_date(next_lecture['start']), date)
+    if current_lecture:
+        ret['rapla_current_lecture'] = {}
+        ret['rapla_current_lecture']['title'] = parse_lecture_title(current_lecture['title'])
+        ret['rapla_current_lecture']['end'] = timedelta_to_sentence(parse_date(current_lecture['end']), date)
+
+    return ret
+
+
+def timedelta_to_sentence(datetime1, datetime2):
+    delta = datetime1 - datetime2 if datetime1 >= datetime2 else datetime2 - datetime1
+    minutes, _ = divmod(delta.total_seconds(), 60)
+    hours, minutes = divmod(minutes, 60)
+    hours, minutes = int(hours), int(minutes)
+    string = f"{hours} hours" if hours > 1 else f"{hours} hour" if hours == 1 else ""
+    string += " and " if hours > 0 and minutes > 0 else ""
+    string += f"{minutes} minutes" if minutes > 1 else f"{minutes} minute" if minutes == 1 else ""
+    return string if string != "" else "now"
+
+
+def get_days_until_two_off(date=datetime.now()):
+    """
+    You are free "today / in one day / in 3 days" for a two day trip
+    :param date:
+    :return: "today / in one day / in 3 days"
+    """
+    delta = 5 - date.weekday() if date.weekday() != 6 else 6
+    string = ""
+    if delta == 0:
+        string += "today"
+    elif delta == 1:
+        string += "in one day"
+    else:
+        string += f"in {delta} days"
+
+    return string
+
+
+def lecture_titles_to_sentence(lecture_titles: list):
+    if len(lecture_titles) >= 3:
+        last_lecture = lecture_titles.pop()
+        return "lectures are " + ", ".join(lecture_titles) + f", and {last_lecture}"
+    elif len(lecture_titles) == 2:
+        return "lectures are " + f"{lecture_titles[0]} and {lecture_titles[1]}"
+    elif len(lecture_titles) == 1:
+        return "lecture is " + lecture_titles[0]
+    else:
+        return ""
 
 
 def get_event_overview(rapla_data):
