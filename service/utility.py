@@ -1,4 +1,4 @@
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timedelta
 from typing import Final
 
 import numpy as np
@@ -186,38 +186,12 @@ def lecture_titles_to_sentence(lecture_titles: list):
         return ""
 
 
-def get_event_overview(rapla_data):
-    results = []
-    next_lecture = None
-    is_next_lecture = True
-    for event in rapla_data["events"]:
-        start = parser.isoparse(event["start"])
-        date_now = datetime.now(timezone.utc)
-        # date_now = datetime(2021, 10, 14, 7, tzinfo=tzutc())
-        # TODO: date for debugging: datetime(2021, 10, 14, 5, tzinfo=tzutc())
-        if start.date() == date_now.date():
-            start_delta = start - date_now
-            if start_delta.total_seconds() >= 0:
-                if is_next_lecture:
-                    next_lecture = parse_lecture_title(event['title'])
-                    is_next_lecture = False
-            results.append(parse_lecture_title(event['title']))
-    if not results:
-        results = []
-    return results, next_lecture
-
-
 def parse_lecture_title(title):
     return title.replace(" [ Teiln]", "").replace(" - Online", "").replace(" [19 Teiln]", "").rstrip()
 
 
 def parse_lecture_type(event_type):
     return 'online' if event_type == "Online-Format (ohne Raumbelegung)" else "on site"
-
-
-def get_next_event(rapla_data):
-    _, next_lecture = get_event_overview(rapla_data)
-    return next_lecture
 
 
 def get_current_weather(weather_data):
