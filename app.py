@@ -10,6 +10,7 @@ from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from ibm_watson import AssistantV2
 
 from database import Database
+from service import api, utility
 
 app = Flask(__name__, static_folder='./frontend')
 app.secret_key = "DEV_fe5dce3c7b5a0a3339342"
@@ -32,7 +33,7 @@ def default():
 
 @app.route("/api/dialog", methods=["POST"])
 def get_dialog_response():
-    user_input = request.json.get("input", "Hi")
+    user_input = request.json.get("input", None)
     print(f"Got user input: {user_input}")
 
     user_context = session.get("context", None)
@@ -48,24 +49,46 @@ def get_dialog_response():
 
     try:
         first_intent = watson_res["output"]["intents"][0]["intent"]
-        tts = watson_res["output"]["generic"][0]["text"]
-    except (KeyError, IndexError):
+    except (KeyError, IndexError) as e:
+        print(e)
         first_intent = None
+
+    try:
+        tts = [entry["text"] for entry in watson_res["output"]["generic"]]
+    except (KeyError, IndexError) as e:
+        print(e)
         tts = "No intent identified"
 
     try:
         user_defined = watson_res["context"]["skills"]["main skill"]["user_defined"]
-    except (KeyError, IndexError):
+    except (KeyError, IndexError) as e:
+        print(e)
         user_defined = None
 
-    if first_intent == "General_Greetings":
+    try:
+        current_intent_var = user_defined["current_intent"]
+    except (KeyError, IndexError) as e:
+        print(e)
+        current_intent_var = None
+
+    if current_intent_var == "reading_no":
+        book_data = api.get_bestselling_books().json()
+        books = utility.parse_bestselling_books(book_data)
+        watson_res["context"]["skills"]["main skill"]["user_defined"][
+            "book"] = f"{books[0]['title']} by {books[0]['author']}"
+        watson_res = assistant.message_stateless(
+            assistant_id=os.environ.get("WATSON_ASSISTANT_ID"),
+            context=watson_res["context"]
+        ).get_result()
+        try:
+            tts = [entry["text"] for entry in watson_res["output"]["generic"]]
+            watson_res["context"]["skills"]["main skill"]["user_defined"][
+                "book"] = None
+        except (KeyError, IndexError) as e:
+            print(e)
+            tts = "no answer"
+    elif current_intent_var == "Weather":
         pass
-        # Send data to watson
-        # set tts =  watson response text
-    elif first_intent == "Weather":
-        pass
-        # Send data to watson
-        # set tts =  watson response text
 
     session["context"] = watson_res.get("context", None)
     return jsonify(tts=tts, watson=watson_res, intent=first_intent, user_defined=user_defined)
