@@ -21,7 +21,7 @@ async function send(url) {
 
 // text to speech
 function speech(text){
-  fetch('/api/tts-token')
+  send('/api/tts-token')
   .then(function(response) {
     return response.json();
   })
@@ -44,28 +44,41 @@ document.querySelector('#button-start').addEventListener('click', async() => {
     console.log('got token :: ', res)
       var stream = STT.recognizeMicrophone({
         accessToken: res.token,
-        outputElement: "#message",
+        outputElement: "#message_user",
         url: wsURI.STT
       })  
       // stream.setEncoding('utf8')
       
       let input = ''
+
+
       
       stream.on('data', function(data) {
         console.log(data)
-        console.log(data.results[0].alternatives[0].transcript);
-        input = data.results[0].alternatives[0].transcript
+        try {
+          console.log(data.results[0].alternatives[0].transcript);
+          input = data.results[0].alternatives[0].transcript
+        } catch (error) {
+          
+        }
         
       })
       stream.on('error', function(err) {
         console.log(err);
       })
+      var el = document.getElementById('button-stop'),
+      elClone = el.cloneNode(true);
+      el.parentNode.replaceChild(elClone, el);
+
       document.querySelector('#button-stop').addEventListener('click', () => {
         stream.stop()
         console.log('stream stopped..', input)
+        console.log(input.valueOf())
+        if(input.length === 0){console.log("SDSDS")}
         send('/api/dialog', input).then((res) => {
-          speech(res)
-          speech('Test test')
+          res = 'Test test'
+          // speech(res)
+          document.getElementById('message_user').innerHTML = res
         })
       })
   })
