@@ -25,7 +25,7 @@ async function send(url) {
 
 // text to speech
 function speech(text){
-  send('/api/tts-token')
+  fetch('/api/tts-token')
   .then(function(response) {
     return response.json();
   })
