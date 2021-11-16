@@ -12,7 +12,7 @@ from ibm_watson import AssistantV2
 
 from database import Database
 from service import api, utility
-from usecase import welcome
+from usecase import welcome, habit, coach
 
 app = Flask(__name__, static_folder='./frontend')
 app.secret_key = "DEV_fe5dce3c7b5a0a3339342"
@@ -64,6 +64,30 @@ def get_dialog_response():
 
     if first_intent == "Good_Morning":
         usecase_data = welcome.load_data()
+
+        watson_res["context"]["skills"]["main skill"]["user_defined"].update(usecase_data)
+
+        watson_res = assistant.message_stateless(
+            assistant_id=os.environ.get("WATSON_ASSISTANT_ID"),
+            context=watson_res["context"]
+        ).get_result()
+
+        tts = get_watson_tts(watson_res)
+        tts_output.append(tts)
+    elif first_intent in ["Habit_Reading", "Habit_Meditating", "Habit_Sleeping"]:
+        usecase_data = habit.load_data()
+
+        watson_res["context"]["skills"]["main skill"]["user_defined"].update(usecase_data)
+
+        watson_res = assistant.message_stateless(
+            assistant_id=os.environ.get("WATSON_ASSISTANT_ID"),
+            context=watson_res["context"]
+        ).get_result()
+
+        tts = get_watson_tts(watson_res)
+        tts_output.append(tts)
+    elif first_intent == "Sports":
+        usecase_data = coach.load_data()
 
         watson_res["context"]["skills"]["main skill"]["user_defined"].update(usecase_data)
 
