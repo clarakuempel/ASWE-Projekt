@@ -1,0 +1,84 @@
+/* body {
+    margin: 20px;
+    background-color: blue;
+}
+
+#test {
+    margin: 20px;
+    background-color: chocolate;
+} */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    width: 450px;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 2px 20px rgba(0,0,0,0.4);
+    background-color: red;
+
+}
+
+.header h1{
+    color: white;
+    background-color: #4d4866;
+    padding: 15px;
+
+}
+
+.body{
+    flex: 1;
+    color: white;
+    background-color: #E8E8F8;
+    padding: 20px 30px
+}
+.message{
+    background-color: #cb4682;
+    padding: 10px;
+    color: white;
+    width: fit-content;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+.user_message{
+    margin-left: auto;
+    background-color: #954f72;
+    color:white;
+}
+
+.footer{
+    display: flex;
+    background-color: #4d4866;
+}
+
+.footer-text{
+    flex: 1;
+    height: 40px;
+    border:none;
+    outline: none;
+    padding-left: 5px;
+    font-size: 16px
+}
+
+.recButton{
+    width: 100px;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #4d4866;
+    color:white;
+    cursor: pointer;
+    background-image: url('/static/mic.png');
+    background-size: auto;
+}
+
+.recButton:hover{
+    background-color: #954f72;
+    transition: 0.2s;
+
+}

@@ -44,7 +44,7 @@ document.querySelector('#button-start').addEventListener('click', async() => {
     console.log('got token :: ', res)
       var stream = STT.recognizeMicrophone({
         accessToken: res.token,
-        outputElement: "#message_user",
+        outputElement: "#m1_user",
         url: wsURI.STT
       })  
       // stream.setEncoding('utf8')
@@ -78,7 +78,7 @@ document.querySelector('#button-start').addEventListener('click', async() => {
         send('/api/dialog', input).then((res) => {
           res = 'Test test'
           // speech(res)
-          document.getElementById('message_user').innerHTML = res
+          document.getElementById('m2').innerHTML = res
         })
       })
   })
