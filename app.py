@@ -1,4 +1,5 @@
 import os
+import random
 import uuid
 
 import urllib3
@@ -60,6 +61,51 @@ def get_dialog_response():
     # Get context variables dict and the current_intent variable
     user_defined, current_intent_var = get_context_variables(watson_res)
 
+    if "weather" not in user_defined.keys():
+        weather_data = api.get_weather_forecast(48.783333, 9.183333).json()
+        weather, icon = utility.get_current_weather(weather_data)
+        watson_res["context"]["skills"]["main skill"]["user_defined"]["weather"] = weather
+
+    if "lectures" not in user_defined.keys():
+        rapla_lectures = None
+        rapla_data = api.get_rapla().json()
+        events = utility.get_events(rapla_data)
+        if "rapla_lectures" in events.keys():
+            rapla_lectures = events["rapla_lectures"]
+
+        watson_res["context"]["skills"]["main skill"]["user_defined"]["lectures"] = "rapla_lectures"
+
+    if "news" not in user_defined.keys():
+        news_data = api.get_news_stories(1)
+        news_headlines = utility.parse_news_headlines(news_data, 2)
+
+        news = {
+            "first": {
+                "title": news_headlines[0],
+                "text": utility.parse_news_abstract(news_data, 0)
+            },
+            "second": {
+                "title": news_headlines[1],
+                "text": utility.parse_news_abstract(news_data, 1)
+            },
+        }
+        watson_res["context"]["skills"]["main skill"]["user_defined"]["news"] = news
+        watson_res["context"]["skills"]["main skill"]["user_defined"]["preference"] = "Word Wide News"
+
+    if "incidence" not in user_defined.keys():
+        covid_data = api.get_covid_stats("08111").json()
+        incidence = utility.parse_covid_situation(covid_data, "08111")
+        watson_res["context"]["skills"]["main skill"]["user_defined"]["incidence"] = incidence
+
+    if "quote" not in user_defined.keys():
+        quote_data = api.get_quote()
+        quote, _ = utility.parse_quote(quote_data)
+        watson_res["context"]["skills"]["main skill"]["user_defined"]["quote"] = quote
+
+    if "date_days_off" not in user_defined.keys():
+        date_days_off = utility.get_days_until_two_off()
+        watson_res["context"]["skills"]["main skill"]["user_defined"]["date_days_off"] = date_days_off
+
     if current_intent_var == "reading_no":
         # Get data required for this specific node:
         # -> user has not read yet
@@ -69,7 +115,7 @@ def get_dialog_response():
 
         # Set 'backend data' in context variable so watson can access it
         watson_res["context"]["skills"]["main skill"]["user_defined"][
-            "book"] = f"{books[0]['title']} by {books[0]['author']}"
+            "book"] = f"'{books[0]['title'].title()}' by {books[0]['author']}"
 
         # Send the updated context (with the new data) to watson
         watson_res = assistant.message_stateless(
@@ -118,12 +164,27 @@ def get_dialog_response():
         del watson_res["context"]["skills"]["main skill"]["user_defined"]["rapla_lectures"]
         del watson_res["context"]["skills"]["main skill"]["user_defined"]["rapla_current_lecture"]
         del watson_res["context"]["skills"]["main skill"]["user_defined"]["rapla_next_lecture"]
-        # del watson_res["context"]["skills"]["main skill"]["user_defined"]["weather"]
 
     elif current_intent_var == "3:rapla_yes":
         weather_data = api.get_weather_forecast(48.783333, 9.183333).json()
         weather, icon = utility.get_current_weather(weather_data)
         watson_res["context"]["skills"]["main skill"]["user_defined"]["weather"] = weather
+
+        gym_data = api.get_gym_utilization(1731421430).json()
+        utilization = utility.parse_gym_utilization(gym_data)
+        gym = {
+            "auslastung": utilization,
+            "name": "McFIT Stuttgart-Mitte"
+        }
+        watson_res["context"]["skills"]["main skill"]["user_defined"]["gym"] = gym
+
+        yt_data = api.get_youtube_search("home workout pamela reif 20 min").json()
+        yt = utility.parse_youtube_search(yt_data)
+        r = random.randrange(0, 10)
+        video = {
+            "title": yt[r]["title"],
+        }
+        watson_res["context"]["skills"]["main skill"]["user_defined"]["video"] = video
 
         watson_res = assistant.message_stateless(
             assistant_id=os.environ.get("WATSON_ASSISTANT_ID"),
@@ -134,6 +195,21 @@ def get_dialog_response():
         tts_output.append(tts)
 
         del watson_res["context"]["skills"]["main skill"]["user_defined"]["weather"]
+
+    elif current_intent_var == "4:yes":
+        watson_res["context"]["skills"]["main skill"]["user_defined"]["city"] = "Amsterdam"
+        watson_res["context"]["skills"]["main skill"]["user_defined"]["travel_duration"] = "6 hours and 38 minutes"
+        wikipedia_data = api.get_wikipedia_extract("Amsterdam").json()
+        wikipedia = utility.parse_wikipedia_extract(wikipedia_data)
+        watson_res["context"]["skills"]["main skill"]["user_defined"]["wikipedia"] = wikipedia
+
+        watson_res = assistant.message_stateless(
+            assistant_id=os.environ.get("WATSON_ASSISTANT_ID"),
+            context=watson_res["context"]
+        ).get_result()
+
+        tts = get_watson_tts(watson_res)
+        tts_output.append(tts)
 
     # Save the last known context to user cookie so we have it in the next user request (contains username etc.)
     session["context"] = watson_res.get("context", None)
@@ -163,8 +239,9 @@ def get_context_variables(watson_response):
     try:
         user_defined = watson_response["context"]["skills"]["main skill"]["user_defined"]
     except (KeyError, IndexError):
-        user_defined = None
-    if user_defined is not None:
+        user_defined = {}
+        watson_response["context"]["skills"]["main skill"]["user_defined"] = {}
+    if user_defined:
         try:
             current_context = user_defined["current_intent"]
         except (KeyError, IndexError):
