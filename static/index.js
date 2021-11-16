@@ -3,6 +3,10 @@ var wsURI = {
   TTS: 'wss://api.eu-de.text-to-speech.watson.cloud.ibm.com/instances/87d423d8-6ddd-42c3-90a7-4711fca37587' ///v1/synthesize'
 }
 
+document.querySelector('#rec-button').addEventListener('click', function(){
+  startRecord()
+})
+
 async function send(url) {
   const response = await fetch(url, {
     method: 'GET',
@@ -38,7 +42,12 @@ function speech(text){
 }
 
 // handle speech to text
-document.querySelector('#button-start').addEventListener('click', async() => {
+// document.querySelector('#button-start').addEventListener('click', async() => {
+
+async function startRecord(){
+  var el = document.getElementById('rec-button'),
+  elClone = el.cloneNode(true);
+  el.parentNode.replaceChild(elClone, el);
 
   send('/api/stt-token').then((res) => {
     console.log('got token :: ', res)
@@ -51,8 +60,6 @@ document.querySelector('#button-start').addEventListener('click', async() => {
       
       let input = ''
 
-
-      
       stream.on('data', function(data) {
         console.log(data)
         try {
@@ -66,11 +73,11 @@ document.querySelector('#button-start').addEventListener('click', async() => {
       stream.on('error', function(err) {
         console.log(err);
       })
-      var el = document.getElementById('button-stop'),
-      elClone = el.cloneNode(true);
-      el.parentNode.replaceChild(elClone, el);
 
-      document.querySelector('#button-stop').addEventListener('click', () => {
+      document.querySelector('#rec-button').addEventListener('click', () => {
+        var el = document.getElementById('rec-button'),
+        elClone = el.cloneNode(true);
+        el.parentNode.replaceChild(elClone, el);
         stream.stop()
         console.log('stream stopped..', input)
         console.log(input.valueOf())
@@ -80,9 +87,12 @@ document.querySelector('#button-start').addEventListener('click', async() => {
           // speech(res)
           document.getElementById('m2').innerHTML = res
         })
+        document.querySelector('#rec-button').addEventListener('click', function(){
+          startRecord()
+        })
       })
   })
-})
+}
 
 document.getElementById('button-test').addEventListener('click', speech('This is a test'))
 
