@@ -29,6 +29,7 @@ def load_data():
         "title": yt[r]["title"],
     }
 
+    # todo user prefs -> gym
     gym_data = api.get_gym_utilization(1731421430).json()
     utilization = utility.parse_gym_utilization(gym_data)
     gym = {
@@ -36,6 +37,7 @@ def load_data():
         "name": "McFIT Stuttgart-Mitte"
     }
 
+    # todo user prefs -> user location
     weather_data = api.get_weather_forecast(48.783333, 9.183333).json()
     weather, icon = utility.get_current_weather(weather_data)
 

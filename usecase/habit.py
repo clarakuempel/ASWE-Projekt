@@ -19,9 +19,11 @@ def load_data():
     book = f"'{books[r]['title'].title()}' by {books[r]['author']}"
 
     # Todo -> Load database preferences and get "wake up" time to calc $bed_time
+    # todo user prefs -> wakeup time
+    bed_time = "24 Uhr"
 
     return {
         "quote": quote,
         "book": book,
-        "bed_time": "24 Uhr"
+        "bed_time": bed_time
     }
