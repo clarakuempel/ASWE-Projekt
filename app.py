@@ -330,3 +330,7 @@ if __name__ == "__main__":
     assistant.set_disable_ssl_verification(True)
 
     app.run(debug=True, host='0.0.0.0', port=9090, threaded=True)
+
+    from usecase import holiday
+
+    holiday.load_data()

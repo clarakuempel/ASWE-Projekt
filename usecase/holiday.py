@@ -11,14 +11,39 @@ import random
 def load_data():
     days_off_date = utility.get_days_until_two_off()
 
-    r = random.randrange(0, 10)
-    # todo city list
     cities = [{
         "city": "Amsterdam",
         "lat": 52.377956,
         "lon": 4.897070
-    }]
-    print("City ", r)
+    },
+        {
+            "city": "Zell",
+            "lat": 50.133578,
+            "lon": 11.821875
+        },
+        {
+            "city": "Strasbourg",
+            "lat": 48.580865,
+            "lon": 7.743881
+        },
+        {
+            "city": "Lyon",
+            "lat": 45.761531,
+            "lon": 4.847827
+        },
+        {
+            "city": "Munich",
+            "lat": 48.140205,
+            "lon": 11.575175
+        },
+        {
+            "city": "Geneva",
+            "lat": 46.203753,
+            "lon": 6.143416
+        }
+    ]
+    r = random.randrange(0, len(cities))
+    print("City " + str(r) + ": " + cities[r]["city"])
     city = cities[0]["city"]
     lat = cities[0]["lat"]
     lon = cities[0]["lon"]
