@@ -20,7 +20,7 @@ def load_data():
 
     # Todo -> Load database preferences and get "wake up" time to calc $bed_time
     # todo user prefs -> wakeup time
-    bed_time = "24 Uhr"
+    bed_time = "12 PM"
 
     return {
         "quote": quote,
