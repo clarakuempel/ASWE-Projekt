@@ -64,7 +64,7 @@ async function sendPost(url, data) {
 
 // text to speech
 function speech(text) {
-    send('/api/tts-token')
+    fetch('/api/tts-token')
         .then(function (response) {
             return response.json();
         })
@@ -97,6 +97,7 @@ async function startRecord() {
         let input = ''
 
         stream.on('data', function (data) {
+            document.getElementById('m1_user').style.display = 'block'
             try {
                 console.log(data.results[0].alternatives[0].transcript);
                 input = data.results[0].alternatives[0].transcript
@@ -120,7 +121,10 @@ async function startRecord() {
                 "input": input
             }
             sendPost('/api/dialog', data).then((res) => {
-                document.getElementById('m2').innerHTML = res.tts
+                let target = document.getElementById('m2')
+                console.log(res)
+                target.style.display = 'block'
+                target.innerHTML = res.tts
                 speech(res.tts)
             })
             document.querySelector('#rec-button').addEventListener('click', function () {
@@ -177,8 +181,10 @@ function triggerUsecase(trigger_text){
     input: trigger_text
   }
   sendPost('/api/dialog', data).then((res) => {
+    let target = document.getElementById('m1')
     console.log(res)
-    document.getElementById('m1').innerHTML = res.tts
+    target.style.display = 'block'
+    target.innerHTML = res.tts
     speech(res.tts)
   })
 }
