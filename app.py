@@ -1,6 +1,5 @@
 import json
 import os
-import random
 import uuid
 
 import urllib3
@@ -15,7 +14,7 @@ from database.database import Database
 from service import api, utility
 from usecase import habit, welcome, holiday, coach
 
-app = Flask(__name__, static_folder='./frontend')
+app = Flask(__name__, static_folder='./static')
 app.secret_key = "DEV_fe5dce3c7b5a0a3339342"
 
 with open(os.path.join(os.path.dirname(__file__), './database/default_user_prefs.json')) as f:
@@ -103,51 +102,10 @@ def get_dialog_response():
         tts = get_watson_tts(watson_res)
         tts_output.append(tts)
 
-    if current_intent_var == "reading_no":
-        # Get data required for this specific node:
-        # -> user has not read yet
-        # -> we need a book that watson can recommend
-        book_data = api.get_bestselling_books().json()
-        books = utility.parse_bestselling_books(book_data)
+    elif first_intent == "holiday_finder":
+        usecase_data = holiday.load_data()
 
-        # Set 'backend data' in context variable so watson can access it
-        watson_res["context"]["skills"]["main skill"]["user_defined"][
-            "book"] = f"'{books[0]['title'].title()}' by {books[0]['author']}"
-
-        # Send the updated context (with the new data) to watson
-        watson_res = assistant.message_stateless(
-            assistant_id=os.environ.get("WATSON_ASSISTANT_ID"),
-            context=watson_res["context"]
-        ).get_result()
-
-        # Get the final sentence (-> the book recommendation)
-        tts = get_watson_tts(watson_res)
-        tts_output.append(tts)
-
-        # Delete the context variable if we dont need it anymore so it doesn't interfere with future requests
-        del watson_res["context"]["skills"]["main skill"]["user_defined"]["book"]
-
-        # Repeat above pattern for every node that requires data
-    elif current_intent_var == "3:yes_sport":
-        rapla_current_lecture = None
-        rapla_next_lecture = None
-        rapla_lectures = None
-        rapla_data = api.get_rapla().json()
-        events = utility.get_events(rapla_data)
-        if "rapla_lectures" in events.keys():
-            rapla_lectures = events["rapla_lectures"]
-        if "rapla_current_lecture" in events.keys():
-            rapla_current_lecture = events["rapla_current_lecture"]
-        if "rapla_next_lecture" in events.keys():
-            rapla_next_lecture = events["rapla_next_lecture"]
-
-        watson_res["context"]["skills"]["main skill"]["user_defined"]["rapla_lectures"] = rapla_lectures
-        watson_res["context"]["skills"]["main skill"]["user_defined"]["rapla_current_lecture"] = rapla_current_lecture
-        watson_res["context"]["skills"]["main skill"]["user_defined"]["rapla_next_lecture"] = rapla_next_lecture
-
-        # weather_data = api.get_weather_forecast(48.783333, 9.183333).json()
-        # weather, icon = utility.get_current_weather(weather_data)
-        # watson_res["context"]["skills"]["main skill"]["user_defined"]["weather"] = weather
+        watson_res["context"]["skills"]["main skill"]["user_defined"].update(usecase_data)
 
         watson_res = assistant.message_stateless(
             assistant_id=os.environ.get("WATSON_ASSISTANT_ID"),
@@ -156,47 +114,13 @@ def get_dialog_response():
 
         tts = get_watson_tts(watson_res)
         tts_output.append(tts)
-
-        del watson_res["context"]["skills"]["main skill"]["user_defined"]["rapla_lectures"]
-        del watson_res["context"]["skills"]["main skill"]["user_defined"]["rapla_current_lecture"]
-        del watson_res["context"]["skills"]["main skill"]["user_defined"]["rapla_next_lecture"]
-
-    elif current_intent_var == "3:rapla_yes":
-        weather_data = api.get_weather_forecast(48.783333, 9.183333).json()
-        weather, icon = utility.get_current_weather(weather_data)
-        watson_res["context"]["skills"]["main skill"]["user_defined"]["weather"] = weather
-
-        gym_data = api.get_gym_utilization(1731421430).json()
-        utilization = utility.parse_gym_utilization(gym_data)
-        gym = {
-            "auslastung": utilization,
-            "name": "McFIT Stuttgart-Mitte"
-        }
-        watson_res["context"]["skills"]["main skill"]["user_defined"]["gym"] = gym
-
-        yt_data = api.get_youtube_search("home workout pamela reif 20 min").json()
-        yt = utility.parse_youtube_search(yt_data)
-        r = random.randrange(0, 10)
-        video = {
-            "title": yt[r]["title"],
-        }
-        watson_res["context"]["skills"]["main skill"]["user_defined"]["video"] = video
-
-        watson_res = assistant.message_stateless(
-            assistant_id=os.environ.get("WATSON_ASSISTANT_ID"),
-            context=watson_res["context"]
-        ).get_result()
-
-        tts = get_watson_tts(watson_res)
-        tts_output.append(tts)
-
-        del watson_res["context"]["skills"]["main skill"]["user_defined"]["weather"]
 
     # Save the last known context to user cookie so we have it in the next user request (contains username etc.)
     session["context"] = watson_res.get("context", None)
 
     # watson, intent, and user_defined are debugging values will be removed
     # Later we pass only tts output and display data (e.g. links, images, etc)
+    print(tts_output)
     return jsonify(tts=" ".join(tts_output), watson=watson_res, intent=first_intent, user_defined=user_defined)
 
 
@@ -208,7 +132,7 @@ def get_first_intent(watson_response):
 
 
 def get_watson_tts(watson_response):
-    tts = None
+    tts = ""
     try:
         tts = " ".join([entry["text"] for entry in watson_response["output"]["generic"]])
     except (KeyError, IndexError):

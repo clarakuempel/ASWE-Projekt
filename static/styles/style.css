@@ -1,0 +1,107 @@
+/* body {
+    margin: 20px;
+    background-color: blue;
+}
+
+#test {
+    margin: 20px;
+    background-color: chocolate;
+} */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    width: 450px;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 5px 5px 50px rgba(0,0,0,0.4);
+    background-color: red;
+    border-radius: 10px;
+
+}
+
+.header h1{
+    color: white;
+    background-color: #4d4866;
+    padding: 15px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
+}
+
+.body{
+    flex: 1;
+    color: white;
+    background-color: #E8E8F8;
+    padding: 20px 30px
+}
+.message{
+    background-color: #cb4682;
+    padding: 10px;
+    color: white;
+    width: fit-content;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
+}
+.user_message{
+    margin-left: auto;
+    background-color: #954f72;
+    color:white;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
+}
+
+.setting{
+    background-color: #4d4866;
+    color:white;
+    border-radius: 2px;
+    padding: 5px;
+    width: 50px;
+    min-width: 50px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
+}
+
+.setting2{
+    background-color: #954f72;
+    color:white;
+    border-radius: 2px;
+    padding: 5px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
+    /* display: flex; justify-content: flex-end" */
+}
+
+.footer{
+    display: flex;
+    background-color: #4d4866;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
+}
+
+.footer-text{
+    flex: 1;
+    height: 40px;
+    border:none;
+    outline: none;
+    padding-left: 5px;
+    font-size: 16px
+}
+
+.recButton{
+    width: 100px;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #4d4866;
+    color:white;
+    cursor: pointer;
+    background-image: url('/static/mic.png');
+    background-size: auto;
+}
+
+.recButton:hover{
+    background-color: #954f72;
+    transition: 0.2s;
+
+}
