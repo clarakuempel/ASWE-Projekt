@@ -1,10 +1,10 @@
 import abc
 import os
-
-from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
-from ibm_cloud_sdk_core.api_exception import ApiException
-from ibmcloudant.cloudant_v1 import CloudantV1
 from typing import Final
+
+from ibm_cloud_sdk_core.api_exception import ApiException
+from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
+from ibmcloudant.cloudant_v1 import CloudantV1
 
 from database.database_interface import DBInterface
 
@@ -206,7 +206,7 @@ class Database(DBInterface, abc.ABC):
 
         prefs = self._fetch(user_id, _DB_NAME_PREFS)
         if prefs is None:
-            return None
+            return {}
         del prefs['_id']
         del prefs['_rev']
         return prefs

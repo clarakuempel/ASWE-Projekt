@@ -181,7 +181,7 @@ def get_user_preferences():
 
 @app.route("/api/preferences", methods=['POST'])
 def set_user_preferences():
-    user_preferences: dict = request.json.get()
+    user_preferences: dict = request.json
     unnecessary_keys = [key for key in user_preferences.keys() if key not in default_user_prefs.keys()]
     for key in unnecessary_keys:
         del user_preferences[key]
@@ -194,7 +194,7 @@ def set_user_preferences():
 
     database = Database.get_instance()
     database.store_prefs(session["id"], user_preferences)
-    return
+    return "", 201
 
 
 @app.route("/test")
