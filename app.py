@@ -11,7 +11,6 @@ from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from ibm_watson import AssistantV2
 
 from database.database import Database
-from service import api, utility
 from usecase import habit, welcome, holiday, coach
 
 app = Flask(__name__, static_folder='./static')
