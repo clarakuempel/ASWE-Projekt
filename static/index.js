@@ -45,6 +45,23 @@ async function send(url) {
   return response.json()
 }
 
+async function sendPost(url, data) {
+  const response = await fetch(url, {
+    method: 'POST',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    },
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+    body: JSON.stringify(data)
+  })
+  return response.json()
+}
+
 // text to speech
 function speech(text){
   fetch('/api/tts-token')
@@ -148,30 +165,18 @@ function submitPreferences(){
     "news": document.getElementById("news_topic").value,
     "gym": parseInt(document.getElementById("gym").value)
   }
-  console.log(data)
 
-  send('/api/preferences', data)
+  updateWakeup((document.getElementById("wakeup_time").value))
 
-  async function send(url, data) {
-    const response = await fetch(url, {
-      method: 'POST',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      },
-      redirect: 'follow',
-      referrerPolicy: 'no-referrer',
-      body: JSON.stringify(data)
-    })
-    return response.json()
-  }
+  sendPost('/api/preferences', data)
 }
 
 function triggerUsecase(trigger_text){
-  send('/api/dialog', trigger_text).then((res) => {
+  let data = {
+    input: trigger_text
+  }
+  sendPost('/api/dialog', data).then((res) => {
+    console.log(res)
     document.getElementById('m1').innerHTML = res
   })
 }
