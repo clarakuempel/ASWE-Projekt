@@ -1,3 +1,8 @@
+window.onload = function() {
+  setPreferences();
+};
+
+
 var wsURI = {
   STT: 'wss://api.eu-de.speech-to-text.watson.cloud.ibm.com/instances/2bbdb10c-31b9-4df9-ac7f-bc364d79b14e/v1/recognize', //?access_token=' + access_token
   TTS: 'wss://api.eu-de.text-to-speech.watson.cloud.ibm.com/instances/87d423d8-6ddd-42c3-90a7-4711fca37587' ///v1/synthesize'
@@ -40,9 +45,6 @@ function speech(text){
     };
   });
 }
-
-// handle speech to text
-// document.querySelector('#button-start').addEventListener('click', async() => {
 
 async function startRecord(){
   var el = document.getElementById('rec-button'),
@@ -94,22 +96,31 @@ async function startRecord(){
   })
 }
 
-document.getElementById('button-test').addEventListener('click', speech('This is a test'))
+//set pref
+function setPreferences(){
+  send('/api/preferences').then((res) => {
+    document.getElementById("wakeup_time").value = res.wakeup_time
+    document.getElementById("assistent_sex").value = res.assistant_sex
+    document.getElementById('location_lat').value = res.location.lat
+    document.getElementById('location_lon').value = res.location.lon
+    document.getElementById('gemeindecode').value = res.location.ags
+    document.getElementById("news_topic").value = res.news
+    document.getElementById("gym").value = res.gym
+  })
+}
 
 // send user pref to backend
-function submitSearch(){
+function submitPreferences(){
   let data = {
-    "tag_beginn": document.getElementById("tag_beginn").value,
-    "ass_len": document.getElementById("ass_len").value,
-    "verkehrsm_pref": document.getElementById("verkehrsm_pref").value,
-    "verkerhsm_available": {
-      "bike": document.getElementById("bike").checked,
-      "car": document.getElementById("car").checked,
-      "horse": document.getElementById("horse").checked
+    "weckzeit": document.getElementById("wakeup_time").value,
+    "assistent_sex": document.getElementById("assistent_sex").value,
+    "location": {
+      "lat": parseFloat(document.getElementById('location_lat').value),
+      "lon": parseFloat(document.getElementById('location_lon').value),
+      "ags": document.getElementById('gemeindecode').value,
     },
-    "urlaub_pref": document.getElementById("urlaub_pref").value,
-    "location_lat": parseFloat(document.getElementById('location_lat').value),
-    "location_lon": parseFloat(document.getElementById('location_lon').value)
+    "news": document.getElementById("news_topic").value,
+    "gym": parseInt(document.getElementById("gym").value)
   }
   console.log(data)
 
@@ -131,4 +142,10 @@ function submitSearch(){
     })
     return response.json()
   }
+}
+
+function triggerUsecase(trigger_text){
+  send('/api/dialog', trigger_text).then((res) => {
+    document.getElementById('m1').innerHTML = res
+  })
 }

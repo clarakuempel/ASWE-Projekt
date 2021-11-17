@@ -43,49 +43,11 @@
             <label for="tag_beginn">Wann möchtest du in den Tag starten</label>
             <input type="time" id="tag_beginn">
           </div> -->
-          <!-- <hr>
           <div class="form-group">
-            <label for="ass_len">Assistent</label><br><br>
-            <select id="ass_len" class="custom-select custom-select-sm" required>
+            <label class="setting" for="assistent_sex">Assistent</label>
+            <select class="setting2" id="assistent_sex" class="custom-select custom-select-sm" required>
               <option value="m">Männlich</option>
-              <option value="f">Weiblich</option>
-            </select>
-          </div>
-          <hr> -->
-          <div class="form-group">
-            <label class="setting" for="verkehrsm_pref">Verkehrsmittelpräferenz</label>
-
-              <select class="setting2" id="verkehrsm_pref" class="custom-select custom-select-sm" required>
-                <option value="0">Auto</option>
-                <option value="1">ÖPNV</option>
-                <option value="2">Fahrrad</option>
-                <option value="3">UFO</option>
-              </select>
-          </div>
-          <br>
-          <hr>
-          <br>
-          <div class="form-group">
-            <label class="setting">Verfügbare Verkehrsmittel</label>
-              <input type="checkbox" id="bike" name="bike"
-                 checked>
-              <label class="setting2">Fahrrad</label>
-              <input type="checkbox" id="car" name="car"
-                 checked>
-              <label class="setting2">Auto</label>
-              <input type="checkbox" id="horse" name="horse"
-                 checked>
-              <label class="setting2">Pferd</label>
-          </div>
-          <br>
-          <hr>
-          <br>
-          <div class="form-group">
-            <label class="setting" for="urlaub_pref">Urlaubspräferenz</label>
-            <select class="setting2" id="urlaub_pref" class="custom-select custom-select-sm" required>
-              <option value="strand">Strand</option>
-              <option value="berge">Berge</option>
-              <option value="mccs">Mccs</option>
+              <option value="w">Weiblich</option>
             </select>
           </div>
           <br>
@@ -94,17 +56,49 @@
           <div class="form-group mb-2">
             <label class="setting">Standort</label>
             <label class="setting" for="location_lon">Lon</label>
-            <input class="setting2" id="location_lon" class="form-control form-control-sm" type="number" step="any" placeholder="42">
+            <input class="setting2" id="location_lon" class="form-control form-control-sm" type="number" step="any">
       
             <label class="setting" for="location_lat">Lat</label>
-            <input class="setting2" id="location_lat" class="form-control form-control-sm" type="number" step="any" placeholder="1337">
+            <input class="setting2" id="location_lat" class="form-control form-control-sm" type="number" step="any">
           </div>
           <br>
-          <!-- <button type="submit">Save Preferences</button> -->
+          <hr>
+          <br>
+          <div class="form-group mb2">
+            <label class="setting">Gemeindecode</label>
+            <input class="setting2" id="gemeindecode" type="text">
+          </div>
+          <br>
+          <hr>
+          <br>
+          <div class="form-group mb2">
+            <label class="setting">Fitnessstudio</label>
+            <input class="setting2" id="gym" type="text">
+            <!-- todo dropdown liste -->
+          </div>
+          <br>
+          <hr>
+          <br>
+          <div class="form-group mb2">
+            <label class="setting">News Topic</label>
+            <select class="setting2" id="news_topic" class="custom-select custom-select-sm" required>
+              <option value="1">All</option>
+              <option value="2">Business</option>
+              <option value="3">Science</option>
+              <option value="4">Sports</option>
+            </select>
+          </div>
+          <br>
+          <hr>
+          <br>
+          <div class="form-group mb">
+            <label class="setting">Weckzeit</label>
+            <input class="setting2" type="time" id="weckzeit">
+          </div>
         </form>
       </div>
       <div class="footer">
-        <button class="recButton" style="width: 100%; margin:auto">Save Preferences</button>
+        <button class="recButton" style="width: 100%; margin:auto" onclick="submitPreferences()">Save Preferences</button>
       </div>
     </div>
   </div>
