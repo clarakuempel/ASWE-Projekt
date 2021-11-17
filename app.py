@@ -66,6 +66,7 @@ def get_dialog_response():
 
     if first_intent == "Good_Morning":
         usecase_data = welcome.load_data()
+        print(usecase_data)
 
         watson_res["context"]["skills"]["main skill"]["user_defined"].update(usecase_data)
 
@@ -76,6 +77,7 @@ def get_dialog_response():
 
         tts = get_watson_tts(watson_res)
         tts_output.append(tts)
+
     elif first_intent in ["Habit_Reading", "Habit_Meditating", "Habit_Sleeping"]:
         usecase_data = habit.load_data()
 

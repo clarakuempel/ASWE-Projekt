@@ -11,8 +11,8 @@ import os
 
 from flask import session
 
-from service import api, utility
 from database.database import Database
+from service import api, utility
 
 with open(os.path.join(os.path.dirname(__file__), '../database/default_user_prefs.json')) as f:
     default_user_prefs: dict = json.load(f)
@@ -37,7 +37,7 @@ def load_data():
     covid_data = api.get_covid_stats(ags).json()
     incidence = utility.parse_covid_situation(covid_data, ags)
 
-    news_data = api.get_news_stories(prefs.get("news") if prefs else default_user_prefs.get("news"))
+    news_data = api.get_news_stories(int(prefs.get("news") if prefs else default_user_prefs.get("news")))
     news_headlines = utility.parse_news_headlines(news_data, 2)
 
     news = {

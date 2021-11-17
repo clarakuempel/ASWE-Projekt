@@ -64,7 +64,7 @@ async function sendPost(url, data) {
 
 // text to speech
 function speech(text) {
-    fetch('/api/tts-token')
+    send('/api/tts-token')
         .then(function (response) {
             return response.json();
         })
@@ -116,8 +116,12 @@ async function startRecord() {
             stream.stop()
             console.log('stream stopped..', input)
             console.log(input.valueOf())
-            sendPost('/api/dialog', input).then((res) => {
+            data = {
+                "input": input
+            }
+            sendPost('/api/dialog', data).then((res) => {
                 document.getElementById('m2').innerHTML = res.tts
+                speech(res.tts)
             })
             document.querySelector('#rec-button').addEventListener('click', function () {
                 startRecord()
