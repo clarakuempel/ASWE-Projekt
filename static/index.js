@@ -97,7 +97,6 @@ async function startRecord(){
       let input = ''
 
       stream.on('data', function(data) {
-        console.log(data)
         try {
           console.log(data.results[0].alternatives[0].transcript);
           input = data.results[0].alternatives[0].transcript
@@ -117,11 +116,8 @@ async function startRecord(){
         stream.stop()
         console.log('stream stopped..', input)
         console.log(input.valueOf())
-        if(input.length === 0){console.log("SDSDS")}
-        send('/api/dialog', input).then((res) => {
-          res = 'Test test'
-          // speech(res)
-          document.getElementById('m2').innerHTML = res
+        sendPost('/api/dialog', input).then((res) => {
+          document.getElementById('m2').innerHTML = res.tts
         })
         document.querySelector('#rec-button').addEventListener('click', function(){
           startRecord()
@@ -177,6 +173,6 @@ function triggerUsecase(trigger_text){
   }
   sendPost('/api/dialog', data).then((res) => {
     console.log(res)
-    document.getElementById('m1').innerHTML = res
+    document.getElementById('m1').innerHTML = res.tts
   })
 }
