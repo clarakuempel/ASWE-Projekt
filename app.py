@@ -1,3 +1,4 @@
+import json
 import os
 import random
 import uuid
@@ -10,12 +11,15 @@ from ibm_cloud_sdk_core import IAMTokenManager
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from ibm_watson import AssistantV2
 
-from database import Database
+from database.database import Database
 from service import api, utility
-from usecase import welcome, habit, coach
+from usecase import habit, welcome, holiday, coach
 
 app = Flask(__name__, static_folder='./frontend')
 app.secret_key = "DEV_fe5dce3c7b5a0a3339342"
+
+with open(os.path.join(os.path.dirname(__file__), './database/default_user_prefs.json')) as f:
+    default_user_prefs: dict = json.load(f)
 
 
 @app.before_request
@@ -245,43 +249,38 @@ def set_user_habits():
 @app.route("/api/preferences", methods=['GET'])
 def get_user_preferences():
     database = Database.get_instance()
-    user_preferences = database.load_prefs(session["id"])
-    if user_preferences is None:
-        user_preferences = {
-            "location": {
-                "ags": "08111",
-                "lat": 48.783333,
-                "lon": 9.183333,
-            },
-            "news": 1,
-        }
+    user_preferences = default_user_prefs.copy().update(
+        database.load_prefs(session["id"]))
+
     return jsonify(user_preferences)
 
 
 @app.route("/api/preferences", methods=['POST'])
 def set_user_preferences():
-    # Get form fields, default values: Stuttgart + All news
-    lat = request.form.get("location_lat", 48.783333)
-    lon = request.form.get("location_lon", 9.183333)
-    ags = request.form.get("location_ags", "08111")
-    news_pref = request.form.get("news_pref", 1)
+    user_preferences: dict = request.json.get()
+    unnecessary_keys = [key for key in user_preferences.keys() if key not in default_user_prefs.keys()]
+    for key in unnecessary_keys:
+        del user_preferences[key]
+
+    if "location" in user_preferences.keys():
+        unnecessary_keys = [key for key in user_preferences["location"].keys()
+                            if key not in default_user_prefs["location"].keys()]
+        for key in unnecessary_keys:
+            del user_preferences["location"][key]
+
     database = Database.get_instance()
-    user_preferences = {
-        "location": {
-            "ags": ags,
-            "lat": lat,
-            "lon": lon,
-        },
-        "news": news_pref,
-    }
     database.store_prefs(session["id"], user_preferences)
-    return jsonify(prefs=user_preferences)
+    return
 
 
 @app.route("/test")
 def test():
     db = Database.get_instance()
     prefs = db.load_prefs(session["id"])
+    print(habit.load_data())
+    print(welcome.load_data())
+    print(holiday.load_data())
+    print(coach.load_data())
     return jsonify(preferences=prefs, session_id=session["id"])
 
 

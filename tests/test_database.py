@@ -1,5 +1,5 @@
 import database
-import database_interface
+from database import database_interface
 from unittest import mock
 
 

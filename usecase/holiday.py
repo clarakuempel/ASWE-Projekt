@@ -4,8 +4,17 @@ Use Case 4
 - $city, $travel_duration
 - $wikipedia
 """
+import json
+import os
+
+from flask import session
+
+from database.database import Database
 from service import api, utility
 import random
+
+with open(os.path.join(os.path.dirname(__file__), '../database/default_user_prefs.json')) as f:
+    default_user_prefs: dict = json.load(f)
 
 
 def load_data():
@@ -17,7 +26,7 @@ def load_data():
         "lon": 4.897070
     },
         {
-            "city": "Zell",
+            "city": "Zell im Fichtelgebirge",
             "lat": 50.133578,
             "lon": 11.821875
         },
@@ -43,13 +52,16 @@ def load_data():
         }
     ]
     r = random.randrange(0, len(cities))
-    print("City " + str(r) + ": " + cities[r]["city"])
-    city = cities[0]["city"]
-    lat = cities[0]["lat"]
-    lon = cities[0]["lon"]
+    city = cities[r]["city"]
+    dest_lat = cities[r]["lat"]
+    dest_lon = cities[r]["lon"]
 
-    # todo get user location, stuttgart = 48.783333, 9.183333
-    travel_data = api.get_travel_summary(48.783333, 9.183333, lat, lon).json()
+    prefs = Database.get_instance().load_prefs(session["id"])
+
+    location: dict = prefs.get("location") if prefs else default_user_prefs.get("location")
+    lat = location.get("lat", default_user_prefs.get("location").get("lat"))
+    lon = location.get("lon", default_user_prefs.get("location").get("lon"))
+    travel_data = api.get_travel_summary(lat, lon, dest_lat, dest_lon).json()
     travel_summary = utility.parse_travel_summary(travel_data)
 
     wikipedia_data = api.get_wikipedia_extract(city).json()

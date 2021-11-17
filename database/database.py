@@ -6,7 +6,7 @@ from ibm_cloud_sdk_core.api_exception import ApiException
 from ibmcloudant.cloudant_v1 import CloudantV1
 from typing import Final
 
-from database_interface import DBInterface
+from database.database_interface import DBInterface
 
 _DB_NAME_PREFS: Final = 'preferences'
 _DB_NAME_HABITS: Final = 'habits'

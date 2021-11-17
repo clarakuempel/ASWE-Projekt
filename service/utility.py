@@ -1,5 +1,5 @@
+import os
 from datetime import datetime, timedelta
-from typing import Final
 
 import numpy as np
 # TODO for debugging date:
@@ -118,8 +118,7 @@ def get_events(rapla_data, date=datetime.now()):  # Debug: datetime(2021, 11, 11
     :return: dict with keys 'rapla_lectures', 'rapla_next_lecture'.'title', 'rapla_next_lecture'.'start',
     'rapla_current_lecture'.'title', 'rapla_current_lecture'.'end'
     """
-    current_time_zone: Final = +1
-    date -= timedelta(hours=current_time_zone)  # date to utc
+    date -= timedelta(hours=int(os.environ.get("TIMEZONE")))  # date to utc
     events_of_date = [event for event in rapla_data['events']
                       if parser.isoparse(event['start']).date() == date.date()]
     current_lecture = next((event for event in events_of_date
