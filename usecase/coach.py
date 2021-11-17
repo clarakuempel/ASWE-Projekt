@@ -5,10 +5,17 @@ Use Case 3
 - gym $gym.name, $gym.auslastung
 - video $video.title
 """
-
+import json
+import os
 import random
 
+from flask import session
+
 from service import api, utility
+from database.database import Database
+
+with open(os.path.join(os.path.dirname(__file__), '../database/default_user_prefs.json')) as f:
+    default_user_prefs: dict = json.load(f)
 
 
 def load_data():
@@ -29,16 +36,19 @@ def load_data():
         "title": yt[r]["title"],
     }
 
-    # todo user prefs -> gym
-    gym_data = api.get_gym_utilization(1731421430).json()
+    prefs = Database.get_instance().load_prefs(session["id"])
+
+    gym_data = api.get_gym_utilization(prefs.get("gym") if prefs else default_user_prefs.get("gym")).json()
     utilization = utility.parse_gym_utilization(gym_data)
     gym = {
         "auslastung": utilization,
         "name": "McFIT Stuttgart-Mitte"
-    }
+    }  # TODO Wäre fresh, wenn Name sich mit ändert
 
-    # todo user prefs -> user location
-    weather_data = api.get_weather_forecast(48.783333, 9.183333).json()
+    location: dict = prefs.get("location") if prefs else default_user_prefs.get("location")
+    lat = location.get("lat", default_user_prefs.get("location").get("lat"))
+    lon = location.get("lon", default_user_prefs.get("location").get("lon"))
+    weather_data = api.get_weather_forecast(lat, lon).json()
     weather, icon = utility.get_current_weather(weather_data)
 
     return {
