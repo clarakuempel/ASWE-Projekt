@@ -172,7 +172,8 @@ def set_user_habits():
 @app.route("/api/preferences", methods=['GET'])
 def get_user_preferences():
     database = Database.get_instance()
-    user_preferences = default_user_prefs.copy().update(
+    user_preferences = default_user_prefs.copy()
+    user_preferences.update(
         database.load_prefs(session["id"]))
 
     return jsonify(user_preferences)
