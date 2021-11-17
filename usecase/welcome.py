@@ -6,7 +6,16 @@ Use Case1
 - news abstract
 - News preference
 """
+import json
+import os
+
+from flask import session
+
+from database.database import Database
 from service import api, utility
+
+with open(os.path.join(os.path.dirname(__file__), '../database/default_user_prefs.json')) as f:
+    default_user_prefs: dict = json.load(f)
 
 
 def load_data():
@@ -16,17 +25,19 @@ def load_data():
     if "rapla_lectures" in events.keys():
         rapla_lectures = events["rapla_lectures"]
 
-    # todo user prefs -> user location
-    weather_data = api.get_weather_forecast(48.783333, 9.183333).json()
+    prefs = Database.get_instance().load_prefs(session["id"])
+    location: dict = prefs["location"] if prefs else default_user_prefs["location"]
+
+    lat = location.get("lat", default_user_prefs.get("location").get("lat"))
+    lon = location.get("lon", default_user_prefs.get("location").get("lon"))
+    weather_data = api.get_weather_forecast(lat, lon).json()
     weather, icon = utility.get_current_weather(weather_data)
 
-    # todo user prefs -> user ags (STADTKREIS)
-    covid_data = api.get_covid_stats("08111").json()
-    incidence = utility.parse_covid_situation(covid_data, "08111")
+    ags = location.get("ags", default_user_prefs.get("location").get("ags"))
+    covid_data = api.get_covid_stats(ags).json()
+    incidence = utility.parse_covid_situation(covid_data, ags)
 
-    # todo user prefs -> news preference
-    preference = "Word Wide news"
-    news_data = api.get_news_stories(1)
+    news_data = api.get_news_stories(int(prefs.get("news") if prefs else default_user_prefs.get("news")))
     news_headlines = utility.parse_news_headlines(news_data, 2)
 
     news = {
@@ -37,9 +48,7 @@ def load_data():
         "second": {
             "title": news_headlines[1],
             "text": utility.parse_news_abstract(news_data, 1)
-        },
-        "preference": preference
-
+        }
     }
 
     return {
