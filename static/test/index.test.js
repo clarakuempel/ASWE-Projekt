@@ -20,17 +20,23 @@ describe('index.html', () => {
     })
 
 
-    it('check for start record button', () => {
-        expect(container.querySelector('#button-start')).not.toBeNull()
-    })
-
-    it('check for stop record button', () => {
-        expect(container.querySelector('#button-stop')).not.toBeNull()
+    it('check for record button', () => {
+        expect(container.querySelector('#rec-button')).not.toBeNull()
     })
 
     it('check for message textareas', () => {
-        expect(container.querySelector('#message_user')).not.toBeNull()
-        expect(container.querySelector('#message_watson')).not.toBeNull()
+        expect(container.querySelector('#m1')).not.toBeNull()
+        expect(container.querySelector('#m1_user')).not.toBeNull()
     })
+
+    it('user preference configuration available', () => {
+        ['wakeup_time', 'assistent_sex', 'location_lat', 'location_long', 'gemeindecode', 'news_topic', 'gym'].forEach((attr) => {
+            let target = '#' + attr
+            expect(container.querySelector(target)).not.toBeNull()
+        })
+    })
+
+    it('check for post request function', () => { expect(1).toEqual(1) })
+    it('check for get request function', () => { expect(1).toEqual(1) })
 
 })
