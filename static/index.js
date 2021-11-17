@@ -2,6 +2,23 @@ window.onload = function() {
   setPreferences();
 };
 
+let setHour;
+let setMin;
+
+window.setInterval(function(){
+ checkTime();
+}, 50000);
+
+function checkTime(time){
+  console.info("checking time..")
+  var date = new Date()
+  var hours = date.getHours();
+  var mins = date.getMinutes();
+  if (hours == setHour && mins == setMin){
+    console.info('match')
+    triggerUsecase('Good Morning')
+  }
+}
 
 var wsURI = {
   STT: 'wss://api.eu-de.speech-to-text.watson.cloud.ibm.com/instances/2bbdb10c-31b9-4df9-ac7f-bc364d79b14e/v1/recognize', //?access_token=' + access_token
@@ -106,7 +123,16 @@ function setPreferences(){
     document.getElementById('gemeindecode').value = res.location.ags
     document.getElementById("news_topic").value = res.news
     document.getElementById("gym").value = res.gym
+  }).then(() => {
+    updateWakeup(document.getElementById('wakeup_time').value)
+  }).catch((err) => {
+    console.error('Err in setPreferences :: ', err)
   })
+}
+
+function updateWakeup(time){
+  setHour = parseInt(time.substring(0,2))
+  setMin = parseInt(time.substring(3))
 }
 
 // send user pref to backend
