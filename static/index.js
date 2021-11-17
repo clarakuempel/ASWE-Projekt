@@ -174,5 +174,6 @@ function triggerUsecase(trigger_text){
   sendPost('/api/dialog', data).then((res) => {
     console.log(res)
     document.getElementById('m1').innerHTML = res.tts
+    speech(res.tts)
   })
 }
