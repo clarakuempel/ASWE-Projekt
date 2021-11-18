@@ -30,10 +30,13 @@ describe('index.html', () => {
     })
 
     it('user preference configuration available', () => {
-        ['wakeup_time', 'assistent_sex', 'location_lat', 'location_long', 'gemeindecode', 'news_topic', 'gym'].forEach((attr) => {
-            let target = '#' + attr
-            expect(container.querySelector(target)).not.toBeNull()
-        })
+        expect(container.querySelector('#wakeup_time')).not.toBeNull()
+        expect(container.querySelector('#assistent_sex')).not.toBeNull()
+        expect(container.querySelector('#location_lat')).not.toBeNull()
+        expect(container.querySelector('#location_lon')).not.toBeNull()
+        expect(container.querySelector('#gemeindecode')).not.toBeNull()
+        expect(container.querySelector('#news_topic')).not.toBeNull()
+        expect(container.querySelector('#gym')).not.toBeNull()
     })
 
     it('check for post request function', () => { expect(1).toEqual(1) })
