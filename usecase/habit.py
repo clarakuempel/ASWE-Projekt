@@ -36,7 +36,7 @@ def load_data():
     wakeup_time = datetime.strptime(wakeup_time_str, "%H:%M").time()
     bed_time = (datetime.combine(date(1, 1, 2), wakeup_time) - timedelta(hours=sleep_time)).time()
     bed_time = bed_time.strftime("%I:%M%p")
-    now_time = (datetime.utcnow() - timedelta(hours=int(os.environ.get("TIMEZONE")))).time().strftime("%I:%M%p")
+    now_time = (datetime.utcnow() + timedelta(hours=int(os.environ.get("TIMEZONE")))).time().strftime("%I:%M%p")
 
     return {
         "quote": quote,

@@ -43,11 +43,11 @@ def load_data():
     news = {
         "first": {
             "title": news_headlines[0],
-            "text": utility.parse_news_abstract(news_data, 0)
+            "text": utility.parse_news_abstract(news_data, 0)[1]
         },
         "second": {
             "title": news_headlines[1],
-            "text": utility.parse_news_abstract(news_data, 1)
+            "text": utility.parse_news_abstract(news_data, 1)[1]
         }
     }
 
