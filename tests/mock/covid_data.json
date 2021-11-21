@@ -1,0 +1,1431 @@
+{
+  "data": {
+    "10041": {
+      "ags": "10041",
+      "name": "Regionalverband Saarbrücken",
+      "county": "LK Stadtverband Saarbrücken",
+      "state": "Saarland",
+      "population": 327502,
+      "cases": 21041,
+      "deaths": 495,
+      "casesPerWeek": 1178,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "SL",
+      "recovered": 18609,
+      "weekIncidence": 359.6924598933747,
+      "casesPer100k": 6424.693589657468,
+      "delta": {
+        "cases": 220,
+        "deaths": 0,
+        "recovered": 24
+      }
+    },
+    "10042": {
+      "ags": "10042",
+      "name": "Merzig-Wadern",
+      "county": "LK Merzig-Wadern",
+      "state": "Saarland",
+      "population": 103471,
+      "cases": 4866,
+      "deaths": 68,
+      "casesPerWeek": 349,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "SL",
+      "recovered": 4327,
+      "weekIncidence": 337.2925747310841,
+      "casesPer100k": 4702.7669588580375,
+      "delta": {
+        "cases": 80,
+        "deaths": 0,
+        "recovered": 18
+      }
+    },
+    "10043": {
+      "ags": "10043",
+      "name": "Neunkirchen",
+      "county": "LK Neunkirchen",
+      "state": "Saarland",
+      "population": 131172,
+      "cases": 7283,
+      "deaths": 131,
+      "casesPerWeek": 338,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "SL",
+      "recovered": 6642,
+      "weekIncidence": 257.67694325008387,
+      "casesPer100k": 5552.252005001067,
+      "delta": {
+        "cases": 62,
+        "deaths": 0,
+        "recovered": 10
+      }
+    },
+    "10044": {
+      "ags": "10044",
+      "name": "Saarlouis",
+      "county": "LK Saarlouis",
+      "state": "Saarland",
+      "population": 193732,
+      "cases": 11944,
+      "deaths": 170,
+      "casesPerWeek": 881,
+      "deathsPerWeek": 1,
+      "stateAbbreviation": "SL",
+      "recovered": 10541,
+      "weekIncidence": 454.7519253401606,
+      "casesPer100k": 6165.217929923812,
+      "delta": {
+        "cases": 162,
+        "deaths": 0,
+        "recovered": 49
+      }
+    },
+    "10045": {
+      "ags": "10045",
+      "name": "Saarpfalz-Kreis",
+      "county": "LK Saarpfalz-Kreis",
+      "state": "Saarland",
+      "population": 141656,
+      "cases": 6798,
+      "deaths": 116,
+      "casesPerWeek": 440,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "SL",
+      "recovered": 6078,
+      "weekIncidence": 310.6116225221664,
+      "casesPer100k": 4798.94956796747,
+      "delta": {
+        "cases": 92,
+        "deaths": 0,
+        "recovered": 23
+      }
+    },
+    "10046": {
+      "ags": "10046",
+      "name": "St. Wendel",
+      "county": "LK Sankt Wendel",
+      "state": "Saarland",
+      "population": 86458,
+      "cases": 4243,
+      "deaths": 115,
+      "casesPerWeek": 205,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "SL",
+      "recovered": 3803,
+      "weekIncidence": 237.10934789146174,
+      "casesPer100k": 4907.585185870596,
+      "delta": {
+        "cases": 29,
+        "deaths": 0,
+        "recovered": 14
+      }
+    },
+    "11001": {
+      "ags": "11001",
+      "name": "Berlin Mitte",
+      "county": "SK Berlin Mitte",
+      "state": "Berlin",
+      "population": 374581,
+      "cases": 31754,
+      "deaths": 356,
+      "casesPerWeek": 1382,
+      "deathsPerWeek": 2,
+      "stateAbbreviation": "BE",
+      "recovered": 27307,
+      "weekIncidence": 368.945568515221,
+      "casesPer100k": 8477.205197273754,
+      "delta": {
+        "cases": 0,
+        "deaths": 0,
+        "recovered": 3
+      }
+    },
+    "11002": {
+      "ags": "11002",
+      "name": "Berlin Friedrichshain-Kreuzberg",
+      "county": "SK Berlin Friedrichshain-Kreuzberg",
+      "state": "Berlin",
+      "population": 279210,
+      "cases": 22259,
+      "deaths": 176,
+      "casesPerWeek": 1181,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BE",
+      "recovered": 19008,
+      "weekIncidence": 422.979119659038,
+      "casesPer100k": 7972.135668493249,
+      "delta": {
+        "cases": 81,
+        "deaths": 0,
+        "recovered": 51
+      }
+    },
+    "11003": {
+      "ags": "11003",
+      "name": "Berlin Pankow",
+      "county": "SK Berlin Pankow",
+      "state": "Berlin",
+      "population": 404187,
+      "cases": 22637,
+      "deaths": 226,
+      "casesPerWeek": 1384,
+      "deathsPerWeek": 1,
+      "stateAbbreviation": "BE",
+      "recovered": 18399,
+      "weekIncidence": 342.41576300078924,
+      "casesPer100k": 5600.62545306999,
+      "delta": {
+        "cases": 0,
+        "deaths": 0,
+        "recovered": 3
+      }
+    },
+    "11004": {
+      "ags": "11004",
+      "name": "Berlin Charlottenburg-Wilmersdorf",
+      "county": "SK Berlin Charlottenburg-Wilmersdorf",
+      "state": "Berlin",
+      "population": 316223,
+      "cases": 21524,
+      "deaths": 326,
+      "casesPerWeek": 1031,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BE",
+      "recovered": 19382,
+      "weekIncidence": 326.0357406007786,
+      "casesPer100k": 6806.58902103895,
+      "delta": {
+        "cases": 46,
+        "deaths": 0,
+        "recovered": 49
+      }
+    },
+    "11005": {
+      "ags": "11005",
+      "name": "Berlin Spandau",
+      "county": "SK Berlin Spandau",
+      "state": "Berlin",
+      "population": 239374,
+      "cases": 19551,
+      "deaths": 270,
+      "casesPerWeek": 990,
+      "deathsPerWeek": 1,
+      "stateAbbreviation": "BE",
+      "recovered": 17894,
+      "weekIncidence": 413.57875124282504,
+      "casesPer100k": 8167.553702574215,
+      "delta": {
+        "cases": 0,
+        "deaths": 0,
+        "recovered": 84
+      }
+    },
+    "11006": {
+      "ags": "11006",
+      "name": "Berlin Steglitz-Zehlendorf",
+      "county": "SK Berlin Steglitz-Zehlendorf",
+      "state": "Berlin",
+      "population": 291915,
+      "cases": 17058,
+      "deaths": 431,
+      "casesPerWeek": 621,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BE",
+      "recovered": 14557,
+      "weekIncidence": 212.7331586249422,
+      "casesPer100k": 5843.481835465803,
+      "delta": {
+        "cases": 0,
+        "deaths": 0,
+        "recovered": 27
+      }
+    },
+    "11007": {
+      "ags": "11007",
+      "name": "Berlin Tempelhof-Schöneberg",
+      "county": "SK Berlin Tempelhof-Schöneberg",
+      "state": "Berlin",
+      "population": 341296,
+      "cases": 24665,
+      "deaths": 489,
+      "casesPerWeek": 1084,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BE",
+      "recovered": 21452,
+      "weekIncidence": 317.61286390698984,
+      "casesPer100k": 7226.864657071867,
+      "delta": {
+        "cases": 0,
+        "deaths": 0,
+        "recovered": 13
+      }
+    },
+    "11008": {
+      "ags": "11008",
+      "name": "Berlin Neukölln",
+      "county": "SK Berlin Neukölln",
+      "state": "Berlin",
+      "population": 318509,
+      "cases": 29634,
+      "deaths": 434,
+      "casesPerWeek": 1158,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BE",
+      "recovered": 25864,
+      "weekIncidence": 363.569004329548,
+      "casesPer100k": 9303.975711832318,
+      "delta": {
+        "cases": 0,
+        "deaths": 0,
+        "recovered": 71
+      }
+    },
+    "11009": {
+      "ags": "11009",
+      "name": "Berlin Treptow-Köpenick",
+      "county": "SK Berlin Treptow-Köpenick",
+      "state": "Berlin",
+      "population": 272992,
+      "cases": 14251,
+      "deaths": 225,
+      "casesPerWeek": 1051,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BE",
+      "recovered": 11836,
+      "weekIncidence": 384.99296682686673,
+      "casesPer100k": 5220.2994959559255,
+      "delta": {
+        "cases": 0,
+        "deaths": 0,
+        "recovered": 27
+      }
+    },
+    "11010": {
+      "ags": "11010",
+      "name": "Berlin Marzahn-Hellersdorf",
+      "county": "SK Berlin Marzahn-Hellersdorf",
+      "state": "Berlin",
+      "population": 274076,
+      "cases": 14960,
+      "deaths": 255,
+      "casesPerWeek": 487,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BE",
+      "recovered": 13490,
+      "weekIncidence": 177.6879405712284,
+      "casesPer100k": 5458.340022475518,
+      "delta": {
+        "cases": 0,
+        "deaths": 0,
+        "recovered": 13
+      }
+    },
+    "11011": {
+      "ags": "11011",
+      "name": "Berlin Lichtenberg",
+      "county": "SK Berlin Lichtenberg",
+      "state": "Berlin",
+      "population": 292005,
+      "cases": 17158,
+      "deaths": 274,
+      "casesPerWeek": 1064,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BE",
+      "recovered": 15549,
+      "weekIncidence": 364.3773223061249,
+      "casesPer100k": 5875.9267820756495,
+      "delta": {
+        "cases": 0,
+        "deaths": 0,
+        "recovered": 64
+      }
+    },
+    "11012": {
+      "ags": "11012",
+      "name": "Berlin Reinickendorf",
+      "county": "SK Berlin Reinickendorf",
+      "state": "Berlin",
+      "population": 259720,
+      "cases": 20629,
+      "deaths": 317,
+      "casesPerWeek": 1135,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BE",
+      "recovered": 17900,
+      "weekIncidence": 437.0090867087633,
+      "casesPer100k": 7942.784537193902,
+      "delta": {
+        "cases": 0,
+        "deaths": 0,
+        "recovered": 27
+      }
+    },
+    "12051": {
+      "ags": "12051",
+      "name": "Brandenburg an der Havel",
+      "county": "SK Brandenburg a.d.Havel",
+      "state": "Brandenburg",
+      "population": 72040,
+      "cases": 3197,
+      "deaths": 96,
+      "casesPerWeek": 249,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BB",
+      "recovered": 2772,
+      "weekIncidence": 345.64131038312047,
+      "casesPer100k": 4437.812326485286,
+      "delta": {
+        "cases": 0,
+        "deaths": 0,
+        "recovered": 17
+      }
+    },
+    "12052": {
+      "ags": "12052",
+      "name": "Cottbus",
+      "county": "SK Cottbus",
+      "state": "Brandenburg",
+      "population": 98693,
+      "cases": 8128,
+      "deaths": 219,
+      "casesPerWeek": 586,
+      "deathsPerWeek": 1,
+      "stateAbbreviation": "BB",
+      "recovered": 7120,
+      "weekIncidence": 593.7604490693362,
+      "casesPer100k": 8235.63981234738,
+      "delta": {
+        "cases": 147,
+        "deaths": 1,
+        "recovered": 32
+      }
+    },
+    "12053": {
+      "ags": "12053",
+      "name": "Frankfurt (Oder)",
+      "county": "SK Frankfurt (Oder)",
+      "state": "Brandenburg",
+      "population": 57015,
+      "cases": 3161,
+      "deaths": 113,
+      "casesPerWeek": 307,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BB",
+      "recovered": 2611,
+      "weekIncidence": 538.454792598439,
+      "casesPer100k": 5544.155046917478,
+      "delta": {
+        "cases": 45,
+        "deaths": 0,
+        "recovered": 27
+      }
+    },
+    "12054": {
+      "ags": "12054",
+      "name": "Potsdam",
+      "county": "SK Potsdam",
+      "state": "Brandenburg",
+      "population": 182112,
+      "cases": 10104,
+      "deaths": 250,
+      "casesPerWeek": 658,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BB",
+      "recovered": 8126,
+      "weekIncidence": 361.3161131611316,
+      "casesPer100k": 5548.234053769109,
+      "delta": {
+        "cases": 66,
+        "deaths": 0,
+        "recovered": 9
+      }
+    },
+    "12060": {
+      "ags": "12060",
+      "name": "Barnim",
+      "county": "LK Barnim",
+      "state": "Brandenburg",
+      "population": 187343,
+      "cases": 8757,
+      "deaths": 257,
+      "casesPerWeek": 684,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BB",
+      "recovered": 6917,
+      "weekIncidence": 365.10571518551535,
+      "casesPer100k": 4674.313958888242,
+      "delta": {
+        "cases": 71,
+        "deaths": 0,
+        "recovered": 11
+      }
+    },
+    "12061": {
+      "ags": "12061",
+      "name": "Dahme-Spreewald",
+      "county": "LK Dahme-Spreewald",
+      "state": "Brandenburg",
+      "population": 173316,
+      "cases": 10405,
+      "deaths": 267,
+      "casesPerWeek": 1150,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BB",
+      "recovered": 7965,
+      "weekIncidence": 663.5278912506635,
+      "casesPer100k": 6003.484963881004,
+      "delta": {
+        "cases": 38,
+        "deaths": 0,
+        "recovered": 3
+      }
+    },
+    "12062": {
+      "ags": "12062",
+      "name": "Elbe-Elster",
+      "county": "LK Elbe-Elster",
+      "state": "Brandenburg",
+      "population": 101085,
+      "cases": 10704,
+      "deaths": 258,
+      "casesPerWeek": 1315,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BB",
+      "recovered": 8648,
+      "weekIncidence": 1300.885393480734,
+      "casesPer100k": 10589.108176287284,
+      "delta": {
+        "cases": 237,
+        "deaths": 0,
+        "recovered": 123
+      }
+    },
+    "12063": {
+      "ags": "12063",
+      "name": "Havelland",
+      "county": "LK Havelland",
+      "state": "Brandenburg",
+      "population": 164693,
+      "cases": 8916,
+      "deaths": 194,
+      "casesPerWeek": 729,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BB",
+      "recovered": 7138,
+      "weekIncidence": 442.6417637665232,
+      "casesPer100k": 5413.709143679453,
+      "delta": {
+        "cases": 133,
+        "deaths": 0,
+        "recovered": 18
+      }
+    },
+    "12064": {
+      "ags": "12064",
+      "name": "Märkisch-Oderland",
+      "county": "LK Märkisch-Oderland",
+      "state": "Brandenburg",
+      "population": 197195,
+      "cases": 9819,
+      "deaths": 288,
+      "casesPerWeek": 643,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BB",
+      "recovered": 7838,
+      "weekIncidence": 326.07317629757347,
+      "casesPer100k": 4979.335175841172,
+      "delta": {
+        "cases": 121,
+        "deaths": 0,
+        "recovered": 46
+      }
+    },
+    "12065": {
+      "ags": "12065",
+      "name": "Oberhavel",
+      "county": "LK Oberhavel",
+      "state": "Brandenburg",
+      "population": 214234,
+      "cases": 11839,
+      "deaths": 320,
+      "casesPerWeek": 1098,
+      "deathsPerWeek": 1,
+      "stateAbbreviation": "BB",
+      "recovered": 9470,
+      "weekIncidence": 512.5236890502908,
+      "casesPer100k": 5526.200323011287,
+      "delta": {
+        "cases": 0,
+        "deaths": 0,
+        "recovered": 18
+      }
+    },
+    "12066": {
+      "ags": "12066",
+      "name": "Oberspreewald-Lausitz",
+      "county": "LK Oberspreewald-Lausitz",
+      "state": "Brandenburg",
+      "population": 108396,
+      "cases": 10495,
+      "deaths": 265,
+      "casesPerWeek": 1223,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BB",
+      "recovered": 7735,
+      "weekIncidence": 1128.270415882505,
+      "casesPer100k": 9682.091590095575,
+      "delta": {
+        "cases": 107,
+        "deaths": 0,
+        "recovered": 30
+      }
+    },
+    "12067": {
+      "ags": "12067",
+      "name": "Oder-Spree",
+      "county": "LK Oder-Spree",
+      "state": "Brandenburg",
+      "population": 179276,
+      "cases": 11500,
+      "deaths": 326,
+      "casesPerWeek": 1046,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BB",
+      "recovered": 9233,
+      "weekIncidence": 583.4579084763159,
+      "casesPer100k": 6414.690198353377,
+      "delta": {
+        "cases": 105,
+        "deaths": 0,
+        "recovered": 19
+      }
+    },
+    "12068": {
+      "ags": "12068",
+      "name": "Ostprignitz-Ruppin",
+      "county": "LK Ostprignitz-Ruppin",
+      "state": "Brandenburg",
+      "population": 98808,
+      "cases": 5695,
+      "deaths": 162,
+      "casesPerWeek": 457,
+      "deathsPerWeek": 2,
+      "stateAbbreviation": "BB",
+      "recovered": 4824,
+      "weekIncidence": 462.51315682940657,
+      "casesPer100k": 5763.703343858797,
+      "delta": {
+        "cases": 69,
+        "deaths": 0,
+        "recovered": 57
+      }
+    },
+    "12069": {
+      "ags": "12069",
+      "name": "Potsdam-Mittelmark",
+      "county": "LK Potsdam-Mittelmark",
+      "state": "Brandenburg",
+      "population": 217954,
+      "cases": 11596,
+      "deaths": 226,
+      "casesPerWeek": 1204,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BB",
+      "recovered": 9477,
+      "weekIncidence": 552.4101415895097,
+      "casesPer100k": 5320.388705873716,
+      "delta": {
+        "cases": 74,
+        "deaths": 0,
+        "recovered": 39
+      }
+    },
+    "12070": {
+      "ags": "12070",
+      "name": "Prignitz",
+      "county": "LK Prignitz",
+      "state": "Brandenburg",
+      "population": 76096,
+      "cases": 4370,
+      "deaths": 165,
+      "casesPerWeek": 319,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BB",
+      "recovered": 3516,
+      "weekIncidence": 419.20731707317077,
+      "casesPer100k": 5742.746005046257,
+      "delta": {
+        "cases": 50,
+        "deaths": 0,
+        "recovered": 3
+      }
+    },
+    "12071": {
+      "ags": "12071",
+      "name": "Spree-Neiße",
+      "county": "LK Spree-Neiße",
+      "state": "Brandenburg",
+      "population": 113011,
+      "cases": 10659,
+      "deaths": 231,
+      "casesPerWeek": 1032,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BB",
+      "recovered": 8626,
+      "weekIncidence": 913.1854421251029,
+      "casesPer100k": 9431.82522055375,
+      "delta": {
+        "cases": 103,
+        "deaths": 0,
+        "recovered": 32
+      }
+    },
+    "12072": {
+      "ags": "12072",
+      "name": "Teltow-Fläming",
+      "county": "LK Teltow-Fläming",
+      "state": "Brandenburg",
+      "population": 171554,
+      "cases": 9758,
+      "deaths": 222,
+      "casesPerWeek": 738,
+      "deathsPerWeek": 1,
+      "stateAbbreviation": "BB",
+      "recovered": 7710,
+      "weekIncidence": 430.18524779369756,
+      "casesPer100k": 5688.004943050002,
+      "delta": {
+        "cases": 93,
+        "deaths": 0,
+        "recovered": 1
+      }
+    },
+    "12073": {
+      "ags": "12073",
+      "name": "Uckermark",
+      "county": "LK Uckermark",
+      "state": "Brandenburg",
+      "population": 118250,
+      "cases": 5669,
+      "deaths": 173,
+      "casesPerWeek": 724,
+      "deathsPerWeek": 2,
+      "stateAbbreviation": "BB",
+      "recovered": 4419,
+      "weekIncidence": 612.262156448203,
+      "casesPer100k": 4794.080338266385,
+      "delta": {
+        "cases": 0,
+        "deaths": 0,
+        "recovered": 11
+      }
+    },
+    "13003": {
+      "ags": "13003",
+      "name": "Rostock",
+      "county": "SK Rostock",
+      "state": "Mecklenburg-Vorpommern",
+      "population": 209061,
+      "cases": 6124,
+      "deaths": 65,
+      "casesPerWeek": 497,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "MV",
+      "recovered": 5113,
+      "weekIncidence": 237.7296578510578,
+      "casesPer100k": 2929.288580844825,
+      "delta": {
+        "cases": 94,
+        "deaths": 1,
+        "recovered": 44
+      }
+    },
+    "13004": {
+      "ags": "13004",
+      "name": "Schwerin",
+      "county": "SK Schwerin",
+      "state": "Mecklenburg-Vorpommern",
+      "population": 95609,
+      "cases": 3722,
+      "deaths": 115,
+      "casesPerWeek": 232,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "MV",
+      "recovered": 3288,
+      "weekIncidence": 242.6549801796902,
+      "casesPer100k": 3892.938949262099,
+      "delta": {
+        "cases": 0,
+        "deaths": 0,
+        "recovered": 9
+      }
+    },
+    "13071": {
+      "ags": "13071",
+      "name": "Mecklenburgische Seenplatte",
+      "county": "LK Mecklenburgische Seenplatte",
+      "state": "Mecklenburg-Vorpommern",
+      "population": 258057,
+      "cases": 11264,
+      "deaths": 169,
+      "casesPerWeek": 715,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "MV",
+      "recovered": 10103,
+      "weekIncidence": 277.0705696803419,
+      "casesPer100k": 4364.927128502618,
+      "delta": {
+        "cases": 29,
+        "deaths": 0,
+        "recovered": 2
+      }
+    },
+    "13072": {
+      "ags": "13072",
+      "name": "Rostock",
+      "county": "LK Rostock",
+      "state": "Mecklenburg-Vorpommern",
+      "population": 217072,
+      "cases": 7289,
+      "deaths": 185,
+      "casesPerWeek": 553,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "MV",
+      "recovered": 6107,
+      "weekIncidence": 254.75418294390803,
+      "casesPer100k": 3357.8720424559597,
+      "delta": {
+        "cases": 49,
+        "deaths": 0,
+        "recovered": 34
+      }
+    },
+    "13073": {
+      "ags": "13073",
+      "name": "Vorpommern-Rügen",
+      "county": "LK Vorpommern-Rügen",
+      "state": "Mecklenburg-Vorpommern",
+      "population": 225383,
+      "cases": 7148,
+      "deaths": 98,
+      "casesPerWeek": 808,
+      "deathsPerWeek": 1,
+      "stateAbbreviation": "MV",
+      "recovered": 5756,
+      "weekIncidence": 358.50086297546846,
+      "casesPer100k": 3171.490307609713,
+      "delta": {
+        "cases": 117,
+        "deaths": 0,
+        "recovered": 56
+      }
+    },
+    "13074": {
+      "ags": "13074",
+      "name": "Nordwestmecklenburg",
+      "county": "LK Nordwestmecklenburg",
+      "state": "Mecklenburg-Vorpommern",
+      "population": 157975,
+      "cases": 5716,
+      "deaths": 88,
+      "casesPerWeek": 353,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "MV",
+      "recovered": 5178,
+      "weekIncidence": 223.45307801867384,
+      "casesPer100k": 3618.294033866118,
+      "delta": {
+        "cases": 62,
+        "deaths": 0,
+        "recovered": 27
+      }
+    },
+    "13075": {
+      "ags": "13075",
+      "name": "Vorpommern-Greifswald",
+      "county": "LK Vorpommern-Greifswald",
+      "state": "Mecklenburg-Vorpommern",
+      "population": 235773,
+      "cases": 13283,
+      "deaths": 298,
+      "casesPerWeek": 872,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "MV",
+      "recovered": 11787,
+      "weekIncidence": 369.84726834709653,
+      "casesPer100k": 5633.808790658812,
+      "delta": {
+        "cases": 383,
+        "deaths": 0,
+        "recovered": 66
+      }
+    },
+    "13076": {
+      "ags": "13076",
+      "name": "Ludwigslust-Parchim",
+      "county": "LK Ludwigslust-Parchim",
+      "state": "Mecklenburg-Vorpommern",
+      "population": 211844,
+      "cases": 8216,
+      "deaths": 273,
+      "casesPerWeek": 77,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "MV",
+      "recovered": 7866,
+      "weekIncidence": 36.34750099129548,
+      "casesPer100k": 3878.3255603179696,
+      "delta": {
+        "cases": 0,
+        "deaths": 0,
+        "recovered": 0
+      }
+    },
+    "08111": {
+      "ags": "08111",
+      "name": "Stuttgart",
+      "county": "SK Stuttgart",
+      "state": "Baden-Württemberg",
+      "population": 630305,
+      "cases": 44436,
+      "deaths": 543,
+      "casesPerWeek": 1963,
+      "deathsPerWeek": 1,
+      "stateAbbreviation": "BW",
+      "recovered": 39417,
+      "weekIncidence": 311.43652676085384,
+      "casesPer100k": 7049.920276691443,
+      "delta": {
+        "cases": 88,
+        "deaths": 0,
+        "recovered": 2
+      }
+    },
+    "08115": {
+      "ags": "08115",
+      "name": "Böblingen",
+      "county": "LK Böblingen",
+      "state": "Baden-Württemberg",
+      "population": 392898,
+      "cases": 25988,
+      "deaths": 307,
+      "casesPerWeek": 1752,
+      "deathsPerWeek": 2,
+      "stateAbbreviation": "BW",
+      "recovered": 22415,
+      "weekIncidence": 445.9172609684956,
+      "casesPer100k": 6614.439371032685,
+      "delta": {
+        "cases": 334,
+        "deaths": 1,
+        "recovered": 27
+      }
+    },
+    "08116": {
+      "ags": "08116",
+      "name": "Esslingen",
+      "county": "LK Esslingen",
+      "state": "Baden-Württemberg",
+      "population": 533617,
+      "cases": 38118,
+      "deaths": 599,
+      "casesPerWeek": 2481,
+      "deathsPerWeek": 2,
+      "stateAbbreviation": "BW",
+      "recovered": 32515,
+      "weekIncidence": 464.9402099258457,
+      "casesPer100k": 7143.325643673271,
+      "delta": {
+        "cases": 347,
+        "deaths": 0,
+        "recovered": 1
+      }
+    },
+    "08117": {
+      "ags": "08117",
+      "name": "Göppingen",
+      "county": "LK Göppingen",
+      "state": "Baden-Württemberg",
+      "population": 258781,
+      "cases": 19140,
+      "deaths": 276,
+      "casesPerWeek": 992,
+      "deathsPerWeek": 1,
+      "stateAbbreviation": "BW",
+      "recovered": 15997,
+      "weekIncidence": 383.3357163006558,
+      "casesPer100k": 7396.215332655798,
+      "delta": {
+        "cases": 461,
+        "deaths": -1,
+        "recovered": 20
+      }
+    },
+    "08118": {
+      "ags": "08118",
+      "name": "Ludwigsburg",
+      "county": "LK Ludwigsburg",
+      "state": "Baden-Württemberg",
+      "population": 544971,
+      "cases": 38773,
+      "deaths": 546,
+      "casesPerWeek": 1930,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BW",
+      "recovered": 33298,
+      "weekIncidence": 354.1472849013984,
+      "casesPer100k": 7114.6905064673165,
+      "delta": {
+        "cases": 255,
+        "deaths": 1,
+        "recovered": 40
+      }
+    },
+    "08119": {
+      "ags": "08119",
+      "name": "Rems-Murr-Kreis",
+      "county": "LK Rems-Murr-Kreis",
+      "state": "Baden-Württemberg",
+      "population": 427286,
+      "cases": 31203,
+      "deaths": 403,
+      "casesPerWeek": 1988,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BW",
+      "recovered": 26722,
+      "weekIncidence": 465.26214292066675,
+      "casesPer100k": 7302.602940419298,
+      "delta": {
+        "cases": 372,
+        "deaths": 0,
+        "recovered": 132
+      }
+    },
+    "08121": {
+      "ags": "08121",
+      "name": "Heilbronn",
+      "county": "SK Heilbronn",
+      "state": "Baden-Württemberg",
+      "population": 126458,
+      "cases": 12974,
+      "deaths": 160,
+      "casesPerWeek": 707,
+      "deathsPerWeek": 2,
+      "stateAbbreviation": "BW",
+      "recovered": 11384,
+      "weekIncidence": 559.0789036676208,
+      "casesPer100k": 10259.532809312183,
+      "delta": {
+        "cases": 199,
+        "deaths": 0,
+        "recovered": 9
+      }
+    },
+    "08125": {
+      "ags": "08125",
+      "name": "Heilbronn",
+      "county": "LK Heilbronn",
+      "state": "Baden-Württemberg",
+      "population": 346363,
+      "cases": 24919,
+      "deaths": 224,
+      "casesPerWeek": 1726,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BW",
+      "recovered": 20539,
+      "weekIncidence": 498.32112552437763,
+      "casesPer100k": 7194.475160453051,
+      "delta": {
+        "cases": 52,
+        "deaths": 0,
+        "recovered": 15
+      }
+    },
+    "08126": {
+      "ags": "08126",
+      "name": "Hohenlohekreis",
+      "county": "LK Hohenlohekreis",
+      "state": "Baden-Württemberg",
+      "population": 112765,
+      "cases": 8187,
+      "deaths": 141,
+      "casesPerWeek": 595,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BW",
+      "recovered": 6936,
+      "weekIncidence": 527.6459894470802,
+      "casesPer100k": 7260.231454795371,
+      "delta": {
+        "cases": 183,
+        "deaths": 0,
+        "recovered": 5
+      }
+    },
+    "08127": {
+      "ags": "08127",
+      "name": "Schwäbisch Hall",
+      "county": "LK Schwäbisch Hall",
+      "state": "Baden-Württemberg",
+      "population": 197860,
+      "cases": 15062,
+      "deaths": 270,
+      "casesPerWeek": 802,
+      "deathsPerWeek": 1,
+      "stateAbbreviation": "BW",
+      "recovered": 13451,
+      "weekIncidence": 405.3371070453856,
+      "casesPer100k": 7612.453249772566,
+      "delta": {
+        "cases": 165,
+        "deaths": 0,
+        "recovered": 60
+      }
+    },
+    "08128": {
+      "ags": "08128",
+      "name": "Main-Tauber-Kreis",
+      "county": "LK Main-Tauber-Kreis",
+      "state": "Baden-Württemberg",
+      "population": 132684,
+      "cases": 7623,
+      "deaths": 97,
+      "casesPerWeek": 506,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BW",
+      "recovered": 6566,
+      "weekIncidence": 381.35720961080466,
+      "casesPer100k": 5745.229266527992,
+      "delta": {
+        "cases": 75,
+        "deaths": 1,
+        "recovered": 17
+      }
+    },
+    "08135": {
+      "ags": "08135",
+      "name": "Heidenheim",
+      "county": "LK Heidenheim",
+      "state": "Baden-Württemberg",
+      "population": 132812,
+      "cases": 10422,
+      "deaths": 188,
+      "casesPerWeek": 778,
+      "deathsPerWeek": 1,
+      "stateAbbreviation": "BW",
+      "recovered": 7727,
+      "weekIncidence": 585.7904406228353,
+      "casesPer100k": 7847.182483510526,
+      "delta": {
+        "cases": 118,
+        "deaths": 0,
+        "recovered": 7
+      }
+    },
+    "08136": {
+      "ags": "08136",
+      "name": "Ostalbkreis",
+      "county": "LK Ostalbkreis",
+      "state": "Baden-Württemberg",
+      "population": 314294,
+      "cases": 23235,
+      "deaths": 450,
+      "casesPerWeek": 2207,
+      "deathsPerWeek": 4,
+      "stateAbbreviation": "BW",
+      "recovered": 19575,
+      "weekIncidence": 702.208759950874,
+      "casesPer100k": 7392.75964542753,
+      "delta": {
+        "cases": 207,
+        "deaths": 1,
+        "recovered": 109
+      }
+    },
+    "08211": {
+      "ags": "08211",
+      "name": "Baden-Baden",
+      "county": "SK Baden-Baden",
+      "state": "Baden-Württemberg",
+      "population": 55449,
+      "cases": 3479,
+      "deaths": 75,
+      "casesPerWeek": 263,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BW",
+      "recovered": 2945,
+      "weekIncidence": 474.30972605457265,
+      "casesPer100k": 6274.233980775126,
+      "delta": {
+        "cases": 81,
+        "deaths": 0,
+        "recovered": 4
+      }
+    },
+    "08212": {
+      "ags": "08212",
+      "name": "Karlsruhe",
+      "county": "SK Karlsruhe",
+      "state": "Baden-Württemberg",
+      "population": 308436,
+      "cases": 16782,
+      "deaths": 240,
+      "casesPerWeek": 1229,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BW",
+      "recovered": 13501,
+      "weekIncidence": 398.461917545293,
+      "casesPer100k": 5440.999105162821,
+      "delta": {
+        "cases": 221,
+        "deaths": 0,
+        "recovered": 13
+      }
+    },
+    "08215": {
+      "ags": "08215",
+      "name": "Karlsruhe",
+      "county": "LK Karlsruhe",
+      "state": "Baden-Württemberg",
+      "population": 446852,
+      "cases": 28914,
+      "deaths": 521,
+      "casesPerWeek": 1990,
+      "deathsPerWeek": 3,
+      "stateAbbreviation": "BW",
+      "recovered": 23330,
+      "weekIncidence": 445.33760618728354,
+      "casesPer100k": 6470.598766481968,
+      "delta": {
+        "cases": 298,
+        "deaths": 1,
+        "recovered": 37
+      }
+    },
+    "08216": {
+      "ags": "08216",
+      "name": "Rastatt",
+      "county": "LK Rastatt",
+      "state": "Baden-Württemberg",
+      "population": 232091,
+      "cases": 15318,
+      "deaths": 236,
+      "casesPerWeek": 1084,
+      "deathsPerWeek": 1,
+      "stateAbbreviation": "BW",
+      "recovered": 12976,
+      "weekIncidence": 467.05817976569534,
+      "casesPer100k": 6599.997414807122,
+      "delta": {
+        "cases": 320,
+        "deaths": 0,
+        "recovered": 23
+      }
+    },
+    "08221": {
+      "ags": "08221",
+      "name": "Heidelberg",
+      "county": "SK Heidelberg",
+      "state": "Baden-Württemberg",
+      "population": 158741,
+      "cases": 7170,
+      "deaths": 68,
+      "casesPerWeek": 364,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BW",
+      "recovered": 6495,
+      "weekIncidence": 229.3043385136795,
+      "casesPer100k": 4516.791503140335,
+      "delta": {
+        "cases": 32,
+        "deaths": 0,
+        "recovered": 5
+      }
+    },
+    "08222": {
+      "ags": "08222",
+      "name": "Mannheim",
+      "county": "SK Mannheim",
+      "state": "Baden-Württemberg",
+      "population": 309721,
+      "cases": 24101,
+      "deaths": 346,
+      "casesPerWeek": 1441,
+      "deathsPerWeek": 1,
+      "stateAbbreviation": "BW",
+      "recovered": 21236,
+      "weekIncidence": 465.25744137465654,
+      "casesPer100k": 7781.51949657918,
+      "delta": {
+        "cases": 118,
+        "deaths": 2,
+        "recovered": 89
+      }
+    },
+    "08225": {
+      "ags": "08225",
+      "name": "Neckar-Odenwald-Kreis",
+      "county": "LK Neckar-Odenwald-Kreis",
+      "state": "Baden-Württemberg",
+      "population": 143797,
+      "cases": 9279,
+      "deaths": 152,
+      "casesPerWeek": 665,
+      "deathsPerWeek": 1,
+      "stateAbbreviation": "BW",
+      "recovered": 8001,
+      "weekIncidence": 462.4574921590854,
+      "casesPer100k": 6452.846721419779,
+      "delta": {
+        "cases": 145,
+        "deaths": 0,
+        "recovered": 51
+      }
+    },
+    "08226": {
+      "ags": "08226",
+      "name": "Rhein-Neckar-Kreis",
+      "county": "LK Rhein-Neckar-Kreis",
+      "state": "Baden-Württemberg",
+      "population": 548233,
+      "cases": 32202,
+      "deaths": 481,
+      "casesPerWeek": 1779,
+      "deathsPerWeek": 4,
+      "stateAbbreviation": "BW",
+      "recovered": 28705,
+      "weekIncidence": 324.49706602849517,
+      "casesPer100k": 5873.77994392895,
+      "delta": {
+        "cases": 206,
+        "deaths": 0,
+        "recovered": 86
+      }
+    },
+    "08231": {
+      "ags": "08231",
+      "name": "Pforzheim",
+      "county": "SK Pforzheim",
+      "state": "Baden-Württemberg",
+      "population": 126016,
+      "cases": 12358,
+      "deaths": 232,
+      "casesPerWeek": 803,
+      "deathsPerWeek": 1,
+      "stateAbbreviation": "BW",
+      "recovered": 10234,
+      "weekIncidence": 637.2206703910615,
+      "casesPer100k": 9806.691213814118,
+      "delta": {
+        "cases": 64,
+        "deaths": 0,
+        "recovered": 24
+      }
+    },
+    "08235": {
+      "ags": "08235",
+      "name": "Calw",
+      "county": "LK Calw",
+      "state": "Baden-Württemberg",
+      "population": 160149,
+      "cases": 12346,
+      "deaths": 195,
+      "casesPerWeek": 881,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BW",
+      "recovered": 10604,
+      "weekIncidence": 550.1127075411024,
+      "casesPer100k": 7709.07092769858,
+      "delta": {
+        "cases": 161,
+        "deaths": 0,
+        "recovered": 53
+      }
+    },
+    "08236": {
+      "ags": "08236",
+      "name": "Enzkreis",
+      "county": "LK Enzkreis",
+      "state": "Baden-Württemberg",
+      "population": 199752,
+      "cases": 14867,
+      "deaths": 280,
+      "casesPerWeek": 1155,
+      "deathsPerWeek": 2,
+      "stateAbbreviation": "BW",
+      "recovered": 11929,
+      "weekIncidence": 578.2169890664424,
+      "casesPer100k": 7442.728983940086,
+      "delta": {
+        "cases": 88,
+        "deaths": 0,
+        "recovered": 30
+      }
+    },
+    "08237": {
+      "ags": "08237",
+      "name": "Freudenstadt",
+      "county": "LK Freudenstadt",
+      "state": "Baden-Württemberg",
+      "population": 118364,
+      "cases": 7847,
+      "deaths": 166,
+      "casesPerWeek": 459,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BW",
+      "recovered": 6839,
+      "weekIncidence": 387.7868270758001,
+      "casesPer100k": 6629.549525193471,
+      "delta": {
+        "cases": 84,
+        "deaths": 0,
+        "recovered": 45
+      }
+    },
+    "08311": {
+      "ags": "08311",
+      "name": "Freiburg im Breisgau",
+      "county": "SK Freiburg i.Breisgau",
+      "state": "Baden-Württemberg",
+      "population": 230940,
+      "cases": 11950,
+      "deaths": 182,
+      "casesPerWeek": 687,
+      "deathsPerWeek": 0,
+      "stateAbbreviation": "BW",
+      "recovered": 10482,
+      "weekIncidence": 297.479864899974,
+      "casesPer100k": 5174.504200225167,
+      "delta": {
+        "cases": 90,
+        "deaths": 0,
+        "recovered": 34
+      }
+    },
+    "08315": {
+      "ags": "08315",
+      "name": "Breisgau-Hochschwarzwald",
+      "county": "LK Breisgau-Hochschwarzwald",
+      "state": "Baden-Württemberg",
+      "population": 264867,
+      "cases": 12860,
+      "deaths": 203,
+      "casesPerWeek": 634,
+      "deathsPerWeek": 2,
+      "stateAbbreviation": "BW",
+      "recovered": 11388,
+      "weekIncidence": 239.3654173604111,
+      "casesPer100k": 4855.266983051872,
+      "delta": {
+        "cases": 104,
+        "deaths": 0,
+        "recovered": 53
+      }
+    }
+  },
+  "meta": {
+    "source": "Robert Koch-Institut",
+    "contact": "Marlon Lueckert (m.lueckert@me.com)",
+    "info": "https://github.com/marlon360/rki-covid-api",
+    "lastUpdate": "2021-11-21T00:00:00.000Z",
+    "lastCheckedForUpdate": "2021-11-21T10:09:14.174Z"
+  }
+}

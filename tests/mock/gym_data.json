@@ -1,0 +1,174 @@
+{
+  "startTime": "00:00:00",
+  "endTime": "00:00:00",
+  "items": [
+    {
+      "startTime": "00:00:00",
+      "endTime": "01:00:00",
+      "percentage": 0,
+      "level": "LOW",
+      "isCurrent": false
+    },
+    {
+      "startTime": "01:00:00",
+      "endTime": "02:00:00",
+      "percentage": 0,
+      "level": "LOW",
+      "isCurrent": false
+    },
+    {
+      "startTime": "02:00:00",
+      "endTime": "03:00:00",
+      "percentage": 0,
+      "level": "LOW",
+      "isCurrent": false
+    },
+    {
+      "startTime": "03:00:00",
+      "endTime": "04:00:00",
+      "percentage": 0,
+      "level": "LOW",
+      "isCurrent": false
+    },
+    {
+      "startTime": "04:00:00",
+      "endTime": "05:00:00",
+      "percentage": 0,
+      "level": "LOW",
+      "isCurrent": false
+    },
+    {
+      "startTime": "05:00:00",
+      "endTime": "06:00:00",
+      "percentage": 0,
+      "level": "LOW",
+      "isCurrent": false
+    },
+    {
+      "startTime": "06:00:00",
+      "endTime": "07:00:00",
+      "percentage": 0,
+      "level": "LOW",
+      "isCurrent": false
+    },
+    {
+      "startTime": "07:00:00",
+      "endTime": "08:00:00",
+      "percentage": 1,
+      "level": "LOW",
+      "isCurrent": false
+    },
+    {
+      "startTime": "08:00:00",
+      "endTime": "09:00:00",
+      "percentage": 3,
+      "level": "LOW",
+      "isCurrent": false
+    },
+    {
+      "startTime": "09:00:00",
+      "endTime": "10:00:00",
+      "percentage": 7,
+      "level": "LOW",
+      "isCurrent": false
+    },
+    {
+      "startTime": "10:00:00",
+      "endTime": "11:00:00",
+      "percentage": 14,
+      "level": "LOW",
+      "isCurrent": false
+    },
+    {
+      "startTime": "11:00:00",
+      "endTime": "12:00:00",
+      "percentage": 21,
+      "level": "LOW",
+      "isCurrent": true
+    },
+    {
+      "startTime": "12:00:00",
+      "endTime": "13:00:00",
+      "percentage": 0,
+      "level": "LOW",
+      "isCurrent": false
+    },
+    {
+      "startTime": "13:00:00",
+      "endTime": "14:00:00",
+      "percentage": 0,
+      "level": "LOW",
+      "isCurrent": false
+    },
+    {
+      "startTime": "14:00:00",
+      "endTime": "15:00:00",
+      "percentage": 0,
+      "level": "LOW",
+      "isCurrent": false
+    },
+    {
+      "startTime": "15:00:00",
+      "endTime": "16:00:00",
+      "percentage": 0,
+      "level": "LOW",
+      "isCurrent": false
+    },
+    {
+      "startTime": "16:00:00",
+      "endTime": "17:00:00",
+      "percentage": 0,
+      "level": "LOW",
+      "isCurrent": false
+    },
+    {
+      "startTime": "17:00:00",
+      "endTime": "18:00:00",
+      "percentage": 0,
+      "level": "LOW",
+      "isCurrent": false
+    },
+    {
+      "startTime": "18:00:00",
+      "endTime": "19:00:00",
+      "percentage": 0,
+      "level": "LOW",
+      "isCurrent": false
+    },
+    {
+      "startTime": "19:00:00",
+      "endTime": "20:00:00",
+      "percentage": 0,
+      "level": "LOW",
+      "isCurrent": false
+    },
+    {
+      "startTime": "20:00:00",
+      "endTime": "21:00:00",
+      "percentage": 0,
+      "level": "LOW",
+      "isCurrent": false
+    },
+    {
+      "startTime": "21:00:00",
+      "endTime": "22:00:00",
+      "percentage": 0,
+      "level": "LOW",
+      "isCurrent": false
+    },
+    {
+      "startTime": "22:00:00",
+      "endTime": "23:00:00",
+      "percentage": 0,
+      "level": "LOW",
+      "isCurrent": false
+    },
+    {
+      "startTime": "23:00:00",
+      "endTime": "00:00:00",
+      "percentage": 0,
+      "level": "LOW",
+      "isCurrent": false
+    }
+  ]
+}
