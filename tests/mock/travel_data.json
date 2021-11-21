@@ -1,0 +1,49 @@
+{
+  "routes": [
+    {
+      "id": "f6a69b2b-4b00-43aa-ba28-b20a5d7d48b6",
+      "sections": [
+        {
+          "id": "5ebca78f-a5ef-4c9c-8b76-aad23478d11e",
+          "type": "vehicle",
+          "departure": {
+            "time": "2021-11-21T11:49:59+01:00",
+            "place": {
+              "type": "place",
+              "location": {
+                "lat": 48.78242,
+                "lng": 9.18324
+              },
+              "originalLocation": {
+                "lat": 48.7833329,
+                "lng": 9.183333
+              }
+            }
+          },
+          "arrival": {
+            "time": "2021-11-21T17:52:34+01:00",
+            "place": {
+              "type": "place",
+              "location": {
+                "lat": 52.37802,
+                "lng": 4.89716
+              },
+              "originalLocation": {
+                "lat": 52.3779559,
+                "lng": 4.8970699
+              }
+            }
+          },
+          "travelSummary": {
+            "duration": 21755,
+            "length": 618797,
+            "baseDuration": 21797
+          },
+          "transport": {
+            "mode": "car"
+          }
+        }
+      ]
+    }
+  ]
+}
