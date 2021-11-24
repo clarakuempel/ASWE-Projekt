@@ -1,11 +1,3 @@
-"""
-Use Case1
-- Wetter: $weather.rain, $weather.current, $weather.min
-- Incidence
-- News headlines
-- news abstract
-- News preference
-"""
 import json
 import os
 
@@ -17,6 +9,10 @@ with open(os.path.join(os.path.dirname(__file__), '../database/default_user_pref
 
 
 def load_data(session_id: str):
+    """
+    Load all required data for the Welcome usecase.
+    :return: Dict with rapla, weather, news, and covid data
+    """
     rapla_lectures = None
     rapla_data = api.get_rapla().json()
     events = utility.get_events(rapla_data)
