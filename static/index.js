@@ -1,9 +1,32 @@
+const VOICES = [
+    'en-US_AllisonV3Voice',
+    'en-US_EmilyV3Voice',
+    'en-US_HenryV3Voice',
+    'en-US_KevinV3Voice',
+    'en-US_LisaV3Voice',
+    'en-US_MichaelV3Voice'
+]
 window.onload = function () {
+    setVoices()
     setPreferences();
 };
 
 let setHour;
 let setMin;
+
+function setVoices(){
+    var min = 0,
+    max = 5,
+    select = document.getElementById('assistent_sex');
+    for (var i = min; i<=max; i++){
+        var voice_pre = VOICES[i].split(['_'])
+        var voice_name = voice_pre[1].split('V3')
+        var opt = document.createElement('option');
+        opt.value = VOICES[i];
+        opt.innerHTML = voice_name[0];
+        select.appendChild(opt);
+    }
+}
 
 window.setInterval(function () {
     checkTime();
@@ -69,8 +92,10 @@ function speech(text) {
             return response.json();
         })
         .then(function (res) {
+            let voice = document.getElementById('assistent_sex').value
             const audio = TTS.synthesize({
                 accessToken: res.token,
+                voice: voice,
                 url: res.url,
                 text: text,
             });
