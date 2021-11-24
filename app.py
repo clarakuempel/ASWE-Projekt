@@ -177,8 +177,11 @@ def get_user_preferences():
     user_preferences = default_user_prefs.copy()
     user_preferences.update(
         database.load_prefs(session["id"]))
-
-    return jsonify(user_preferences)
+    with open(os.path.join(os.path.dirname(__file__), 'database/gym_selection.json'), encoding='utf-8') as gym_f:
+        gyms = json.load(gym_f)
+    print(gyms[2])
+    gym_selection = [{"id": gym["id"], "name": gym["studioName"]} for gym in gyms]
+    return jsonify(preferences=user_preferences, gyms=gym_selection)
 
 
 @app.route("/api/preferences", methods=['POST'])
