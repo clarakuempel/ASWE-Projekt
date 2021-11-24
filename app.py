@@ -67,10 +67,10 @@ def get_dialog_response():
 
     usecase_data = None
     if first_intent == "Good_Morning":
-        usecase_data = welcome.load_data()
+        usecase_data = welcome.load_data(session["id"])
 
     elif first_intent in ["Habit_Reading", "Habit_Meditating", "Habit_Sleeping"]:
-        usecase_data = habit.load_data()
+        usecase_data = habit.load_data(session["id"])
 
     elif first_intent == "Sports":
         usecase_data = coach.load_data()
