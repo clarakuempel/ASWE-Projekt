@@ -9,8 +9,6 @@ Use Case1
 import json
 import os
 
-from flask import session
-
 from database.database import Database
 from service import api, utility
 
@@ -18,14 +16,14 @@ with open(os.path.join(os.path.dirname(__file__), '../database/default_user_pref
     default_user_prefs: dict = json.load(f)
 
 
-def load_data():
+def load_data(session_id: str):
     rapla_lectures = None
     rapla_data = api.get_rapla().json()
     events = utility.get_events(rapla_data)
     if "rapla_lectures" in events.keys():
         rapla_lectures = events["rapla_lectures"]
 
-    prefs = Database.get_instance().load_prefs(session["id"])
+    prefs = Database.get_instance().load_prefs(session_id)
     location: dict = prefs["location"] if prefs else default_user_prefs["location"]
 
     lat = location.get("lat", default_user_prefs.get("location").get("lat"))
