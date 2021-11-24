@@ -3,8 +3,6 @@ import os
 import random
 from typing import Final
 
-from flask import session
-
 from service import api, utility
 from database.database import Database
 from datetime import datetime, date, timedelta
@@ -13,11 +11,12 @@ with open(os.path.join(os.path.dirname(__file__), '../database/default_user_pref
     default_user_prefs: dict = json.load(f)
 
 
-def load_data():
+def load_data(session_id: str):
     """
     Load all required data for the Habit Tracker usecase.
     :return: Dict with rapla, video, book, and quote data
     """
+
     sleep_time: Final = 8
 
     quote_data = api.get_quote()
@@ -35,7 +34,7 @@ def load_data():
     r = random.randrange(0, 10)
     book = f"'{books[r]['title'].title()}' by {books[r]['author']}"
 
-    prefs = Database.get_instance().load_prefs(session["id"])
+    prefs = Database.get_instance().load_prefs(session_id)
 
     wakeup_time_str = prefs['wakeup_time'] if prefs else default_user_prefs.get("wakeup_time")
     wakeup_time = datetime.strptime(wakeup_time_str, "%H:%M").time()
