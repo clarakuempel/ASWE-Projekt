@@ -1,11 +1,3 @@
-"""
-Use Case1
-- Wetter: $weather.rain, $weather.current, $weather.min
-- Incidence
-- News headlines
-- news abstract
-- News preference
-"""
 import json
 import os
 
