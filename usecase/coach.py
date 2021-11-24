@@ -1,10 +1,3 @@
-"""
-Use Case 3
-- $rapla_lectures, $rapla_current_lecture, $rapla_next_lecture
-- weather
-- gym $gym.name, $gym.auslastung
-- video $video.title
-"""
 import json
 import os
 import random
@@ -19,6 +12,10 @@ with open(os.path.join(os.path.dirname(__file__), '../database/default_user_pref
 
 
 def load_data():
+    """
+    Load all required data for the Sports Coach usecase.
+    :return: Dict with rapla, weather, gym, and video data
+    """
     rapla_lectures, rapla_current_lecture, rapla_next_lecture = None, None, None
     rapla_data = api.get_rapla().json()
     events = utility.get_events(rapla_data)

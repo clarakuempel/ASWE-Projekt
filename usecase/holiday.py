@@ -18,6 +18,10 @@ with open(os.path.join(os.path.dirname(__file__), '../database/default_user_pref
 
 
 def load_data():
+    """
+    Load all required data for the Holiday Finder usecase.
+    :return: Dict with travel, wikipedia, weather, and covid data
+    """
     days_off_date = utility.get_days_until_two_off()
 
     cities = [

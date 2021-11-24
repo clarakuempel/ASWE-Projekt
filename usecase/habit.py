@@ -20,6 +20,10 @@ with open(os.path.join(os.path.dirname(__file__), '../database/default_user_pref
 
 
 def load_data():
+    """
+    Load all required data for the Habit Tracker usecase.
+    :return: Dict with rapla, video, book, and quote data
+    """
     sleep_time: Final = 8
 
     quote_data = api.get_quote()
