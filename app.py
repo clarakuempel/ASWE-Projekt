@@ -22,6 +22,9 @@ with open(os.path.join(os.path.dirname(__file__), './database/default_user_prefs
 
 @app.before_request
 def assign_user_id():
+    """
+    Assign each new user a session_id. Session id is used to save user preferences.
+    """
     if "id" not in session:
         session.permanent = True
         session["id"] = uuid.uuid4().hex
