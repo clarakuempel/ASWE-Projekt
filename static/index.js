@@ -168,6 +168,7 @@ function setPreferences() {
         document.getElementById('location_lon').value = res.preferences.location.lon
         document.getElementById('gemeindecode').value = res.preferences.location.ags
         document.getElementById("news_topic").value = res.preferences.news
+        document.getElementById("username").value = res.preferences.username
         setGyms(res.gyms)
     }).then(() => {
         updateWakeup(document.getElementById('wakeup_time').value)
@@ -196,14 +197,15 @@ function updateWakeup(time) {
 function submitPreferences() {
     let data = {
         "wakeup_time": document.getElementById("wakeup_time").value,
-        "assistent_sex": document.getElementById("assistent_sex").value,
+        "assistant_sex": document.getElementById("assistent_sex").value,
         "location": {
             "lat": parseFloat(document.getElementById('location_lat').value),
             "lon": parseFloat(document.getElementById('location_lon').value),
             "ags": document.getElementById('gemeindecode').value,
         },
         "news": document.getElementById("news_topic").value,
-        "gym": parseInt(document.getElementById("gym").value)
+        "gym": parseInt(document.getElementById("gym").value),
+        "username": document.getElementById("username").value
     }
 
     updateWakeup((document.getElementById("wakeup_time").value))
