@@ -169,7 +169,7 @@ function setPreferences() {
         document.getElementById('gemeindecode').value = res.preferences.location.ags
         document.getElementById("news_topic").value = res.preferences.news
         document.getElementById("username").value = res.preferences.username
-        setGyms(res.gyms)
+        setGyms(res.gyms, res.preferences.gym)
     }).then(() => {
         updateWakeup(document.getElementById('wakeup_time').value)
     }).catch((err) => {
@@ -177,7 +177,7 @@ function setPreferences() {
     })
 }
 
-function setGyms(gyms){
+function setGyms(gyms, thisone){
     console.log(gyms[0].id)
     select = document.getElementById("gym");
     for (let i = 0; i < gyms.length; i++){
@@ -186,6 +186,7 @@ function setGyms(gyms){
         opt.innerHTML = gyms[i].name;
         select.appendChild(opt);
     }
+    document.getElementById('gym').value=thisone
 }
 
 function updateWakeup(time) {
