@@ -49,6 +49,23 @@ def get_dialog_response():
 
     user_context = session.get("context", None)
 
+    database = Database.get_instance()
+    user_preferences = default_user_prefs.copy()
+    user_preferences.update(database.load_prefs(session["id"]))
+    print(user_preferences["username"])
+    if user_context is not None:
+        user_context["skills"]["main skill"]["user_defined"].update(
+            {"username": user_preferences["username"]}
+        )
+    else:
+        user_context = {"skills": {
+            "main skill": {
+                "user_defined": {
+                    "username": user_preferences["username"]
+                }
+            }
+        }}
+
     watson_res = assistant.message_stateless(
         assistant_id=os.environ.get("WATSON_ASSISTANT_ID"),
         input={
