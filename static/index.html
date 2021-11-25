@@ -3,34 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Ivy - your PDA</title>
-    <link rel= "stylesheet" type= "text/css" href="static/styles/style.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- <script data-main="static/imports" stc="static/require.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="static/styles/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- <script data-main="static/imports" stc="static/require.js"></script> -->
 </head>
 <body>
-  
+
 <div>
-  <div style="width: 45%; float:left; height:1000px; margin:10px; text-align: center; margin-top: 69px; margin-left: 69px">
-    <div class="container">
-      <div class="header">
-        <h1>Ivy</h1>
-      </div>
-      <div class="body">
-        <p style="display: none" id="m1" class="message"></p>
-        <p style="display: none" id="m1_user" class="message user_message"></p>
-        <p style="display: none" id="m2" class="message"></p>
-        <!-- <p id="m2_user" class="message user_message"></p> -->
-        <!-- <p id="m3" class="message"></p>
-        <p id="m3_user" class="message user_message"></p>
-        <p id="m4" class="message"></p>
-        <p id="m4_user" class="message user_message"></p> -->
-      </div>
-      <div class="footer">
-        <button class="recButton" style="margin-right: 0px; margin-left: auto;" id="rec-button">REC</button>
-      </div>
+    <div style="width: 45%; float:left; height:1000px; margin:10px; text-align: center; margin-top: 69px; margin-left: 69px">
+        <div class="container">
+            <div class="header">
+                <h1>Ivy</h1>
+            </div>
+            <div class="body">
+                <p style="display: none" id="m1" class="message"></p>
+                <p style="display: none" id="m1_user" class="message user_message"></p>
+                <p style="display: none" id="m2" class="message"></p>
+                <!-- <p id="m2_user" class="message user_message"></p> -->
+                <!-- <p id="m3" class="message"></p>
+                <p id="m3_user" class="message user_message"></p>
+                <p id="m4" class="message"></p>
+                <p id="m4_user" class="message user_message"></p> -->
+            </div>
+            <div class="footer">
+                <button class="recButton" style="margin-right: 0px; margin-left: auto;" id="rec-button">REC</button>
+            </div>
+        </div>
     </div>
-  </div>
-  <div style="width: 45%; float:left; height:1000px; margin:10px; margin-top: 69px;">
+    <div style="width: 45%; float:left; height:1000px; margin:10px; margin-top: 69px;">
+
+        <!-- Second DIV -->
+        <div class="container" style="width:auto">
+            <div class="header">
+                <h1>User Preferences</h1>
+            </div>
+            <div class="body">
+                <form onsubmit="submitSearch(); return false">
+                    <!-- <div class="form-group mb2">
+                      <label class="setting">Nutzername</label>
+                      <input class="setting2" id="username" type="text">
+                    </div>
+                    <br>
+                    <hr>
+                    <br> -->
+                    <div class="form-group">
+                        <label class="setting" for="assistent_sex">Assistent</label>
+                        <select class="setting2" id="assistent_sex" class="custom-select custom-select-sm" required>
+                            <option value="m">Male</option>
+                            <option value="w">Female</option>
+                        </select>
+                    </div>
+                    <br>
+                    <hr>
+                    <br>
+                    <div class="form-group mb-2">
+                        <label class="setting">Location</label>
+                        <label class="setting" for="location_lon">Lon</label>
+                        <input class="setting2" id="location_lon" class="form-control form-control-sm" type="number"
+                               step="any">
 
     <!-- Second DIV -->
     <div class="container" style="width:auto">
@@ -102,7 +132,6 @@
         <button class="recButton" style="width: 100%; margin:auto" onclick="submitPreferences()">Save Preferences</button>
       </div>
     </div>
-  </div>
 </div>
 </body>
 <!-- <script type="module" src="./static/imports.js"></script> -->

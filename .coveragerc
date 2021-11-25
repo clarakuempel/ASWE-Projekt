@@ -1,2 +1,5 @@
 [run]
-omit = tests/*, database.py, app.py
+omit = tests/*, database/database.py, app.py
+
+[report]
+exclude_lines = pass

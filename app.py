@@ -22,6 +22,9 @@ with open(os.path.join(os.path.dirname(__file__), './database/default_user_prefs
 
 @app.before_request
 def assign_user_id():
+    """
+    Assign each new user a session_id. Session id is used to save user preferences.
+    """
     if "id" not in session:
         session.permanent = True
         session["id"] = uuid.uuid4().hex
@@ -37,6 +40,10 @@ def default():
 
 @app.route("/api/dialog", methods=["POST"])
 def get_dialog_response():
+    """
+    Connect user input with Watson Assistant. Handles usecase intent identification,
+    loading and passing data to watson. And output back to the user.
+    """
     user_input = request.json.get("input", None)
     print(f"Got user input: {user_input}")
 
@@ -51,81 +58,46 @@ def get_dialog_response():
         context=user_context
     ).get_result()
 
-    # Intent is not needed anymore, this is old and will be probably removed
     first_intent = get_first_intent(watson_res)
-
     tts_output = []
-
-    # Get the TTS text because the current node requires no external data
     tts = get_watson_tts(watson_res)
-    # tts_output is an List that collects all Watson Chat responses since we do two requests (initial and data response)
     tts_output.append(tts)
 
-    # Get context variables dict and the current_intent variable
     user_defined, current_intent_var = get_context_variables(watson_res)
 
+    usecase_data = {}
     if first_intent == "Good_Morning":
-        usecase_data = welcome.load_data()
-        print(usecase_data)
-
-        watson_res["context"]["skills"]["main skill"]["user_defined"].update(usecase_data)
-
-        watson_res = assistant.message_stateless(
-            assistant_id=os.environ.get("WATSON_ASSISTANT_ID"),
-            context=watson_res["context"]
-        ).get_result()
-
-        tts = get_watson_tts(watson_res)
-        tts_output.append(tts)
+        usecase_data = welcome.load_data(session["id"])
 
     elif first_intent in ["Habit_Reading", "Habit_Meditating", "Habit_Sleeping"]:
-        usecase_data = habit.load_data()
+        usecase_data = habit.load_data(session["id"])
 
-        watson_res["context"]["skills"]["main skill"]["user_defined"].update(usecase_data)
-
-        watson_res = assistant.message_stateless(
-            assistant_id=os.environ.get("WATSON_ASSISTANT_ID"),
-            context=watson_res["context"]
-        ).get_result()
-
-        tts = get_watson_tts(watson_res)
-        tts_output.append(tts)
     elif first_intent == "Sports":
         usecase_data = coach.load_data()
-
-        watson_res["context"]["skills"]["main skill"]["user_defined"].update(usecase_data)
-
-        watson_res = assistant.message_stateless(
-            assistant_id=os.environ.get("WATSON_ASSISTANT_ID"),
-            context=watson_res["context"]
-        ).get_result()
-
-        tts = get_watson_tts(watson_res)
-        tts_output.append(tts)
 
     elif first_intent == "holiday_finder":
         usecase_data = holiday.load_data()
 
+    if first_intent is not None:
         watson_res["context"]["skills"]["main skill"]["user_defined"].update(usecase_data)
+        if usecase_data:
+            watson_res = assistant.message_stateless(
+                assistant_id=os.environ.get("WATSON_ASSISTANT_ID"),
+                context=watson_res["context"]
+            ).get_result()
+            tts = get_watson_tts(watson_res)
+            tts_output.append(tts)
 
-        watson_res = assistant.message_stateless(
-            assistant_id=os.environ.get("WATSON_ASSISTANT_ID"),
-            context=watson_res["context"]
-        ).get_result()
-
-        tts = get_watson_tts(watson_res)
-        tts_output.append(tts)
-
-    # Save the last known context to user cookie so we have it in the next user request (contains username etc.)
     session["context"] = watson_res.get("context", None)
-
-    # watson, intent, and user_defined are debugging values will be removed
-    # Later we pass only tts output and display data (e.g. links, images, etc)
-    print(tts_output)
     return jsonify(tts=" ".join(tts_output), watson=watson_res, intent=first_intent, user_defined=user_defined)
 
 
 def get_first_intent(watson_response):
+    """
+    Parse watson response to get the first intent. first = highest identification confidence
+    :param watson_response:  Watson response object
+    :return: First intent as string
+    """
     try:
         return watson_response["output"]["intents"][0]["intent"]
     except (KeyError, IndexError):
@@ -133,6 +105,11 @@ def get_first_intent(watson_response):
 
 
 def get_watson_tts(watson_response):
+    """
+    Parse watson response to get TTS output
+    :param watson_response: Watson response object
+    :return: TTS output
+    """
     tts = ""
     try:
         tts = " ".join([entry["text"] for entry in watson_response["output"]["generic"]])
@@ -142,6 +119,11 @@ def get_watson_tts(watson_response):
 
 
 def get_context_variables(watson_response):
+    """
+    Parse the watson response to get context variables
+    :param watson_response: Watson response object
+    :return: user_defined, current_context
+    """
     try:
         user_defined = watson_response["context"]["skills"]["main skill"]["user_defined"]
     except (KeyError, IndexError):
@@ -157,32 +139,26 @@ def get_context_variables(watson_response):
     return user_defined, current_context
 
 
-@app.route("/api/habits", methods=['GET'])
-def get_user_habits():
-    # Get habits for user, idk what format
-    user_habits = []
-    return jsonify(user_habits)
-
-
-@app.route("/api/habits", methods=['POST'])
-def set_user_habits():
-    print(f"Set habits for user {session.get('id', None)}")
-    user_habits = []
-    return jsonify(user_habits)
-
-
 @app.route("/api/preferences", methods=['GET'])
 def get_user_preferences():
+    """
+    Get user preferences and gym selection
+    """
     database = Database.get_instance()
     user_preferences = default_user_prefs.copy()
     user_preferences.update(
         database.load_prefs(session["id"]))
-
-    return jsonify(user_preferences)
+    with open(os.path.join(os.path.dirname(__file__), 'database/gym_selection.json'), encoding='utf-8') as gym_f:
+        gyms = json.load(gym_f)
+    gym_selection = [{"id": gym["id"], "name": gym["studioName"]} for gym in gyms]
+    return jsonify(preferences=user_preferences, gyms=gym_selection)
 
 
 @app.route("/api/preferences", methods=['POST'])
 def set_user_preferences():
+    """
+    Set user preferences
+    """
     user_preferences: dict = request.json
     unnecessary_keys = [key for key in user_preferences.keys() if key not in default_user_prefs.keys()]
     for key in unnecessary_keys:
@@ -199,20 +175,12 @@ def set_user_preferences():
     return "", 201
 
 
-@app.route("/test")
-def test():
-    db = Database.get_instance()
-    prefs = db.load_prefs(session["id"])
-    print(habit.load_data())
-    print(welcome.load_data())
-    print(holiday.load_data())
-    print(coach.load_data())
-    return jsonify(preferences=prefs, session_id=session["id"])
-
-
-@app.route("/chat")
+@app.route("/debug-chat")
 def test_chat():
-    return send_from_directory(app.static_folder, 'chat.html')
+    """
+    Simple watson chat to debug usecase dialogs
+    """
+    return send_from_directory(app.static_folder, 'debug-chat.html')
 
 
 @app.route("/api/tts-token", methods=["GET"])

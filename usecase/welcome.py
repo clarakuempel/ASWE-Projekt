@@ -1,15 +1,5 @@
-"""
-Use Case1
-- Wetter: $weather.rain, $weather.current, $weather.min
-- Incidence
-- News headlines
-- news abstract
-- News preference
-"""
 import json
 import os
-
-from flask import session
 
 from database.database import Database
 from service import api, utility
@@ -18,14 +8,18 @@ with open(os.path.join(os.path.dirname(__file__), '../database/default_user_pref
     default_user_prefs: dict = json.load(f)
 
 
-def load_data():
+def load_data(session_id: str):
+    """
+    Load all required data for the Welcome usecase.
+    :return: Dict with rapla, weather, news, and covid data
+    """
     rapla_lectures = None
     rapla_data = api.get_rapla().json()
     events = utility.get_events(rapla_data)
     if "rapla_lectures" in events.keys():
         rapla_lectures = events["rapla_lectures"]
 
-    prefs = Database.get_instance().load_prefs(session["id"])
+    prefs = Database.get_instance().load_prefs(session_id)
     location: dict = prefs["location"] if prefs else default_user_prefs["location"]
 
     lat = location.get("lat", default_user_prefs.get("location").get("lat"))
@@ -43,11 +37,11 @@ def load_data():
     news = {
         "first": {
             "title": news_headlines[0],
-            "text": utility.parse_news_abstract(news_data, 0)
+            "text": utility.parse_news_abstract(news_data, 0)[1]
         },
         "second": {
             "title": news_headlines[1],
-            "text": utility.parse_news_abstract(news_data, 1)
+            "text": utility.parse_news_abstract(news_data, 1)[1]
         }
     }
 

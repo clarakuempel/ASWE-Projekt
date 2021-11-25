@@ -1,0 +1,111 @@
+{
+  "title": "19A",
+  "queryStart": "2021-11-14T23:00:00.000Z",
+  "queryEnd": "2021-11-21T22:59:59.999Z",
+  "events": [
+    {
+      "title": "Advanced Software Engineering [19 Teiln]",
+      "type": "Vorlesung / Lehrbetrieb",
+      "createdAt": "2021-08-05T12:03:00.000Z",
+      "lastModified": "2021-11-02T07:54:00.000Z",
+      "start": "2021-11-18T07:15:00.000Z",
+      "end": "2021-11-18T10:45:00.000Z",
+      "persons": [
+        "Rößler, Horst"
+      ],
+      "resources": [
+        "STG-TINF19A"
+      ],
+      "room": "RB41-0.18"
+    },
+    {
+      "title": "Verteilte Systeme [19 Teiln]",
+      "type": "Vorlesung / Lehrbetrieb",
+      "createdAt": "2021-08-05T12:05:00.000Z",
+      "lastModified": "2021-11-02T07:55:00.000Z",
+      "start": "2021-11-19T07:30:00.000Z",
+      "end": "2021-11-19T10:00:00.000Z",
+      "persons": [
+        "Jungk, Patrick"
+      ],
+      "resources": [
+        "STG-TINF19A"
+      ],
+      "room": "RB41-0.18"
+    },
+    {
+      "title": "Künstliche Intelligenz  [ Teiln]",
+      "type": "Online-Format (ohne Raumbelegung)",
+      "createdAt": "2021-08-05T10:10:00.000Z",
+      "lastModified": "2021-09-24T06:26:00.000Z",
+      "start": "2021-11-15T08:00:00.000Z",
+      "end": "2021-11-15T11:15:00.000Z",
+      "persons": [
+        "Dr. Gillner, Sabine"
+      ],
+      "resources": [
+        "STG-TINF19A"
+      ],
+      "room": "RB41-0.18"
+    },
+    {
+      "title": "IT Architekturen [19 Teiln]",
+      "type": "Vorlesung / Lehrbetrieb",
+      "createdAt": "2021-08-05T12:06:00.000Z",
+      "lastModified": "2021-11-02T07:56:00.000Z",
+      "start": "2021-11-19T10:30:00.000Z",
+      "end": "2021-11-19T13:00:00.000Z",
+      "persons": [
+        "Bachmaier, Martin",
+        "Fütterling, Stefan, Dr."
+      ],
+      "resources": [
+        "STG-TINF19A"
+      ],
+      "room": "RB41-0.18"
+    },
+    {
+      "title": "Grundlagen Data Science [19 Teiln]",
+      "type": "Vorlesung / Lehrbetrieb",
+      "createdAt": "2021-08-05T12:01:00.000Z",
+      "lastModified": "2021-11-02T07:53:00.000Z",
+      "start": "2021-11-17T11:30:00.000Z",
+      "end": "2021-11-17T14:15:00.000Z",
+      "persons": [
+        "Kochanowski, Monika"
+      ],
+      "resources": [
+        "STG-TINF19A"
+      ],
+      "room": "RB41-0.18"
+    },
+    {
+      "title": "Wahl-/Zusatzfächer  [ Teiln]",
+      "type": "Online-Format (ohne Raumbelegung)",
+      "createdAt": "2021-08-05T12:08:00.000Z",
+      "lastModified": "2021-09-24T06:21:00.000Z",
+      "start": "2021-11-15T12:00:00.000Z",
+      "end": "2021-11-15T17:45:00.000Z",
+      "persons": [],
+      "resources": [
+        "STG-TINF19A"
+      ],
+      "room": ""
+    },
+    {
+      "title": "Künstliche Intelligenz [19 Teiln]",
+      "type": "Vorlesung / Lehrbetrieb",
+      "createdAt": "2021-11-12T08:19:00.000Z",
+      "lastModified": "2021-11-12T08:20:00.000Z",
+      "start": "2021-11-18T12:00:00.000Z",
+      "end": "2021-11-18T15:15:00.000Z",
+      "persons": [
+        "Reichardt, Dirk, Dr."
+      ],
+      "resources": [
+        "STG-TINF19A"
+      ],
+      "room": "RB41-0.18"
+    }
+  ]
+}
