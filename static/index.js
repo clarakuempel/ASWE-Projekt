@@ -1,9 +1,32 @@
+const VOICES = [
+    'en-US_AllisonV3Voice',
+    'en-US_EmilyV3Voice',
+    'en-US_HenryV3Voice',
+    'en-US_KevinV3Voice',
+    'en-US_LisaV3Voice',
+    'en-US_MichaelV3Voice'
+]
 window.onload = function () {
+    setVoices()
     setPreferences();
 };
 
 let setHour;
 let setMin;
+
+function setVoices(){
+    var min = 0,
+    max = 5,
+    select = document.getElementById('assistent_sex');
+    for (var i = min; i<=max; i++){
+        var voice_pre = VOICES[i].split(['_'])
+        var voice_name = voice_pre[1].split('V3')
+        var opt = document.createElement('option');
+        opt.value = VOICES[i];
+        opt.innerHTML = voice_name[0];
+        select.appendChild(opt);
+    }
+}
 
 window.setInterval(function () {
     checkTime();
@@ -69,8 +92,10 @@ function speech(text) {
             return response.json();
         })
         .then(function (res) {
+            let voice = document.getElementById('assistent_sex').value
             const audio = TTS.synthesize({
                 accessToken: res.token,
+                voice: voice,
                 url: res.url,
                 text: text,
             });
@@ -137,18 +162,29 @@ async function startRecord() {
 //set pref
 function setPreferences() {
     send('/api/preferences').then((res) => {
-        document.getElementById("wakeup_time").value = res.wakeup_time
-        document.getElementById("assistent_sex").value = res.assistant_sex
-        document.getElementById('location_lat').value = res.location.lat
-        document.getElementById('location_lon').value = res.location.lon
-        document.getElementById('gemeindecode').value = res.location.ags
-        document.getElementById("news_topic").value = res.news
-        document.getElementById("gym").value = res.gym
+        document.getElementById("wakeup_time").value = res.preferences.wakeup_time
+        document.getElementById("assistent_sex").value = res.preferences.assistant_sex
+        document.getElementById('location_lat').value = res.preferences.location.lat
+        document.getElementById('location_lon').value = res.preferences.location.lon
+        document.getElementById('gemeindecode').value = res.preferences.location.ags
+        document.getElementById("news_topic").value = res.preferences.news
+        setGyms(res.gyms)
     }).then(() => {
         updateWakeup(document.getElementById('wakeup_time').value)
     }).catch((err) => {
         console.error('Err in setPreferences :: ', err)
     })
+}
+
+function setGyms(gyms){
+    console.log(gyms[0].id)
+    select = document.getElementById("gym");
+    for (let i = 0; i < gyms.length; i++){
+        var opt = document.createElement('option');
+        opt.value = gyms[i].id;
+        opt.innerHTML = gyms[i].name;
+        select.appendChild(opt);
+    }
 }
 
 function updateWakeup(time) {

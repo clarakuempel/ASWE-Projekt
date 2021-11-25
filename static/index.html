@@ -31,83 +31,77 @@
         </div>
     </div>
     <div style="width: 45%; float:left; height:1000px; margin:10px; margin-top: 69px;">
-
-        <!-- Second DIV -->
-        <div class="container" style="width:auto">
-            <div class="header">
-                <h1>User Preferences</h1>
-            </div>
-            <div class="body">
-                <form onsubmit="submitSearch(); return false">
-                    <!-- <div class="form-group mb2">
-                      <label class="setting">Nutzername</label>
-                      <input class="setting2" id="username" type="text">
-                    </div>
-                    <br>
-                    <hr>
-                    <br> -->
-                    <div class="form-group">
-                        <label class="setting" for="assistent_sex">Assistent</label>
-                        <select class="setting2" id="assistent_sex" class="custom-select custom-select-sm" required>
-                            <option value="m">Male</option>
-                            <option value="w">Female</option>
-                        </select>
-                    </div>
-                    <br>
-                    <hr>
-                    <br>
-                    <div class="form-group mb-2">
-                        <label class="setting">Location</label>
-                        <label class="setting" for="location_lon">Lon</label>
-                        <input class="setting2" id="location_lon" class="form-control form-control-sm" type="number"
-                               step="any">
-
-                        <label class="setting" for="location_lat">Lat</label>
-                        <input class="setting2" id="location_lat" class="form-control form-control-sm" type="number"
-                               step="any">
-                    </div>
-                    <br>
-                    <hr>
-                    <br>
-                    <div class="form-group mb2">
-                        <label class="setting">AGS</label>
-                        <input class="setting2" id="gemeindecode" type="text">
-                    </div>
-                    <br>
-                    <hr>
-                    <br>
-                    <div class="form-group mb2">
-                        <label class="setting">Gym</label>
-                        <input class="setting2" id="gym" type="text">
-                        <!-- todo dropdown liste -->
-                    </div>
-                    <br>
-                    <hr>
-                    <br>
-                    <div class="form-group mb2">
-                        <label class="setting">News Topic</label>
-                        <select class="setting2" id="news_topic" class="custom-select custom-select-sm" required>
-                            <option value="1">All</option>
-                            <option value="2">Business</option>
-                            <option value="3">Science</option>
-                            <option value="4">Sports</option>
-                        </select>
-                    </div>
-                    <br>
-                    <hr>
-                    <br>
-                    <div class="form-group mb">
-                        <label class="setting">Wake-Up Time</label>
-                        <input class="setting2" type="time" id="wakeup_time">
-                    </div>
-                </form>
-            </div>
-            <div class="footer">
-                <button class="recButton" style="width: 100%; margin:auto" onclick="submitPreferences()">Save
-                    Preferences
-                </button>
-            </div>
-        </div>
+    <!-- Second DIV -->
+    <div class="container" style="width:auto">
+      <div class="header">
+        <h1>User Preferences</h1>
+      </div>
+      <div class="body">
+        <form onsubmit="submitSearch(); return false">
+          <!-- <div class="form-group mb2">
+            <label class="setting">Nutzername</label>
+            <input class="setting2" id="username" type="text">
+          </div>
+          <br>
+          <hr>
+          <br> -->
+          <div class="form-group">
+            <label class="setting" for="assistent_sex">Assistent Language</label>
+            <select class="setting2" id="assistent_sex" class="custom-select custom-select-sm" required>
+            </select>
+          </div>
+          <br>
+          <hr>
+          <br>
+          <div class="form-group mb-2">
+            <label class="setting">Location</label>
+            <label class="setting" for="location_lon">Lon</label>
+            <input class="setting2" id="location_lon" class="form-control form-control-sm" type="number" step="any">
+      
+            <label class="setting" for="location_lat">Lat</label>
+            <input class="setting2" id="location_lat" class="form-control form-control-sm" type="number" step="any">
+          </div>
+          <br>
+          <hr>
+          <br>
+          <div class="form-group mb2">
+            <label class="setting">Mnicipality Code</label>
+            <input class="setting2" id="gemeindecode" type="text">
+          </div>
+          <br>
+          <hr>
+          <br>
+          <div class="form-group mb2">
+            <label class="setting">Gym</label>
+            <select class="setting2" id="gym" class="custom-select custom-select-sm" required>
+          </div>
+          <br>
+          <hr>
+          <br>
+          <div class="form-group mb2">
+            <label class="setting">News Topic</label>
+            <label class="setting">News Topic</label>
+            <label class="setting">News Topic</label>
+            <select class="setting2" id="news_topic" class="custom-select custom-select-sm" required>
+            <select class="setting2" id="news_topic" class="custom-select custom-select-sm" required>
+              <option value="1">All</option>
+              <option value="2">Business</option>
+              <option value="3">Science</option>
+              <option value="4">Sports</option>
+            </select>
+          </div>
+          <br>
+          <hr>
+          <br>
+          <div class="form-group mb">
+            <label class="setting">Wakeup Time</label>
+            <input class="setting2" type="time" id="wakeup_time">
+          </div>
+        </form>
+      </div>
+      <div class="footer">
+        <button class="recButton" style="width: 100%; margin:auto" onclick="submitPreferences()">Save Preferences</button>
+      </div>
     </div>
 </div>
 </body>
