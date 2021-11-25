@@ -65,7 +65,7 @@ def get_dialog_response():
 
     user_defined, current_intent_var = get_context_variables(watson_res)
 
-    usecase_data = None
+    usecase_data = {}
     if first_intent == "Good_Morning":
         usecase_data = welcome.load_data(session["id"])
 
@@ -80,14 +80,13 @@ def get_dialog_response():
 
     if first_intent is not None:
         watson_res["context"]["skills"]["main skill"]["user_defined"].update(usecase_data)
-
-        watson_res = assistant.message_stateless(
-            assistant_id=os.environ.get("WATSON_ASSISTANT_ID"),
-            context=watson_res["context"]
-        ).get_result()
-
-        tts = get_watson_tts(watson_res)
-        tts_output.append(tts)
+        if usecase_data:
+            watson_res = assistant.message_stateless(
+                assistant_id=os.environ.get("WATSON_ASSISTANT_ID"),
+                context=watson_res["context"]
+            ).get_result()
+            tts = get_watson_tts(watson_res)
+            tts_output.append(tts)
 
     session["context"] = watson_res.get("context", None)
     return jsonify(tts=" ".join(tts_output), watson=watson_res, intent=first_intent, user_defined=user_defined)
