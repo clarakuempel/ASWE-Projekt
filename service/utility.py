@@ -1,4 +1,5 @@
 import os
+import re
 from datetime import datetime, timedelta
 
 import numpy as np
@@ -88,7 +89,12 @@ def parse_wikipedia_extract(wiki_data):
     for key in pages:
         page_id = key
         break
-    extract = pages[page_id]["extract"]
+    extract = str(pages[page_id]["extract"])
+    # Remove nested parentheses
+    for i in range(0, 5):
+        extract = re.sub(r"\([^(]+?\)", "", extract)
+        if extract.find("(") == -1:
+            break
     return extract
 
 
