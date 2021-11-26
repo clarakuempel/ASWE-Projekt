@@ -2,8 +2,6 @@ import json
 import os
 import random
 
-from flask import session
-
 from service import api, utility
 from database.database import Database
 
@@ -11,7 +9,7 @@ with open(os.path.join(os.path.dirname(__file__), '../database/default_user_pref
     default_user_prefs: dict = json.load(f)
 
 
-def load_data():
+def load_data(session_id: str):
     """
     Load all required data for the Sports Coach usecase.
     :return: Dict with rapla, weather, gym, and video data
@@ -33,7 +31,7 @@ def load_data():
         "title": yt[r]["title"],
     }
 
-    prefs = Database.get_instance().load_prefs(session["id"])
+    prefs = Database.get_instance().load_prefs(session_id)
 
     gym_data = api.get_gym_utilization(prefs.get("gym") if prefs else default_user_prefs.get("gym")).json()
     utilization = utility.parse_gym_utilization(gym_data)
