@@ -33,12 +33,23 @@ def load_data(session_id: str):
 
     prefs = Database.get_instance().load_prefs(session_id)
 
-    gym_data = api.get_gym_utilization(prefs.get("gym") if prefs else default_user_prefs.get("gym")).json()
+    gym_id = prefs.get("gym") if prefs else default_user_prefs.get("gym")
+    gym_data = api.get_gym_utilization(gym_id).json()
     utilization = utility.parse_gym_utilization(gym_data)
+
+    with open(os.path.join(os.path.dirname(__file__), '../database/gym_selection.json'), encoding='utf-8') as gym_f:
+        gyms = json.load(gym_f)
+    gym_name = "McFit"
+    for gym in gyms:
+        if gym["id"] == gym_id:
+            gym_name = gym["studioName"]
+            break
     gym = {
         "auslastung": utilization,
-        "name": "McFIT Stuttgart-Mitte"
-    }  # TODO Wäre fresh, wenn Name sich mit ändert
+        "name": gym_name
+    }
+
+    print(gym)
 
     location: dict = prefs.get("location") if prefs else default_user_prefs.get("location")
     lat = location.get("lat", default_user_prefs.get("location").get("lat"))
