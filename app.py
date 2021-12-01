@@ -92,10 +92,10 @@ def get_dialog_response():
     elif first_intent == "Sports":
         usecase_data = coach.load_data(session["id"])
 
-    elif first_intent == "holiday_finder":
+    elif first_intent == "holiday_finder" or current_intent_var == "4:city_no":
         usecase_data = holiday.load_data(session["id"])
 
-    if first_intent is not None:
+    if first_intent is not None or current_intent_var == "4:city_no":
         watson_res["context"]["skills"]["main skill"]["user_defined"].update(usecase_data)
         if usecase_data:
             watson_res = assistant.message_stateless(
