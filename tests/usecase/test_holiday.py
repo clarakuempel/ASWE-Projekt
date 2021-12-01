@@ -38,7 +38,7 @@ rand_index = 0
 @mock.patch('service.api.get_travel_summary', return_value=travel_mock)
 @mock.patch('service.api.get_wikipedia_extract', return_value=wiki_mock)
 def test_holiday_load(*args):
-    res = holiday.load_data("123")
+    res, _ = holiday.load_data("123")
 
     weather, _ = utility.get_current_weather(weather_data)
     del weather['mean']

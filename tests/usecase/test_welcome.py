@@ -35,7 +35,7 @@ covid_mock.json.return_value = covid_data
 @mock.patch('os.environ.get', return_value=os_env_mock.os_env_mock)
 @mock.patch('service.utility.get_events', return_value={"rapla_lectures": ["Test"]})
 def test_load_data_for_a_warmly_welcome(*args):
-    res = welcome.load_data("123")
+    res, _ = welcome.load_data("123")
 
     ags = default_user_prefs["location"]["ags"]
     weather, _ = utility.get_current_weather(weather_data)

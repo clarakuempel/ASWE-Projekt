@@ -41,7 +41,7 @@ get_events = {"rapla_next_lecture": {
 @mock.patch('service.api.get_rapla', return_value=rapla_mock)
 @mock.patch('service.utility.get_events', return_value=get_events)
 def test_habit_load_data(*args):
-    res = habit.load_data("123")
+    res, _ = habit.load_data("123")
 
     books = utility.parse_bestselling_books(book_data)
     yt = utility.parse_youtube_search(yt_data)

@@ -55,7 +55,7 @@ get_events = {
 @mock.patch('service.api.get_weather_forecast', return_value=weather_mock)
 @mock.patch('service.api.get_gym_utilization', return_value=gym_mock)
 def test_coach_load(*args):
-    res = coach.load_data("123")
+    res, _ = coach.load_data("123")
 
     weather, _ = utility.get_current_weather(weather_data)
     del weather['mean']
