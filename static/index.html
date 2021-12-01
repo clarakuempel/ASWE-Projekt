@@ -19,11 +19,8 @@
                 <p style="display: none" id="m1" class="message"></p>
                 <p style="display: none" id="m1_user" class="message user_message"></p>
                 <p style="display: none" id="m2" class="message"></p>
-                <!-- <p id="m2_user" class="message user_message"></p> -->
-                <!-- <p id="m3" class="message"></p>
-                <p id="m3_user" class="message user_message"></p>
-                <p id="m4" class="message"></p>
-                <p id="m4_user" class="message user_message"></p> -->
+                <img id="m2_extra1" style="display: none; max-width: 250px;" class="message">
+                <a style="display: none" id="m2_extra2" class="message"></a>
             </div>
             <div class="footer">
                 <button class="recButton" style="margin-right: 0px; margin-left: auto;" id="rec-button">REC</button>
@@ -94,7 +91,17 @@
             <label class="setting">Wakeup Time</label>
             <input class="setting2" type="time" id="wakeup_time">
           </div>
+          <br>
+          <hr>
+          <br>
         </form>
+          <label class="setting">Demo Trigger</label>
+          <button onclick="triggerUsecase('Habit Tracker Reading') "class="setting2">UC2</button>
+          <button onclick="triggerUsecase('exercise') "class="setting2">UC3</button>
+          <button onclick="triggerUsecase('holiday finder') "class="setting2">UC4</button>
+          <div>
+            <!-- <button class="setting" onclick="TriggerUsecase('Habit Tracker Reading')">Habit Tracker</button> -->
+          </div>
       </div>
       <div class="footer">
         <button class="recButton" style="width: 100%; margin:auto" onclick="submitPreferences()">Save Preferences</button>
