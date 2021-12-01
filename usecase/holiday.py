@@ -1,8 +1,6 @@
 import json
 import os
 
-from flask import session
-
 from database.database import Database
 from service import api, utility
 import random
@@ -11,7 +9,7 @@ with open(os.path.join(os.path.dirname(__file__), '../database/default_user_pref
     default_user_prefs: dict = json.load(f)
 
 
-def load_data():
+def load_data(session_id: str):
     """
     Load all required data for the Holiday Finder usecase.
     :return: Dict with travel, wikipedia, weather, and covid data
@@ -80,7 +78,7 @@ def load_data():
     dest_lon = cities[r]["lon"]
     dest_ags = cities[r]["ags"]
 
-    prefs = Database.get_instance().load_prefs(session["id"])
+    prefs = Database.get_instance().load_prefs(session_id)
 
     location: dict = prefs.get("location") if prefs else default_user_prefs.get("location")
     lat = location.get("lat", default_user_prefs.get("location").get("lat"))
