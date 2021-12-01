@@ -90,7 +90,7 @@ def get_dialog_response():
     elif first_intent in ["Habit_Reading", "Habit_Meditating", "Habit_Sleeping"]:
         usecase_data, extra = habit.load_data(session["id"])
 
-    elif first_intent == "Sports":
+    elif first_intent in ["Sports", "Gym"]:
         usecase_data, extra = coach.load_data(session["id"])
 
     elif first_intent == "holiday_finder" or current_intent_var == "4:city_no":
