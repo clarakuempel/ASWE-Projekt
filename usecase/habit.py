@@ -33,6 +33,7 @@ def load_data(session_id: str):
     books = utility.parse_bestselling_books(book_data)
     r = random.randrange(0, 10)
     book = f"'{books[r]['title'].title()}' by {books[r]['author']}"
+    book_image = books[r]['image']
 
     prefs = Database.get_instance().load_prefs(session_id)
 
@@ -51,10 +52,10 @@ def load_data(session_id: str):
         rapla_next_lecture = events["rapla_next_lecture"]
 
     return {
-        "quote": quote,
-        "book": book,
-        "bed_time": bed_time,
-        "now": now_time,
-        "rapla_next_lecture": rapla_next_lecture,
-        "video": video
-    }
+               "quote": quote,
+               "book": book,
+               "bed_time": bed_time,
+               "now": now_time,
+               "rapla_next_lecture": rapla_next_lecture,
+               "video": video
+           }, {"image": book_image}

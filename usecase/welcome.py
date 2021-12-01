@@ -46,14 +46,14 @@ def load_data(session_id: str):
     }
 
     return {
-        "weather": {
-            "min": weather["min"],
-            "max": weather["max"],
-            "current": weather["current"],
-            "rain": weather["rain"],
-            "description": weather["description"]
-        },
-        "lectures": rapla_lectures,
-        "incidence": incidence,
-        "news": news,
-    }
+               "weather": {
+                   "min": weather["min"],
+                   "max": weather["max"],
+                   "current": weather["current"],
+                   "rain": weather["rain"],
+                   "description": weather["description"]
+               },
+               "lectures": rapla_lectures,
+               "incidence": incidence,
+               "news": news,
+           }, {"image": icon}

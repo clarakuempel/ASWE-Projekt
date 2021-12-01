@@ -25,6 +25,7 @@
 
         function handle_res(data) {
             $("#chat").append("<p>watson: " + data["tts"] + "</p>");
+            $("#output").prepend("<p> extra: " + JSON.stringify(data["extra"]) + "</p><hr>");
             $("#output").prepend("<p> watson intent: " + JSON.stringify(data["intent"]) + "</p><hr>");
             $("#output").prepend("<p> watson user defined: " + JSON.stringify(data["user_defined"]) + "</p>");
             $("#output").prepend("<p>" + JSON.stringify(data["watson"]) + "</p>");

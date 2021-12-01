@@ -30,6 +30,8 @@ def load_data(session_id: str):
     video = {
         "title": yt[r]["title"],
     }
+    video_image = yt[r]["thumbnail"]
+    video_link = yt[r]["url"]
 
     prefs = Database.get_instance().load_prefs(session_id)
 
@@ -58,16 +60,16 @@ def load_data(session_id: str):
     weather, icon = utility.get_current_weather(weather_data)
 
     return {
-        "rapla_lectures": rapla_lectures,
-        "rapla_current_lecture": rapla_current_lecture,
-        "rapla_next_lecture": rapla_next_lecture,
-        "video": video,
-        "gym": gym,
-        "weather": {
-            "min": weather["min"],
-            "max": weather["max"],
-            "current": weather["current"],
-            "rain": weather["rain"],
-            "description": weather["description"]
-        }
-    }
+               "rapla_lectures": rapla_lectures,
+               "rapla_current_lecture": rapla_current_lecture,
+               "rapla_next_lecture": rapla_next_lecture,
+               "video": video,
+               "gym": gym,
+               "weather": {
+                   "min": weather["min"],
+                   "max": weather["max"],
+                   "current": weather["current"],
+                   "rain": weather["rain"],
+                   "description": weather["description"]
+               }
+           }, {"image": video_image, "link": video_link}

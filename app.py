@@ -48,6 +48,7 @@ def get_dialog_response():
     print(f"Got user input: {user_input}")
 
     user_context = session.get("context", None)
+    extra = session.get("extra", None)
 
     database = Database.get_instance()
     user_preferences = default_user_prefs.copy()
@@ -84,16 +85,16 @@ def get_dialog_response():
 
     usecase_data = {}
     if first_intent == "Good_Morning":
-        usecase_data = welcome.load_data(session["id"])
+        usecase_data, extra = welcome.load_data(session["id"])
 
     elif first_intent in ["Habit_Reading", "Habit_Meditating", "Habit_Sleeping"]:
-        usecase_data = habit.load_data(session["id"])
+        usecase_data, extra = habit.load_data(session["id"])
 
     elif first_intent == "Sports":
-        usecase_data = coach.load_data(session["id"])
+        usecase_data, extra = coach.load_data(session["id"])
 
     elif first_intent == "holiday_finder" or current_intent_var == "4:city_no":
-        usecase_data = holiday.load_data(session["id"])
+        usecase_data, extra = holiday.load_data(session["id"])
 
     if first_intent is not None or current_intent_var == "4:city_no":
         watson_res["context"]["skills"]["main skill"]["user_defined"].update(usecase_data)
@@ -106,7 +107,9 @@ def get_dialog_response():
             tts_output.append(tts)
 
     session["context"] = watson_res.get("context", None)
-    return jsonify(tts=" ".join(tts_output), watson=watson_res, intent=first_intent, user_defined=user_defined)
+    session["extra"] = extra
+    return jsonify(tts=" ".join(tts_output), extra=extra, watson=watson_res, intent=first_intent,
+                   user_defined=user_defined)
 
 
 def get_first_intent(watson_response):

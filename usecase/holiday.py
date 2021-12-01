@@ -97,16 +97,16 @@ def load_data(session_id: str):
     wikipedia = wikipedia.split("\n")[0]
 
     return {
-        "days_off_date": days_off_date,
-        "city": city,
-        "travel_duration": travel_summary["duration"],
-        "wikipedia": wikipedia,
-        "weather": {
-            "min": weather["min"],
-            "max": weather["max"],
-            "current": weather["current"],
-            "rain": weather["rain"],
-            "description": weather["description"]
-        },
-        "incidence": incidence
-    }
+               "days_off_date": days_off_date,
+               "city": city,
+               "travel_duration": travel_summary["duration"],
+               "wikipedia": wikipedia,
+               "weather": {
+                   "min": weather["min"],
+                   "max": weather["max"],
+                   "current": weather["current"],
+                   "rain": weather["rain"],
+                   "description": weather["description"]
+               },
+               "incidence": incidence
+           }, {"image": icon}
