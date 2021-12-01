@@ -28,12 +28,13 @@ def load_data(session_id: str):
     video = {
         "title": yt[r]["title"],
     }
+    video_image = yt[r]["thumbnail"]
+    video_link = yt[r]["url"]
 
     book_data = api.get_bestselling_books().json()
     books = utility.parse_bestselling_books(book_data)
     r = random.randrange(0, 10)
     book = f"'{books[r]['title'].title()}' by {books[r]['author']}"
-    book_image = books[r]['image']
 
     prefs = Database.get_instance().load_prefs(session_id)
 
@@ -58,4 +59,4 @@ def load_data(session_id: str):
                "now": now_time,
                "rapla_next_lecture": rapla_next_lecture,
                "video": video
-           }, {"image": book_image}
+           }, {"image": video_image, "link": video_link}
