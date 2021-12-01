@@ -72,8 +72,14 @@ def load_data(session_id: str):
             "ags": "12054"
         }
     ]
-    r = random.randrange(0, len(cities))
+    r = os.environ.get("LAST_CITY", None)
+    if r is None:
+        r = random.randrange(0, len(cities))
+    else:
+        while str(r) == os.environ.get("LAST_CITY", None):
+            r = random.randrange(0, len(cities))
     city = cities[r]["city"]
+    os.environ["LAST_CITY"] = str(r)
     dest_lat = cities[r]["lat"]
     dest_lon = cities[r]["lon"]
     dest_ags = cities[r]["ags"]
