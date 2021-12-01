@@ -145,19 +145,64 @@ async function startRecord() {
             data = {
                 "input": input
             }
-            sendPost('/api/dialog', data).then((res) => {
-                let target = document.getElementById('m2')
-                console.log(res)
-                target.style.display = 'block'
-                target.innerHTML = res.tts
-                speech(res.tts)
-            })
+            sendToBackend(data, 'm2')
             document.querySelector('#rec-button').addEventListener('click', function () {
                 startRecord()
             })
         })
     })
 }
+
+function sendToBackend(data, targetId){
+    sendPost('/api/dialog', data).then((res) => {
+        if(targetId == 'm2'){
+            document.getElementById('m1').style.display = 'none'
+        }
+        let target = document.getElementById(targetId)
+        console.log(res)
+        target.style.display = 'block'
+        target.innerHTML = res.tts
+        speech(res.tts)
+        console.log(res.extra.image)
+        if(res.extra.link != undefined && res.extra.image != undefined && res.extra.image != 'https://openweathermap.org/img/wn/03n@2x.png'
+        && res.tts != "I didn't get your meaning." && res.tts != "I didn't understand. You can try rephrasing."
+        && res.tts != "Can you reword your statement? I'm not understanding."
+        && (
+            res.user_defined.current_intent == "2:mediation_yes"
+            || res.user_defined.current_intent == "3:workout"
+        )
+        // && res.intent != "General_Ending"
+        ){
+            let target_extra1 = document.getElementById('m2_extra1')
+            target_extra1.style.display = 'block'
+            target_extra1.src = res.extra.image
+            target_extra1.href = res.extra.link
+            let target_extra2 = document.getElementById('m2_extra2')
+            target_extra2.style.display = 'block'
+            target_extra2.innerHTML = res.extra.link
+            target_extra2.href = res.extra.link
+        } else {
+            document.getElementById('m2_extra1').style.display = 'none'
+            document.getElementById('m2_extra2').style.display = 'none'
+        }
+    })
+}
+
+function test(triggertext){
+    let data = {
+        input: triggertext
+    }
+    sendToBackend(data, 'm2')
+}
+
+
+function triggerUsecase(trigger_text){
+    let data = {
+      input: trigger_text
+    }
+    document.getElementById('m2').style.display = 'none'
+    sendToBackend(data, 'm1')
+  }
 
 //set pref
 function setPreferences() {
@@ -212,18 +257,4 @@ function submitPreferences() {
     updateWakeup((document.getElementById("wakeup_time").value))
 
     sendPost('/api/preferences', data)
-}
-
-
-function triggerUsecase(trigger_text){
-  let data = {
-    input: trigger_text
-  }
-  sendPost('/api/dialog', data).then((res) => {
-    let target = document.getElementById('m1')
-    console.log(res)
-    target.style.display = 'block'
-    target.innerHTML = res.tts
-    speech(res.tts)
-  })
 }
