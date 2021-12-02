@@ -48,7 +48,6 @@ function checkTime(time) {
         triggerUsecase('Good Morning')
     }
 }
-module.exports = checkTime
 
 var wsURI = {
     STT: 'wss://api.eu-de.speech-to-text.watson.cloud.ibm.com/instances/2bbdb10c-31b9-4df9-ac7f-bc364d79b14e/v1/recognize', //?access_token=' + access_token
@@ -174,7 +173,7 @@ function sendToBackend(data, targetId){
             res.user_defined.current_intent == "2:mediation_yes"
             || res.user_defined.current_intent == "3:workout"
         )
-        // && res.intent != "General_Ending"
+         && (res.tts).text.toLowerCase().includes('video')
         ){
             let target_extra1 = document.getElementById('m2_extra1')
             target_extra1.style.display = 'block'
@@ -204,6 +203,7 @@ function triggerUsecase(trigger_text){
       input: trigger_text
     }
     document.getElementById('m2').style.display = 'none'
+    document.getElementById('m1_user').style.display = 'none'
     sendToBackend(data, 'm1')
   }
 
