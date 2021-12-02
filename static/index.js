@@ -173,7 +173,7 @@ function sendToBackend(data, targetId){
             res.user_defined.current_intent == "2:mediation_yes"
             || res.user_defined.current_intent == "3:workout"
         )
-         && (res.tts).text.toLowerCase().includes('video')
+         && (res.tts).toLowerCase().includes('video')
         ){
             let target_extra1 = document.getElementById('m2_extra1')
             target_extra1.style.display = 'block'
