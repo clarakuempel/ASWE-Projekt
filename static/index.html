@@ -96,15 +96,15 @@
           <br>
         </form>
           <label class="setting">Demo Trigger</label>
-          <button onclick="triggerUsecase('Habit Tracker Reading') "class="setting2">UC2</button>
-          <button onclick="triggerUsecase('exercise') "class="setting2">UC3</button>
-          <button onclick="triggerUsecase('holiday finder') "class="setting2">UC4</button>
+          <button id="UC2" onclick="triggerUsecase('Habit Tracker Reading') "class="setting2">UC2</button>
+          <button id="UC3" onclick="triggerUsecase('exercise') "class="setting2">UC3</button>
+          <button id="UC4" onclick="triggerUsecase('holiday finder') "class="setting2">UC4</button>
           <div>
             <!-- <button class="setting" onclick="TriggerUsecase('Habit Tracker Reading')">Habit Tracker</button> -->
           </div>
       </div>
       <div class="footer">
-        <button class="recButton" style="width: 100%; margin:auto" onclick="submitPreferences()">Save Preferences</button>
+        <button class="recButton" id="savePref" style="width: 100%; margin:auto" onclick="submitPreferences()">Save Preferences</button>
       </div>
     </div>
 </div>

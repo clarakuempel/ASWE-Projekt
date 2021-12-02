@@ -6,10 +6,19 @@ const VOICES = [
     'en-US_LisaV3Voice',
     'en-US_MichaelV3Voice'
 ]
+
 window.onload = function () {
     setVoices()
     setPreferences();
 };
+
+window.setInterval(function () {
+    checkTime();
+}, 50000);
+
+document.querySelector('#rec-button').addEventListener('click', function () {
+    startRecord()
+})
 
 let setHour;
 let setMin;
@@ -26,11 +35,8 @@ function setVoices(){
         opt.innerHTML = voice_name[0];
         select.appendChild(opt);
     }
+    return true
 }
-
-window.setInterval(function () {
-    checkTime();
-}, 50000);
 
 function checkTime(time) {
     console.info("checking time..")
@@ -47,10 +53,6 @@ var wsURI = {
     STT: 'wss://api.eu-de.speech-to-text.watson.cloud.ibm.com/instances/2bbdb10c-31b9-4df9-ac7f-bc364d79b14e/v1/recognize', //?access_token=' + access_token
     TTS: 'wss://api.eu-de.text-to-speech.watson.cloud.ibm.com/instances/87d423d8-6ddd-42c3-90a7-4711fca37587' ///v1/synthesize'
 }
-
-document.querySelector('#rec-button').addEventListener('click', function () {
-    startRecord()
-})
 
 async function send(url) {
     const response = await fetch(url, {
@@ -171,7 +173,7 @@ function sendToBackend(data, targetId){
             res.user_defined.current_intent == "2:mediation_yes"
             || res.user_defined.current_intent == "3:workout"
         )
-        // && res.intent != "General_Ending"
+         && (res.tts).text.toLowerCase().includes('video')
         ){
             let target_extra1 = document.getElementById('m2_extra1')
             target_extra1.style.display = 'block'
@@ -201,6 +203,7 @@ function triggerUsecase(trigger_text){
       input: trigger_text
     }
     document.getElementById('m2').style.display = 'none'
+    document.getElementById('m1_user').style.display = 'none'
     sendToBackend(data, 'm1')
   }
 
